@@ -1,0 +1,25 @@
+{
+  "name": "domain-compiler-collection",
+  "version": "1.0.0",
+  "description": "Domain Compiler Collection (DCC) comprises a number of compilers for different domain model languages",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oliverkocsis/domain-compiler-collection.git"
+  },
+  "keywords": [
+    "domain",
+    "model",
+    "language",
+    "compiler"
+  ],
+  "author": "Oliver Kocsis",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/oliverkocsis/domain-compiler-collection/issues"
+  },
+  "homepage": "https://github.com/oliverkocsis/domain-compiler-collection#readme"
+}
