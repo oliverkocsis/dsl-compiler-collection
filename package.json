@@ -4,7 +4,8 @@
   "description": "Domain Compiler Collection (DCC) comprises a number of compilers for different domain model languages",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine"
+    "build": "tsc",
+    "test": "ts-node node_modules/jasmine/bin/jasmine --config=jasmine.json"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,9 @@
   },
   "homepage": "https://github.com/oliverkocsis/domain-compiler-collection#readme",
   "devDependencies": {
-    "jasmine": "^3.5.0"
+    "@types/jasmine": "^3.5.6",
+    "jasmine": "^3.5.0",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.8.2"
   }
 }
