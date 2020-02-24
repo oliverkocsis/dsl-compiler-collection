@@ -2,7 +2,7 @@
   "name": "domain-compiler-collection",
   "version": "1.0.0",
   "description": "Domain Compiler Collection (DCC) comprises a number of compilers for different domain model languages",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "test": "ts-node node_modules/jasmine/bin/jasmine --config=jasmine.json"
