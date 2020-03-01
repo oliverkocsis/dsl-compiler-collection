@@ -82,12 +82,6 @@ describe("The BackEnd", function () {
 
     it("the content of the component template is a valid angular form template", function () {
         let index = sourceCode.map(x => x.name).indexOf(`${EXPECTED_ENTITY_NAME_KEBAB}.component.html`);
-        expect(sourceCode[index].data.toString()).toBe(entity_component_template);
+        expect(sourceCode[index].data.toString()).toBe(EXPECTED_ENTITY_TEMPLATE);
     });
-
-
 });
-
-
-const entity_component_template = `<p>my-domain works!</p>
-`

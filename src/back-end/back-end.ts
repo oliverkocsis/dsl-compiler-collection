@@ -12,15 +12,16 @@ export class BackEnd {
         for (const node of abstractSyntaxTree.getChildNodes()) {
             let kebab = this.convertToKebabCase(node.getName());
             let camel = this.convertToCamelCase(node.getName());
+            let pascal = this.convertToPascalCase(node.getName());
             let name;
             let data;
             // Component Class
             name = `${kebab}.component.ts`;
-            data = Mustache.render(COMPONENT_CLASS.toString(), { kebab: kebab, camel: camel });
+            data = Mustache.render(COMPONENT_CLASS.toString(), { kebab: kebab, camel: camel, pascal: pascal });
             sourceCode.push(new SourceCode(name, Buffer.from(data)));
             // Component Template
             name = `${kebab}.component.html`;
-            data = Mustache.render(COMPONENT_HTML.toString(), {});
+            data = Mustache.render(COMPONENT_HTML.toString(), { kebab: kebab, camel: camel, pascal: pascal });
             sourceCode.push(new SourceCode(name, Buffer.from(data)));
         }
         return sourceCode;
@@ -30,10 +31,15 @@ export class BackEnd {
         return s.replace(/\s+/g, '-').toLowerCase();
     }
 
-    private convertToCamelCase(s: string) {
+    private convertToPascalCase(s: string) {
         return s.replace(/\W+(.)/g, (match, chr) => {
             return chr.toUpperCase();
         });
+    }
+
+    private convertToCamelCase(s: string) {
+        const word = this.convertToPascalCase(s);
+        return word.charAt(0).toLowerCase() + word.substr(1)
     }
 }
 
