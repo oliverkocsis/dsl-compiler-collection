@@ -1,12 +1,12 @@
-import { AbstractSyntaxTree } from './abstract-syntax-tree';
+import { AbstractSyntaxGraph } from './abstract-syntax-graph';
 import { Entity } from './entity';
 
 describe("Abstract Syntax Tree", function () {
 
-    let abstractSyntaxTree: AbstractSyntaxTree;
+    let abstractSyntaxTree: AbstractSyntaxGraph;
 
     beforeEach(() => {
-        abstractSyntaxTree = new AbstractSyntaxTree();
+        abstractSyntaxTree = new AbstractSyntaxGraph();
     });
 
     it("is empty by default", function () {

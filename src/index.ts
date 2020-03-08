@@ -1,3 +1,4 @@
-export { AbstractSyntaxTree } from './abstract-syntax-tree/abstract-syntax-tree';
+export { AbstractSyntaxGraph } from './abstract-syntax-graph/abstract-syntax-graph';
 export { Backend } from './backend/backend';
+export { } from './'
 
