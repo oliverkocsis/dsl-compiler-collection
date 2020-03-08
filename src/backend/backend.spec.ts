@@ -2,8 +2,8 @@ import { AbstractSyntaxGraph } from '../abstract-syntax-graph/abstract-syntax-gr
 import { Backend } from './backend';
 import { Entity } from '../abstract-syntax-graph/entity';
 import * as https from 'https';
-import { Project } from './project';
-import { File } from './file';
+import { Project } from '../project/project';
+import { File } from '../project/file';
 
 describe("The Backend", function () {
 

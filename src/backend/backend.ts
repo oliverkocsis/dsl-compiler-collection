@@ -1,8 +1,8 @@
 import * as Mustache from 'mustache';
 import { AngularTempate } from "./angular/angular-template";
 import { AbstractSyntaxGraph } from '../abstract-syntax-graph/abstract-syntax-graph';
-import { Project } from './project';
-import { File } from './file';
+import { Project } from '../project/project';
+import { File } from '../project/file';
 
 export class Backend {
 
