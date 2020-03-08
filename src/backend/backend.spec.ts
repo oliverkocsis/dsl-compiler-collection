@@ -11,8 +11,10 @@ describe("The Backend", function () {
     let abstractSyntaxTree: AbstractSyntaxGraph;
     let project: Project;
 
-    const ENTITY_NAME = "My Entity Form"
-    const EXPECTED_ENTITY_NAME_KEBAB = "my-entity-form"
+    const ENTITY_NAME = "My Entity Form";
+    const EXPECTED_ENTITY_NAME_KEBAB = "my-entity-form";
+
+    const EXPECTED_GIT_BASE = "https://raw.githubusercontent.com/oliverkocsis/dcc-backend-angular/master";
 
     beforeAll(() => {
         backEnd = new Backend();
@@ -24,7 +26,7 @@ describe("The Backend", function () {
     it("generates a component class", function (done) {
         const file = project.getChildNode(`${EXPECTED_ENTITY_NAME_KEBAB}.component.ts`) as File;
         expect(file).toBeDefined();
-        https.get("https://raw.githubusercontent.com/oliverkocsis/dcc-backend-angular/issue-1/src/app/my-entity-form/my-entity-form.component.ts", (res) => {
+        https.get(EXPECTED_GIT_BASE + "/src/app/my-entity-form/my-entity-form.component.ts", (res) => {
             res.setEncoding('utf8');
             let rawData = '';
             res.on('data', (chunk) => { rawData += chunk; });
@@ -46,7 +48,7 @@ describe("The Backend", function () {
     it("generates a component template", function (done) {
         const file = project.getChildNode(`${EXPECTED_ENTITY_NAME_KEBAB}.component.html`) as File;
         expect(file).toBeDefined();
-        https.get("https://raw.githubusercontent.com/oliverkocsis/dcc-backend-angular/issue-1/src/app/my-entity-form/my-entity-form.component.html", (res) => {
+        https.get(EXPECTED_GIT_BASE + "/src/app/my-entity-form/my-entity-form.component.html", (res) => {
             res.setEncoding('utf8');
             let rawData = '';
             res.on('data', (chunk) => { rawData += chunk; });

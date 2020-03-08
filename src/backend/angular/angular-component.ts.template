@@ -8,14 +8,14 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class {{pascal}}Component implements OnInit {
 
-  {{camel}}Group = new FormGroup({
+  formGroup = new FormGroup({
     name: new FormControl(''),
-    lastName: new FormControl(''),
   });
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
+
+  onSubmit() { console.info(this.formGroup.value) }
 
 }

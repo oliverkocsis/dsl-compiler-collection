@@ -6,7 +6,7 @@ export class AngularTempate {
 
     public static getComponentClassTemplate(): string {
         if (!AngularTempate._componentClassTemplate) {
-            const buffer = readFileSync('./src/backend/angular/angular-component-class.template');
+            const buffer = readFileSync('./src/backend/angular/angular-component.ts.template');
             if (!AngularTempate._componentClassTemplate) {
                 AngularTempate._componentClassTemplate = buffer.toString();
             }
@@ -16,7 +16,7 @@ export class AngularTempate {
 
     public static getComponentHTMLTemplate(): string {
         if (!AngularTempate._componentHTMLTemplate) {
-            const buffer = readFileSync('./src/backend/angular/angular-component-html.template');
+            const buffer = readFileSync('./src/backend/angular/angular-component.html.template');
             if (!AngularTempate._componentHTMLTemplate) {
                 AngularTempate._componentHTMLTemplate = buffer.toString();
             }

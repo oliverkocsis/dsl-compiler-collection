@@ -1,6 +1,6 @@
 {
   "name": "domain-compiler-collection",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Domain Compiler Collection (DCC) comprises a number of compilers for different domain model languages",
   "main": "dist/index.js",
   "scripts": {
