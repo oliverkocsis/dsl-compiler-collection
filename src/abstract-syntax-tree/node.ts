@@ -3,5 +3,4 @@ export interface Node {
     getType(): string;
     appendChild(node: Node): void;
     getChildNodes(): Node[];
-
 }

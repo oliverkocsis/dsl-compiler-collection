@@ -1,4 +1,4 @@
-export const COMPONENT_CLASS = `import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -19,11 +19,3 @@ export class {{pascal}}Component implements OnInit {
   }
 
 }
-`
-
-export const COMPONENT_HTML = `<form [formGroup]="{{camel}}Group">
-    <label>
-        Name:
-        <input type="text" formControlName="name">
-    </label>
-</form>`

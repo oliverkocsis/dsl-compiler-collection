@@ -1,0 +1,6 @@
+<form [formGroup]="{{camel}}Group">
+    <label>
+        Name:
+        <input type="text" formControlName="name">
+    </label>
+</form>

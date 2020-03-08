@@ -1,9 +1,10 @@
 import { AbstractSyntaxTree } from "../abstract-syntax-tree/abstract-syntax-tree";
 import { SourceCode } from "./source-code";
-import { COMPONENT_CLASS, COMPONENT_HTML } from './angular.templates'
-import * as Mustache from 'mustache';
 
-export class BackEnd {
+import * as Mustache from 'mustache';
+import { AngularTempate } from "./angular/angular-template";
+
+export class Backend {
 
     constructor() { }
 
@@ -17,11 +18,11 @@ export class BackEnd {
             let data;
             // Component Class
             name = `${kebab}.component.ts`;
-            data = Mustache.render(COMPONENT_CLASS.toString(), { kebab: kebab, camel: camel, pascal: pascal });
+            data = Mustache.render(AngularTempate.getComponentClassTemplate(), { kebab: kebab, camel: camel, pascal: pascal });
             sourceCode.push(new SourceCode(name, Buffer.from(data)));
             // Component Template
             name = `${kebab}.component.html`;
-            data = Mustache.render(COMPONENT_HTML.toString(), { kebab: kebab, camel: camel, pascal: pascal });
+            data = Mustache.render(AngularTempate.getComponentHTMLTemplate(), { kebab: kebab, camel: camel, pascal: pascal });
             sourceCode.push(new SourceCode(name, Buffer.from(data)));
         }
         return sourceCode;
