@@ -2,9 +2,9 @@ import { CodeNode } from "./code-node";
 
 export class File extends CodeNode {
 
-    private value: Buffer;
+    private value: string;
 
-    constructor(name: string, value: Buffer) {
+    constructor(name: string, value: string) {
         super(name);
         this.value = value;
     }
@@ -13,7 +13,7 @@ export class File extends CodeNode {
         return CodeNode.FILE;
     }
 
-    getValue(): Buffer {
+    getValue(): string {
         return this.value;
     }
 

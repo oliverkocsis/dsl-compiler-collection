@@ -32,7 +32,7 @@ describe("The Backend", function () {
             res.on('data', (chunk) => { rawData += chunk; });
             res.on('end', () => {
                 try {
-                    expect(file.getValue().toString().replace(/\s+/g, ' ')).toBe(rawData.replace(/\s+/g, ' '));
+                    expect(file.getValue().replace(/\s+/g, ' ')).toBe(rawData.replace(/\s+/g, ' '));
                     done();
                 } catch (e) {
                     console.error(e.message);
@@ -54,7 +54,7 @@ describe("The Backend", function () {
             res.on('data', (chunk) => { rawData += chunk; });
             res.on('end', () => {
                 try {
-                    expect(file.getValue().toString().replace(/\s+/g, ' ')).toBe(rawData.replace(/\s+/g, ' '));
+                    expect(file.getValue().replace(/\s+/g, ' ')).toBe(rawData.replace(/\s+/g, ' '));
                     done();
                 } catch (e) {
                     console.error(e.message);

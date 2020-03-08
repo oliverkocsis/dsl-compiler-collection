@@ -2,7 +2,7 @@ import { AngularTempate } from './angular-template'
 
 describe("AngularTempate", function () {
     it("returns component class template", function () {
-        const template = AngularTempate.getComponentClassTemplate();
+        const template = AngularTempate.getComponentTSTemplate();
         expect(template.substring(0, 6)).toBe('import');
     });
 

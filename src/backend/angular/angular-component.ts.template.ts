@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+export const ANGULAR_COMPONENT_TS_TEMPLATE = `import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -19,3 +19,4 @@ export class {{pascal}}Component implements OnInit {
   onSubmit() { console.info(this.formGroup.value) }
 
 }
+`

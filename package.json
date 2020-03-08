@@ -1,7 +1,7 @@
 {
-  "name": "domain-compiler-collection",
+  "name": "dsl-compiler-collection",
   "version": "0.0.1",
-  "description": "Domain Compiler Collection (DCC) comprises a number of compilers for different domain model languages",
+  "description": "DSL Compiler Collection (DCC) comprises a number of compilers for different domain model languages",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",

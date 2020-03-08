@@ -1,26 +1,13 @@
-import { readFileSync } from 'fs';
+import { ANGULAR_COMPONENT_HTML_TEMPLATE } from './angular-component.html.template';
+import { ANGULAR_COMPONENT_TS_TEMPLATE } from './angular-component.ts.template';
 
 export class AngularTempate {
-    private static _componentClassTemplate: string;
-    private static _componentHTMLTemplate: string;
-
-    public static getComponentClassTemplate(): string {
-        if (!AngularTempate._componentClassTemplate) {
-            const buffer = readFileSync('./src/backend/angular/angular-component.ts.template');
-            if (!AngularTempate._componentClassTemplate) {
-                AngularTempate._componentClassTemplate = buffer.toString();
-            }
-        }
-        return AngularTempate._componentClassTemplate;
+    
+    public static getComponentTSTemplate(): string {
+        return ANGULAR_COMPONENT_TS_TEMPLATE;
     }
 
     public static getComponentHTMLTemplate(): string {
-        if (!AngularTempate._componentHTMLTemplate) {
-            const buffer = readFileSync('./src/backend/angular/angular-component.html.template');
-            if (!AngularTempate._componentHTMLTemplate) {
-                AngularTempate._componentHTMLTemplate = buffer.toString();
-            }
-        }
-        return AngularTempate._componentHTMLTemplate;
+        return ANGULAR_COMPONENT_HTML_TEMPLATE;
     }
 }
