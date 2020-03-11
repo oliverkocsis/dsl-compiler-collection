@@ -16,7 +16,7 @@ export class {{pascal}}Component implements OnInit {
 
   ngOnInit() { }
 
-  onSubmit() { console.info(this.formGroup.value) }
+  onSubmit() { console.info(this.formGroup.value.name) }
 
 }
 `

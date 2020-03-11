@@ -16,6 +16,10 @@ export class Backend {
             let pascal = this.convertToPascalCase(node.getName());
             let name;
             let data;
+            // Readme
+            name = `readme.md`;
+            data = Mustache.render(AngularTempate.getReadmeTemplate(), { kebab: kebab, camel: camel, pascal: pascal });
+            project.appendChild(new File(name, data));
             // Component Class
             name = `${kebab}.component.ts`;
             data = Mustache.render(AngularTempate.getComponentTSTemplate(), { kebab: kebab, camel: camel, pascal: pascal });

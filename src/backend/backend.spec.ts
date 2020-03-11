@@ -13,6 +13,7 @@ describe("The Backend", function () {
 
     const ENTITY_NAME = "My Entity Form";
     const EXPECTED_ENTITY_NAME_KEBAB = "my-entity-form";
+    const EXPECTED_ENTITY_NAME_PASCAL = "MyEntityForm";
 
     const EXPECTED_GIT_BASE = "https://raw.githubusercontent.com/oliverkocsis/dcc-backend-angular/master";
 
@@ -21,6 +22,12 @@ describe("The Backend", function () {
         abstractSyntaxTree = new AbstractSyntaxGraph();
         abstractSyntaxTree.appendChild(new Entity(ENTITY_NAME));
         project = backEnd.generate(abstractSyntaxTree);
+    });
+
+    it("generates a readme", function () {
+        const file = project.getChildNode('readme.md') as File;
+        expect(file).toBeDefined();
+        expect(file.getValue().replace(/\s+/g, ' ')).toContain(`import { ${EXPECTED_ENTITY_NAME_PASCAL}Component } from './${EXPECTED_ENTITY_NAME_KEBAB}/${EXPECTED_ENTITY_NAME_KEBAB}.component';`);
     });
 
     it("generates a component class", function (done) {
