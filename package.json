@@ -1,6 +1,6 @@
 {
   "name": "dsl-compiler-collection",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "DSL Compiler Collection (DCC) comprises a number of compilers for different domain model languages",
   "main": "dist/index.js",
   "scripts": {

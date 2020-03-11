@@ -26,6 +26,11 @@ export const ANGULAR_README_TEMPLATE = `# Import Reactive Form module
         ...
     ],
 
+# Create Component
+1. Create a new folder called {{kebab}}
+1. Create a new file called {{kebab}}.component.ts in the {{kebab}} folder
+1. Create a new file called {{kebab}}.component.html in the {{kebab}} folder
+1. Copy and paste the files below into the created files
 
 # Declare Component
 1. Declare the new component in your app (i.e. app.module.ts)

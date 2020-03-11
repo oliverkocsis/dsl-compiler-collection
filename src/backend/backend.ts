@@ -3,6 +3,8 @@ import { AngularTempate } from "./angular/angular-template";
 import { AbstractSyntaxGraph } from '../abstract-syntax-graph/abstract-syntax-graph';
 import { Project } from '../project/project';
 import { File } from '../project/file';
+import { convertToKebabCase, convertToCamelCase, convertToPascalCase } from './case-converter';
+
 
 export class Backend {
 
@@ -11,9 +13,9 @@ export class Backend {
     public generate(abstractSyntaxGraph: AbstractSyntaxGraph): Project {
         const project: Project = new Project("default");
         for (const node of abstractSyntaxGraph.getChildNodes()) {
-            let kebab = this.convertToKebabCase(node.getName());
-            let camel = this.convertToCamelCase(node.getName());
-            let pascal = this.convertToPascalCase(node.getName());
+            let kebab = convertToKebabCase(node.getName());
+            let camel = convertToCamelCase(node.getName());
+            let pascal = convertToPascalCase(node.getName());
             let name;
             let data;
             // Readme
@@ -30,20 +32,5 @@ export class Backend {
             project.appendChild(new File(name, data));
         }
         return project;
-    }
-
-    private convertToKebabCase(s: string) {
-        return s.replace(/\s+/g, '-').toLowerCase();
-    }
-
-    private convertToPascalCase(s: string) {
-        return s.replace(/\W+(.)/g, (match, chr) => {
-            return chr.toUpperCase();
-        });
-    }
-
-    private convertToCamelCase(s: string) {
-        const word = this.convertToPascalCase(s);
-        return word.charAt(0).toLowerCase() + word.substr(1)
     }
 }
