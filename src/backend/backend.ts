@@ -24,11 +24,11 @@ export class Backend {
             project.appendChild(new File(name, data));
             // Component Class
             name = `${kebab}.component.ts`;
-            data = Mustache.render(AngularTempate.getComponentTSTemplate(), { kebab: kebab, camel: camel, pascal: pascal });
+            data = Mustache.render(AngularTempate.getFormComponentTSTemplate(), { kebab: kebab, camel: camel, pascal: pascal });
             project.appendChild(new File(name, data));
             // Component Template
             name = `${kebab}.component.html`;
-            data = Mustache.render(AngularTempate.getComponentHTMLTemplate(), { kebab: kebab, camel: camel, pascal: pascal });
+            data = Mustache.render(AngularTempate.getFormComponentHTMLTemplate(), { kebab: kebab, camel: camel, pascal: pascal });
             project.appendChild(new File(name, data));
         }
         return project;
