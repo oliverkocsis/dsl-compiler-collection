@@ -1,6 +1,5 @@
-import { AbstractSyntaxGraph } from '../abstract-syntax-graph/abstract-syntax-graph';
+import { AbstractSyntaxGraph, DataNode } from '../abstract-syntax-graph/abstract-syntax-graph';
 import { Backend } from './backend';
-import { DataNode } from '../abstract-syntax-graph/data-node';
 import { readFileSync } from 'fs';
 import { Project } from '../project/project';
 import { File } from '../project/file';
@@ -18,7 +17,7 @@ describe("The Backend", function () {
     beforeAll(() => {
         backEnd = new Backend();
         abstractSyntaxTree = new AbstractSyntaxGraph();
-        abstractSyntaxTree.appendChild(new DataNode(DATA_NAME));
+        abstractSyntaxTree.appendChildNode(new DataNode(DATA_NAME));
         project = backEnd.generate(abstractSyntaxTree);
     });
 
