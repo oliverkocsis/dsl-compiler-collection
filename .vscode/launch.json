@@ -22,5 +22,6 @@
       "env": {
         "TS_NODE_IGNORE": "false"
       }
-    ]
-  }
+    }
+  ]
+}
