@@ -1,9 +1,9 @@
 import { AbstractSyntaxGraphNode } from "./abstract-syntax-graph-node";
 
-export class Entity extends AbstractSyntaxGraphNode {
+export class DataNode extends AbstractSyntaxGraphNode {
 
     getType(): number {
-        return AbstractSyntaxGraphNode.ENITY_NODE;
+        return AbstractSyntaxGraphNode.DATA_NODE;
     }
     
 }

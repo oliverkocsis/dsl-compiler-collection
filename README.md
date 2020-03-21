@@ -19,7 +19,7 @@ A language structured around the domain model and used by all team members to co
 A standard [Business Process Model and Notation (BPMN)](http://www.bpmn.org/) will provide businesses with the capability of understanding their internal business procedures in a graphical notation and will give organizations the ability to communicate these procedures in a standard manner. Furthermore, the graphical notation will facilitate the understanding of the performance collaborations and business transactions between the organizations. This will ensure that businesses will understand themselves and participants in their business and will enable organizations to adjust to new internal and B2B business circumstances quickly.
 
 ## Data 
-Data provide information about what Activities require to be performed and/or what they produce (see page 205), Data can represent a singular object or a collection of objects.
+Data provide information about what Activities require to be performed and/or what they produce, Data can represent a singular object or a collection of objects.
 
 ## Activity
 Work that a company or organization performs using business processes. An activity can be atomic or non-atomic (compound). The types of activities that are a part of a Process Model are: Process, Sub-Process, and Task.

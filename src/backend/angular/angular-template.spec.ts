@@ -13,6 +13,6 @@ describe("AngularTempate", function () {
 
   it("returns readme", function () {
     const template = AngularTempate.getReadmeTemplate();
-    expect(template.substring(0, 6)).toBe('# Impo');
+    expect(template.substring(0, 6)).toBe('# Gett');
   });
 });
