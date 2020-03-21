@@ -7,15 +7,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 
-import { AddressFormComponent } from './address-form.component';
+import { ShippingInformationFormComponent } from './shipping-information-form.component';
 
-describe('AddressFormComponent', () => {
-  let component: AddressFormComponent;
-  let fixture: ComponentFixture<AddressFormComponent>;
+describe('ShippingInformationFormComponent', () => {
+  let component: ShippingInformationFormComponent;
+  let fixture: ComponentFixture<ShippingInformationFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddressFormComponent ],
+      declarations: [ ShippingInformationFormComponent ],
       imports: [
         NoopAnimationsModule,
         ReactiveFormsModule,
@@ -29,7 +29,7 @@ describe('AddressFormComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddressFormComponent);
+    fixture = TestBed.createComponent(ShippingInformationFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
