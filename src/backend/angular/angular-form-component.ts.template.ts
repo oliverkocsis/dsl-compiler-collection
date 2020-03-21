@@ -8,14 +8,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class {{pascal}}FormComponent {
   formGroup = this.fb.group({
-    {{for}}
-    company: null,
-    firstName: null,
-    lastName: null,
-    address: null,
-    city: null,
-    postalCode: null,
-    {{end}}
+    {{#properties}}
+    {{camel}}: null,
+    {{/properties}}
   });
 
   constructor(private fb: FormBuilder) { }

@@ -80,4 +80,7 @@ export class PropertyNode extends AbstractSyntaxGraphNode {
         return AbstractSyntaxGraphNode.PROPERTY_NODE;
     }
 
+    getType(): number {
+        return this.type;
+    }
 }
