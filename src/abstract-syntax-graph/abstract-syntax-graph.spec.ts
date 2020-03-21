@@ -1,29 +1,36 @@
-import { AbstractSyntaxGraph } from './abstract-syntax-graph';
-import { Entity } from './entity';
+import { AbstractSyntaxGraph, DataNode } from './abstract-syntax-graph';
 
-describe("Abstract Syntax Tree", function () {
+describe("AbstractSyntaxGraph", function () {
 
-    let abstractSyntaxTree: AbstractSyntaxGraph;
+    let abstractSyntaxGraph: AbstractSyntaxGraph;
 
     beforeEach(() => {
-        abstractSyntaxTree = new AbstractSyntaxGraph();
+        abstractSyntaxGraph = new AbstractSyntaxGraph();
     });
 
     it("is empty by default", function () {
-        expect(abstractSyntaxTree.getChildNodes().length).toBe(0);
+        expect(abstractSyntaxGraph.getChildNodes().length).toBe(0);
     });
 
-    it("can contain at least one or more entities", function () {
-        const first_entity = "First Entity"
-        const second_entity = "Second Entity"
-        abstractSyntaxTree.appendChild(new Entity(first_entity))
-        expect(abstractSyntaxTree.getChildNodes().length).toBe(1);
-        abstractSyntaxTree.appendChild(new Entity(second_entity))
-        expect(abstractSyntaxTree.getChildNodes().length).toBe(2);
-        const index_of_first_entity = abstractSyntaxTree.getChildNodes().map(x => x.getName()).indexOf(first_entity);
-        const index_of_second_entity = abstractSyntaxTree.getChildNodes().map(x => x.getName()).indexOf(second_entity);
-        expect(index_of_first_entity).toBeGreaterThan(-1);
-        expect(index_of_second_entity).toBeGreaterThan(-1);
-        expect(index_of_first_entity).not.toBe(index_of_second_entity);
+    it("can contain two data with unique names", function () {
+        const firstData = "First Data"
+        const secondData = "Second Data"
+        abstractSyntaxGraph.appendChildNode(new DataNode(firstData))
+        expect(abstractSyntaxGraph.getChildNodes().length).toBe(1);
+        abstractSyntaxGraph.appendChildNode(new DataNode(secondData))
+        expect(abstractSyntaxGraph.getChildNodes().length).toBe(2);
+        const indexFirstData = abstractSyntaxGraph.getChildNodes().map(x => x.getName()).indexOf(firstData);
+        const indexSecondData = abstractSyntaxGraph.getChildNodes().map(x => x.getName()).indexOf(secondData);
+        expect(indexFirstData).toBeGreaterThan(-1);
+        expect(indexSecondData).toBeGreaterThan(-1);
+        expect(indexFirstData).not.toBe(indexSecondData);
+    });
+
+    it("can not contain two data with the same name", function () {
+        const firstData = "Data"
+        const secondData = "Data"
+        abstractSyntaxGraph.appendChildNode(new DataNode(firstData))
+        expect(abstractSyntaxGraph.getChildNodes().length).toBe(1);
+        expect(() => { abstractSyntaxGraph.appendChildNode(new DataNode(secondData)) }).toThrowError();
     });
 });

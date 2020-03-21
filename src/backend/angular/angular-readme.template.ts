@@ -1,45 +1,30 @@
-export const ANGULAR_README_TEMPLATE = `# Import Reactive Form module
-1. Import the Reactive Form module in your app (i.e. app.module.ts)
+export const ANGULAR_README_TEMPLATE = `# Getting Started with Angular
 
-    import { ReactiveFormsModule } from '@angular/forms';
-    ...
-    imports: [
-        ...
-        ReactiveFormsModule,
-        ...
-    ],
+source: https://angular.io/guide/setup-local
+
+1. Install the Angular CLI
+1. Create a workspace and initial application
+
+    $ npm install -g @angular/cli    
+    $ ng new my-app --interactive=false --routing=true --style=scss
+    $ cd my-app
 
 # Getting Started with Angular Material
-1. Go to [Getting Started with Angular Material](https://material.angular.io/guide/getting-started)
-1. Follow the instruction and install Angular Material
 
-# Import Angular Material modules
-1. Import the Angular Material modules in your app (i.e. app.module.ts)
+source: https://material.angular.io/guide/getting-started
 
-    import { MatInputModule } from '@angular/material/input';
-    import { MatButtonModule } from '@angular/material/button';
-    ...
-    imports: [
-        ...
-        MatInputModule,
-        MatButtonModule,
-        ...
-    ],
+1. Install Angular Material
 
-# Create Component
-1. Create a new folder called {{kebab}}
-1. Create a new file called {{kebab}}.component.ts in the {{kebab}} folder
-1. Create a new file called {{kebab}}.component.html in the {{kebab}} folder
+    $ ng add @angular/material --defaults
+
+# Generate Material Design component
+
+source:
+- https://angular.io/guide/reactive-forms
+- https://material.angular.io/guide/schematics
+
+1. Generate a component with a form group that uses Material Design form controls
 1. Copy and paste the files below into the created files
 
-# Declare Component
-1. Declare the new component in your app (i.e. app.module.ts)
-
-    import { {{pascal}}Component } from './{{kebab}}/{{kebab}}.component';
-    ...
-    declarations: [
-        ...
-        {{pascal}}Component
-        ...
-    ],
+    $ ng generate @angular/material:address-form {{kebab}}
 `
