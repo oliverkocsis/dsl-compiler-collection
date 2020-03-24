@@ -1,5 +1,3 @@
 export { AbstractSyntaxGraph, DataNode, PropertyNode } from './abstract-syntax-graph/abstract-syntax-graph';
-export { Backend } from './backend/backend';
-export { Project } from './project/project';
-export { Directory } from './project/directory';
-export { File } from './project/file';
+export { AngularBackend } from './backend/angular/angluar-backend';
+export { VirtualFileSystem, Directory, File } from './virtual-file-system/virtual-file-system';
