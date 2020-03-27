@@ -25,13 +25,15 @@
   "homepage": "https://github.com/oliverkocsis/domain-compiler-collection#readme",
   "devDependencies": {
     "@types/jasmine": "^3.5.7",
+    "@types/lodash": "^4.14.149",
+    "@types/mustache": "^4.0.1",
     "@types/node": "^13.7.5",
     "jasmine": "^3.5.0",
     "ts-node": "^8.6.2",
     "typescript": "^3.8.2"
   },
   "dependencies": {
-    "@types/mustache": "^4.0.1",
+    "lodash": "^4.17.15",
     "mustache": "^4.0.0"
   }
 }

@@ -3,9 +3,10 @@ import { AngularTempate } from "./templates/angular-template";
 import { AbstractSyntaxGraph, PropertyNode } from '../../abstract-syntax-graph/abstract-syntax-graph';
 import { VirtualFileSystem } from '../../virtual-file-system/virtual-file-system';
 import { File } from '../../virtual-file-system/virtual-file-system';
-import { dasherize, camelize, classify } from '../../util/strings';
 import { Backend } from '../backend';
+import * as _ from 'lodash';
 
+const _pascalCase = _.flow(_.camelCase, _.upperFirst);
 
 export class AngularBackend implements Backend {
 
@@ -14,15 +15,15 @@ export class AngularBackend implements Backend {
     public generate(abstractSyntaxGraph: AbstractSyntaxGraph): VirtualFileSystem {
         const virtualFileSystem: VirtualFileSystem = new VirtualFileSystem();
         for (const node of abstractSyntaxGraph.getChildNodes()) {
-            const kebab = dasherize(node.getName());
-            const camel = camelize(node.getName());
-            const pascal = classify(node.getName());
+            const kebab = _.kebabCase(node.getName());
+            const camel = _.camelCase(node.getName());
+            const pascal = _pascalCase(node.getName());
             const properties = node.getChildNodes().map((node) => {
                 return {
                     name: node.getName(),
-                    kebab: dasherize(node.getName()),
-                    camel: camelize(node.getName()),
-                    pascal: classify(node.getName()),
+                    kebab: _.kebabCase(node.getName()),
+                    camel: _.camelCase(node.getName()),
+                    pascal: _pascalCase(node.getName()),
                     type: convertDataTypeToHTMLInputType((node as PropertyNode).getType()),
                 }
             });
