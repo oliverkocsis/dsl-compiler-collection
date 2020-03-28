@@ -2,29 +2,23 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { ShippingInformationTableDataSource, ShippingInformationTableItem } from './shipping-information-table-datasource';
+import { ShippingInformationService } from '../shipping-information.service';
+import { Observable } from 'rxjs';
+import { ShippingInformation } from '../shipping-information';
 
 @Component({
   selector: 'app-shipping-information-table',
   templateUrl: './shipping-information-table.component.html',
   styleUrls: ['./shipping-information-table.component.scss']
 })
-export class ShippingInformationTableComponent implements AfterViewInit, OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<ShippingInformationTableItem>;
-  dataSource: ShippingInformationTableDataSource;
+export class ShippingInformationTableComponent implements OnInit {
+  displayedColumns = ['company', 'firstName', 'lastName', 'address', 'city', 'postalCode'];
+  dataSource: Observable<ShippingInformation[]>;
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  constructor(private service: ShippingInformationService) { }
 
   ngOnInit() {
-    this.dataSource = new ShippingInformationTableDataSource();
+    this.dataSource = this.service.observable();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
-  }
 }
