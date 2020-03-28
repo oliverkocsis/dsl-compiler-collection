@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ShippingInformationFormComponent } from './shipping-information-form/shipping-information-form.component';
+import { ShippingInformationFormComponent } from './shipping-information/shipping-information-form/shipping-information-form.component';
 
 
 const routes: Routes = [

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ShippingInformationService } from '../shipping-information.service';
+import { ShippingInformation } from '../shipping-information';
 
 @Component({
   selector: 'app-shipping-information-form',
@@ -16,9 +18,12 @@ export class ShippingInformationFormComponent {
     postalCode: null,
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private shippingInformationService: ShippingInformationService) { }
 
   onSubmit() {
     console.log(this.formGroup.value);
+    const shippingInformation = ShippingInformation.from(this.formGroup.value);
+    this.shippingInformationService.create(shippingInformation);
+    this.formGroup.reset();
   }
 }

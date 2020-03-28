@@ -27,4 +27,13 @@ source:
 1. Copy and paste the files below into the created files
 
     $ ng generate @angular/material:address-form {{kebab}}
+
+# Generate Service
+
+source:
+- https://angular.io/guide/architecture-services
+- https://angular.io/tutorial/toh-pt4
+
+    $ ng generate service ShippingInformation
+
 `
