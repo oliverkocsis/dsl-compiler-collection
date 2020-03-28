@@ -10,7 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ShippingInformationFormComponent } from './shipping-information-form/shipping-information-form.component';
+import { ShippingInformationFormComponent } from './shipping-information/shipping-information-form/shipping-information-form.component';
 
 @NgModule({
   declarations: [

@@ -1,7 +1,7 @@
 import { AbstractSyntaxGraph, DataNode, PropertyNode } from '../../abstract-syntax-graph/abstract-syntax-graph';
 import { AngularBackend } from './angluar-backend';
 import { readFileSync } from 'fs';
-import { VirtualFileSystem } from '../../virtual-file-system/virtual-file-system';
+import { VirtualFileSystem, Directory, VirtualFileSystemEntry } from '../../virtual-file-system/virtual-file-system';
 import { File } from '../../virtual-file-system/virtual-file-system';
 import { Backend } from '../backend';
 
@@ -11,14 +11,15 @@ describe("The AngularBackend", function () {
     let abstractSyntaxTree: AbstractSyntaxGraph;
     let data: DataNode;
     let virtualFileSystem: VirtualFileSystem;
+    let folder: Directory;
 
-    const DATA_NAME = "Shipping Information";
-    const DATA_NAME_KEBAB = "shipping-information";
+    const NAME = "Shipping Information";
+    const KEBAB = "shipping-information";
 
     beforeAll(() => {
         backend = new AngularBackend();
         abstractSyntaxTree = new AbstractSyntaxGraph();
-        data = new DataNode(DATA_NAME);
+        data = new DataNode(NAME);
         data.appendChildNode(new PropertyNode("Company", PropertyNode.TYPE_TEXT));
         data.appendChildNode(new PropertyNode("First Name", PropertyNode.TYPE_TEXT));
         data.appendChildNode(new PropertyNode("Last Name", PropertyNode.TYPE_TEXT));
@@ -27,32 +28,52 @@ describe("The AngularBackend", function () {
         data.appendChildNode(new PropertyNode("Postal Code", PropertyNode.TYPE_NUMBER));
         abstractSyntaxTree.appendChildNode(data);
         virtualFileSystem = backend.generate(abstractSyntaxTree);
+        folder = virtualFileSystem.getChildNode("src").getChildNode("app").getChildNode(KEBAB);
     });
+
 
     it("generates a readme", function () {
         const file = virtualFileSystem.getChildNode('readme.md') as File;
         expect(file).toBeDefined();
-        expect(file.getValue().replace(/\s+/g, ' ')).toContain(`$ ng generate @angular/material:address-form ${DATA_NAME_KEBAB}`);
+        expect(file.getValue().replace(/\s+/g, ' ')).toContain(`$ ng generate @angular/material:address-form ${KEBAB}`);
+    });
+
+    it("generates a directory", function () {
+        expect(folder.getType()).toBe(VirtualFileSystemEntry.DIRECTORY);
+    });
+
+    it("generates a class", function () {
+        const file = folder.getChildNode(`${KEBAB}.ts`) as File;
+        expect(file).toBeDefined();
+        const expected = readFileSync('angular/src/app/shipping-information/shipping-information.ts');
+        expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
+    });
+
+    it("generates a service", function () {
+        const file = folder.getChildNode(`${KEBAB}.service.ts`) as File;
+        expect(file).toBeDefined();
+        const expected = readFileSync('angular/src/app/shipping-information/shipping-information.service.ts');
+        expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
     });
 
     it("generates a form component HTML", function () {
-        const file = virtualFileSystem.getChildNode(`${DATA_NAME_KEBAB}-form.component.html`) as File;
+        const file = folder.getChildNode(`${KEBAB}-form`).getChildNode(`${KEBAB}-form.component.html`) as File;
         expect(file).toBeDefined();
-        const expected = readFileSync('angular/src/app/shipping-information-form/shipping-information-form.component.html');
+        const expected = readFileSync('angular/src/app/shipping-information/shipping-information-form/shipping-information-form.component.html');
         expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
     });
 
     it("generates a form component CSCC", function () {
-        const file = virtualFileSystem.getChildNode(`${DATA_NAME_KEBAB}-form.component.scss`) as File;
+        const file = folder.getChildNode(`${KEBAB}-form`).getChildNode(`${KEBAB}-form.component.scss`) as File;
         expect(file).toBeDefined();
-        const expected = readFileSync('angular/src/app/shipping-information-form/shipping-information-form.component.scss');
+        const expected = readFileSync('angular/src/app/shipping-information/shipping-information-form/shipping-information-form.component.scss');
         expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
     });
 
     it("generates a form component TS", function () {
-        const file = virtualFileSystem.getChildNode(`${DATA_NAME_KEBAB}-form.component.ts`) as File;
+        const file = folder.getChildNode(`${KEBAB}-form`).getChildNode(`${KEBAB}-form.component.ts`) as File;
         expect(file).toBeDefined();
-        const expected = readFileSync('angular/src/app/shipping-information-form/shipping-information-form.component.ts');
+        const expected = readFileSync('angular/src/app/shipping-information/shipping-information-form/shipping-information-form.component.ts');
         expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
     });
 
