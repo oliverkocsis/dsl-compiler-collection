@@ -38,21 +38,21 @@ describe("The AngularBackend", function () {
     it("generates a form component HTML", function () {
         const file = virtualFileSystem.getChildNode(`${DATA_NAME_KEBAB}-form.component.html`) as File;
         expect(file).toBeDefined();
-        const expected = readFileSync('angular/src/app/shipping-information-form/shipping-information-form.component.html');
+        const expected = readFileSync('angular/src/app/shipping-information/shipping-information-form/shipping-information-form.component.html');
         expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
     });
 
     it("generates a form component CSCC", function () {
         const file = virtualFileSystem.getChildNode(`${DATA_NAME_KEBAB}-form.component.scss`) as File;
         expect(file).toBeDefined();
-        const expected = readFileSync('angular/src/app/shipping-information-form/shipping-information-form.component.scss');
+        const expected = readFileSync('angular/src/app/shipping-information/shipping-information-form/shipping-information-form.component.scss');
         expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
     });
 
     it("generates a form component TS", function () {
         const file = virtualFileSystem.getChildNode(`${DATA_NAME_KEBAB}-form.component.ts`) as File;
         expect(file).toBeDefined();
-        const expected = readFileSync('angular/src/app/shipping-information-form/shipping-information-form.component.ts');
+        const expected = readFileSync('angular/src/app/shipping-information/shipping-information-form/shipping-information-form.component.ts');
         expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
     });
 

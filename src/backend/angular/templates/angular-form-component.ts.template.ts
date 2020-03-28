@@ -1,5 +1,7 @@
 export const ANGULAR_COMPONENT_TS_TEMPLATE = `import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { {{pascal}}Service } from '../{{kebab}}.service';
+import { {{pascal}} } from '../{{kebab}}';
 
 @Component({
   selector: 'app-{{kebab}}-form',
@@ -13,10 +15,13 @@ export class {{pascal}}FormComponent {
     {{/properties}}
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private service: {{pascal}}Service) { }
 
   onSubmit() {
     console.log(this.formGroup.value);
+    const {{camel}} = {{pascal}}.from(this.formGroup.value);
+    this.service.create({{camel}});
+    this.formGroup.reset();
   }
 }
 `
