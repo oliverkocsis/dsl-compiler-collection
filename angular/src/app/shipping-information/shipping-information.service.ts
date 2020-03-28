@@ -10,9 +10,9 @@ export class ShippingInformationService {
 
   constructor() { }
 
-  public create(shippingInformation: ShippingInformation): number {
-    const index = this.store.push(shippingInformation) - 1;
-    console.log(`ShippingInformation created: ${index}`);
+  public create(data: ShippingInformation): number {
+    const index = this.store.push(data) - 1;
+    console.log('Shipping Information created: ' + index);
     return index;
   }
 
@@ -24,8 +24,8 @@ export class ShippingInformationService {
     return this.store;
   }
 
-  public update(index: number, shippingInformation: ShippingInformation) {
-    this.store[index] = shippingInformation;
+  public update(index: number, data: ShippingInformation) {
+    this.store[index] = data;
   }
 
   public delete(index: number) {

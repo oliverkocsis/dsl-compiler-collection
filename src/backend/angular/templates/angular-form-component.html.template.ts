@@ -8,7 +8,7 @@ export const ANGULAR_COMPONENT_HTML_TEMPLATE = `<form [formGroup]="formGroup" no
     <div class="row">
       <div class="col">
         <mat-form-field class="full-width">
-          <input matInput placeholder="{{name}}" type="{{type}}" formControlName="{{camel}}">
+          <input matInput placeholder="{{name}}" type="{{htmlType}}" formControlName="{{camel}}">
         </mat-form-field>
       </div>
     </div>

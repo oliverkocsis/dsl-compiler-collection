@@ -1,7 +1,7 @@
 import * as Mustache from 'mustache';
 import { AngularTempate } from "./templates/angular-template";
 import { AbstractSyntaxGraph, PropertyNode } from '../../abstract-syntax-graph/abstract-syntax-graph';
-import { VirtualFileSystem } from '../../virtual-file-system/virtual-file-system';
+import { VirtualFileSystem, Directory } from '../../virtual-file-system/virtual-file-system';
 import { File } from '../../virtual-file-system/virtual-file-system';
 import { Backend } from '../backend';
 import * as _ from 'lodash';
@@ -14,7 +14,12 @@ export class AngularBackend implements Backend {
 
     public generate(abstractSyntaxGraph: AbstractSyntaxGraph): VirtualFileSystem {
         const virtualFileSystem: VirtualFileSystem = new VirtualFileSystem();
+        const src = new Directory('src');
+        virtualFileSystem.appendChild(src);
+        const app = new Directory('app');
+        src.appendChild(app);
         for (const node of abstractSyntaxGraph.getChildNodes()) {
+
             const kebab = _.kebabCase(node.getName());
             const camel = _.camelCase(node.getName());
             const pascal = _pascalCase(node.getName());
@@ -24,7 +29,8 @@ export class AngularBackend implements Backend {
                     kebab: _.kebabCase(node.getName()),
                     camel: _.camelCase(node.getName()),
                     pascal: _pascalCase(node.getName()),
-                    type: convertDataTypeToHTMLInputType((node as PropertyNode).getType()),
+                    htmlType: convertDataTypeToHTMLType((node as PropertyNode).getType()),
+                    jsType: convertDataTypeToJSType((node as PropertyNode).getType()),
                 }
             });
             const view = {
@@ -40,28 +46,57 @@ export class AngularBackend implements Backend {
             name = `readme.md`;
             data = Mustache.render(AngularTempate.getReadmeTemplate(), view);
             virtualFileSystem.appendChild(new File(name, data));
+            // Driectory
+            const directory = new Directory(kebab);
+            app.appendChild(directory);
+            // Class
+            name = `${kebab}.ts`;
+            data = Mustache.render(AngularTempate.getClassTemplate(), view);
+            directory.appendChild(new File(name, data));
+            // Service
+            name = `${kebab}.service.ts`;
+            data = Mustache.render(AngularTempate.getServiceTemplate(), view);
+            directory.appendChild(new File(name, data));
+            // Form Directory
+            const formDirectory = new Directory(`${kebab}-form`);
+            directory.appendChild(formDirectory);
             // Form Component HTML
             name = `${kebab}-form.component.html`;
             data = Mustache.render(AngularTempate.getFormComponentHTMLTemplate(), view);
-            virtualFileSystem.appendChild(new File(name, data));
+            formDirectory.appendChild(new File(name, data));
             // Form Component scss
             name = `${kebab}-form.component.scss`;
             data = Mustache.render(AngularTempate.getFormComponentSCSSTemplate(), view);
-            virtualFileSystem.appendChild(new File(name, data));
+            formDirectory.appendChild(new File(name, data));
             // Form Component TS
             name = `${kebab}-form.component.ts`;
             data = Mustache.render(AngularTempate.getFormComponentTSTemplate(), view);
-            virtualFileSystem.appendChild(new File(name, data));
+            formDirectory.appendChild(new File(name, data));
         }
         return virtualFileSystem;
     }
 }
 
-function convertDataTypeToHTMLInputType(type: number): string | undefined {
+function convertDataTypeToHTMLType(type: number): string | undefined {
     let inputType;
     switch (type) {
         case PropertyNode.TYPE_TEXT:
             inputType = "text";
+            break;
+        case PropertyNode.TYPE_NUMBER:
+            inputType = "number";
+            break;
+        default:
+            break;
+    }
+    return inputType;
+}
+
+function convertDataTypeToJSType(type: number): string | undefined {
+    let inputType;
+    switch (type) {
+        case PropertyNode.TYPE_TEXT:
+            inputType = "string";
             break;
         case PropertyNode.TYPE_NUMBER:
             inputType = "number";
