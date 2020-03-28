@@ -10,12 +10,19 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { ShippingInformationComponent } from './shipping-information/shipping-information.component';
 import { ShippingInformationFormComponent } from './shipping-information/shipping-information-form/shipping-information-form.component';
+import { ShippingInformationTableComponent } from './shipping-information/shipping-information-table/shipping-information-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ShippingInformationFormComponent
+    ShippingInformationComponent,
+    ShippingInformationFormComponent,
+    ShippingInformationTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +33,10 @@ import { ShippingInformationFormComponent } from './shipping-information/shippin
     MatSelectModule,
     MatRadioModule,
     MatCardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

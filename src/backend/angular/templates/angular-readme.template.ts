@@ -4,10 +4,18 @@ source: https://angular.io/guide/setup-local
 
 1. Install the Angular CLI
 1. Create a workspace and initial application
+1. Create component
+1. Create service
 
     $ npm install -g @angular/cli    
     $ ng new my-app --interactive=false --routing=true --style=scss
     $ cd my-app
+    $ ng generate component ShippingInformation
+    $ cd .\src\app\shipping-information\ 
+    $ ng generate service ShippingInformation
+    $ ng generate class ShippingInformation
+
+
 
 # Getting Started with Angular Material
 
@@ -28,12 +36,7 @@ source:
 
     $ ng generate @angular/material:address-form {{kebab}}
 
-# Generate Service
+# Generate Table 
 
-source:
-- https://angular.io/guide/architecture-services
-- https://angular.io/tutorial/toh-pt4
-
-    $ ng generate service ShippingInformation
-
+    $ ng generate @angular/material:table ShippingInformationTable
 `
