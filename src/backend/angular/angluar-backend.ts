@@ -72,6 +72,21 @@ export class AngularBackend implements Backend {
             name = `${kebab}-form.component.ts`;
             data = Mustache.render(AngularTempate.getFormComponentTSTemplate(), view);
             formDirectory.appendChild(new File(name, data));
+            // Table Directory
+            const tableDirectory = new Directory(`${kebab}-table`);
+            directory.appendChild(tableDirectory);
+            // Table Component HTML
+            name = `${kebab}-table.component.html`;
+            data = Mustache.render(AngularTempate.getTableComponentHTMLTemplate(), view);
+            tableDirectory.appendChild(new File(name, data));
+            // Table Component scss
+            name = `${kebab}-table.component.scss`;
+            data = Mustache.render(AngularTempate.getTableComponentSCSSTemplate(), view);
+            tableDirectory.appendChild(new File(name, data));
+            // Table Component TS
+            name = `${kebab}-table.component.ts`;
+            data = Mustache.render(AngularTempate.getTableComponentTSTemplate(), view);
+            tableDirectory.appendChild(new File(name, data));
         }
         return virtualFileSystem;
     }

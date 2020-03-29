@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ShippingInformationFormComponent } from './shipping-information/shipping-information-form/shipping-information-form.component';
+import { ShippingInformationComponent } from './shipping-information/shipping-information.component';
 
 
 const routes: Routes = [
-  { path: 'shipping-information-form', component: ShippingInformationFormComponent },
+  { path: 'shipping-information', component: ShippingInformationComponent },
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-export const ANGULAR_COMPONENT_TS_TEMPLATE = `import { Component } from '@angular/core';
+export const ANGULAR_FORM_TS_TEMPLATE = `import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { {{pascal}}Service } from '../{{kebab}}.service';
 import { {{pascal}} } from '../{{kebab}}';
