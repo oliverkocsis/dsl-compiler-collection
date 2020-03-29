@@ -1,4 +1,4 @@
-export const ANGULAR_COMPONENT_HTML_TEMPLATE = `<form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
+export const ANGULAR_FORM_HTML_TEMPLATE = `<form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
 <mat-card class="shipping-card">
   <mat-card-header>
     <mat-card-title>{{name}}</mat-card-title>

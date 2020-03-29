@@ -1,27 +1,26 @@
-export const ANGULAR_COMPONENT_TS_TEMPLATE = `import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { {{pascal}}Service } from '../{{kebab}}.service';
+export const ANGULAR_TABLE_TS_TEMPLATE = `import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { {{pascal}} } from '../{{kebab}}';
+import { {{pascal}}Service } from '../{{kebab}}.service';
 
 @Component({
-  selector: 'app-{{kebab}}-form',
-  templateUrl: './{{kebab}}-form.component.html',
-  styleUrls: ['./{{kebab}}-form.component.scss']
+  selector: 'app-{{kebab}}-table',
+  templateUrl: './{{kebab}}-table.component.html',
+  styleUrls: ['./{{kebab}}-table.component.scss']
 })
-export class {{pascal}}FormComponent {
-  formGroup = this.fb.group({
+export class {{pascal}}TableComponent implements OnInit {
+  displayedColumns = [
     {{#properties}}
-    {{camel}}: null,
+    '{{camel}}', 
     {{/properties}}
-  });
+  ];
+  dataSource: Observable<{{pascal}}[]>;
 
-  constructor(private fb: FormBuilder, private service: {{pascal}}Service) { }
+  constructor(private service: {{pascal}}Service) { }
 
-  onSubmit() {
-    console.log(this.formGroup.value);
-    const {{camel}} = {{pascal}}.from(this.formGroup.value);
-    this.service.create({{camel}});
-    this.formGroup.reset();
+  ngOnInit() {
+    this.dataSource = this.service.observable();
   }
+
 }
 `

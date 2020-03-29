@@ -8,7 +8,6 @@ import { ShippingInformation } from './shipping-information';
 export class ShippingInformationService {
 
   private subject = new Subject<ShippingInformation[]>();
-
   private store: ShippingInformation[] = [];
 
   constructor() { }

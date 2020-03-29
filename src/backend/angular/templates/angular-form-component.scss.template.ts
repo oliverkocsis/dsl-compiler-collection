@@ -1,4 +1,4 @@
-export const ANGULAR_COMPONENT_SCSS_TEMPLATE = `.full-width {
+export const ANGULAR_FORM_SCSS_TEMPLATE = `.full-width {
   width: 100%;
 }
 

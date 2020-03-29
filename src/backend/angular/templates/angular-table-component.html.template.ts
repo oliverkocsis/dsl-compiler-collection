@@ -1,21 +1,12 @@
-export const ANGULAR_COMPONENT_HTML_TEMPLATE = `<form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
-<mat-card class="shipping-card">
-  <mat-card-header>
-    <mat-card-title>{{name}}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    {{#properties}}
-    <div class="row">
-      <div class="col">
-        <mat-form-field class="full-width">
-          <input matInput placeholder="{{name}}" type="{{htmlType}}" formControlName="{{camel}}">
-        </mat-form-field>
-      </div>
-    </div>
-    {{/properties}}
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-flat-button color="primary" type="submit">Submit</button>
-  </mat-card-actions>
-</mat-card>
-</form>`
+export const ANGULAR_TABLE_HTML_TEMPLATE = `  <table mat-table [dataSource]="dataSource" class="full-width-table">
+  {{#properties}}
+  <ng-container matColumnDef="{{camel}}">
+    <th mat-header-cell *matHeaderCellDef>{{name}}</th>
+    {{=<% %>=}}
+    <td mat-cell *matCellDef="let row">{{row.<%camel%>}}</td>
+    <%={{ }}=%>
+  </ng-container>
+  {{/properties}}
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>`

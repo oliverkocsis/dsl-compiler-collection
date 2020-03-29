@@ -15,6 +15,7 @@ describe("The AngularBackend", function () {
 
     const NAME = "Shipping Information";
     const KEBAB = "shipping-information";
+    const PASCAL = "ShippingInformation";
 
     beforeAll(() => {
         backend = new AngularBackend();
@@ -35,7 +36,12 @@ describe("The AngularBackend", function () {
     it("generates a readme markup file", function () {
         const file = virtualFileSystem.getChildNode('readme.md') as File;
         expect(file).toBeDefined();
-        expect(file.getValue().replace(/\s+/g, ' ')).toContain(`$ ng generate @angular/material:address-form ${KEBAB}`);
+        expect(file.getValue()).toContain(`$ ng generate component ${PASCAL}`);
+        expect(file.getValue()).toContain(`$ cd ./src/app/${KEBAB}`);
+        expect(file.getValue()).toContain(`$ ng generate class ${PASCAL}`);
+        expect(file.getValue()).toContain(`$ ng generate service ${PASCAL}`);
+        expect(file.getValue()).toContain(`$ ng generate @angular/material:address-form ${PASCAL}Form`);
+        expect(file.getValue()).toContain(`$ ng generate @angular/material:table ${PASCAL}Table`);
     });
 
     it("generates a src and app directory", function () {
