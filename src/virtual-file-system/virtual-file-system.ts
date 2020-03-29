@@ -1,13 +1,16 @@
-export abstract class VirtualFileSystemEntry {
-    public static readonly VIRTUAL_FILE_SYSTEM = 0;
+export abstract class VirtualFileSystemNode {
+    public static readonly ROOT = 0;
     public static readonly DIRECTORY = 1;
     public static readonly FILE = 2;
 
     private name: string;
+    protected path: string;
     private childNodes: any;
+
 
     constructor(name: string) {
         this.name = name;
+        this.path = '/';
         this.childNodes = {};
     }
 
@@ -15,16 +18,25 @@ export abstract class VirtualFileSystemEntry {
         return this.name;
     }
 
-    public appendChild(node: VirtualFileSystemEntry): void {
-        this.childNodes[node.getName()] = node;
+    public getPath(): string {
+        return this.name;
     }
 
-    getChildNode(name: string): VirtualFileSystemEntry {
+    public getPathName(): string {
+        return this.path + this.name;
+    }
+
+    public appendChild(node: VirtualFileSystemNode): void {
+        this.childNodes[node.getName()] = node;
+        node.path = this.path + this.name + '/'
+    }
+
+    getChildNode(name: string): VirtualFileSystemNode {
         return this.childNodes[name];
     }
 
-    getChildNodes(): VirtualFileSystemEntry[] {
-        const childNodes: VirtualFileSystemEntry[] = [];
+    getChildNodes(): VirtualFileSystemNode[] {
+        const childNodes: VirtualFileSystemNode[] = [];
         for (const key in this.childNodes) {
             if (this.childNodes.hasOwnProperty(key)) {
                 childNodes.push(this.childNodes[key]);
@@ -33,31 +45,43 @@ export abstract class VirtualFileSystemEntry {
         return childNodes;
     }
 
+    public visit(visitor: (entry: VirtualFileSystemNode) => void) {
+        VirtualFileSystemNode._visit(visitor, this);
+    }
+
+    private static _visit(visitor: (entry: VirtualFileSystemNode) => void, node: VirtualFileSystemNode) {
+        visitor(node);
+        for (const n of node.getChildNodes()) {
+            VirtualFileSystemNode._visit(visitor, n);
+        }
+    }
+
     public abstract getType(): number;
 
 }
 
-export class VirtualFileSystem extends VirtualFileSystemEntry {
+export class Root extends VirtualFileSystemNode {
 
     constructor() {
-        super("VirtualFileSystem");
+        super('');
+        this.path = '';
     }
 
     getType(): number {
-        return VirtualFileSystemEntry.VIRTUAL_FILE_SYSTEM;
+        return VirtualFileSystemNode.ROOT;
     }
 
 }
 
-export class Directory extends VirtualFileSystemEntry {
+export class Directory extends VirtualFileSystemNode {
 
     getType(): number {
-        return VirtualFileSystemEntry.DIRECTORY;
+        return VirtualFileSystemNode.DIRECTORY;
     }
 
 }
 
-export class File extends VirtualFileSystemEntry {
+export class File extends VirtualFileSystemNode {
 
     private value: string;
 
@@ -67,7 +91,7 @@ export class File extends VirtualFileSystemEntry {
     }
 
     getType(): number {
-        return VirtualFileSystemEntry.FILE;
+        return VirtualFileSystemNode.FILE;
     }
 
     getValue(): string {

@@ -1,7 +1,7 @@
 {
-  "name": "dsl-compiler-collection",
-  "version": "0.0.2",
-  "description": "DSL Compiler Collection (DCC) comprises a number of compilers for different domain model languages",
+  "name": "@dsl-cc/dsl-compiler-collection",
+  "version": "0.1.0",
+  "description": "DSL Compiler Collection (DSL-CC) comprises a number of compilers for different domain model languages",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
@@ -12,9 +12,11 @@
     "url": "git+https://github.com/oliverkocsis/domain-compiler-collection.git"
   },
   "keywords": [
-    "domain",
-    "model",
-    "language",
+    "angular",
+    "firebase",
+    "dsl",
+    "bpmn",
+    "ddd",
     "compiler"
   ],
   "author": "Oliver Kocsis",
@@ -24,16 +26,16 @@
   },
   "homepage": "https://github.com/oliverkocsis/domain-compiler-collection#readme",
   "devDependencies": {
-    "@types/jasmine": "^3.5.7",
+    "@types/jasmine": "^3.5.10",
     "@types/lodash": "^4.14.149",
     "@types/mustache": "^4.0.1",
-    "@types/node": "^13.7.5",
+    "@types/node": "^13.9.5",
     "jasmine": "^3.5.0",
-    "ts-node": "^8.6.2",
-    "typescript": "^3.8.2"
+    "ts-node": "^8.8.1",
+    "typescript": "^3.8.3"
   },
   "dependencies": {
     "lodash": "^4.17.15",
-    "mustache": "^4.0.0"
+    "mustache": "^4.0.1"
   }
 }

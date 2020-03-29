@@ -1,6 +1,28 @@
 # DSL Compiler Collection
 DSL Compiler Collection (DCC) is a collection of compilers for domain specific languages
 
+# Getting Started
+
+Install `@dsl-cc/dsl-compiler-collection`
+
+    npm install --save @dsl-cc/dsl-compiler-collection
+
+Create a data node, add properties, then compile. 
+
+    import { AngularBackend, AbstractSyntaxGraph, DataNode, PropertyNode, Directory, File, VirtualFileSystem } from '@dsl-cc/dsl-compiler-collection';
+
+    const backend = new AngularBackend();
+    const abstractSyntaxTree = new AbstractSyntaxGraph();
+    const data = new DataNode("Shipping Information");
+    data.appendChildNode(new PropertyNode("Company", PropertyNode.TYPE_TEXT));
+    data.appendChildNode(new PropertyNode("First Name", PropertyNode.TYPE_TEXT));
+    data.appendChildNode(new PropertyNode("Last Name", PropertyNode.TYPE_TEXT));
+    data.appendChildNode(new PropertyNode("Address", PropertyNode.TYPE_TEXT));
+    data.appendChildNode(new PropertyNode("City", PropertyNode.TYPE_TEXT));
+    data.appendChildNode(new PropertyNode("Postal Code", PropertyNode.TYPE_NUMBER));
+    abstractSyntaxTree.appendChildNode(data);
+    const virtualFileSystem = backend.generate(abstractSyntaxTree); 
+
 # Domain
 
 ## Domain
@@ -29,21 +51,11 @@ Work that a company or organization performs using business processes. An activi
 [Business Process Model and Notation (BPMN) Version 2.0](https://www.omg.org/spec/BPMN/2.0/PDF)
 [BPMN Quick Guide](https://www.bpmnquickguide.com/)
 
-# Compliance
+# Coming Soon .. 
 
-Users and Roles
-Authentication and Authorization
-Audit: who when what
+- Compliance
+- Firebase
 
-# Angular & Firebase
-
-## Data
-Data = Form + List
-
-## Activity
-Data = Create, Read, Update, Delete
-Alias for Create, Read, Update, Delete
-Custom activities
 
 
 

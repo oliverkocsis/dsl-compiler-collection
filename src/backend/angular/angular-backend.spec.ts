@@ -1,7 +1,7 @@
 import { AbstractSyntaxGraph, DataNode, PropertyNode } from '../../abstract-syntax-graph/abstract-syntax-graph';
 import { AngularBackend } from './angluar-backend';
 import { readFileSync } from 'fs';
-import { VirtualFileSystem, Directory, VirtualFileSystemEntry } from '../../virtual-file-system/virtual-file-system';
+import { Root, Directory, VirtualFileSystemNode } from '../../virtual-file-system/virtual-file-system';
 import { File } from '../../virtual-file-system/virtual-file-system';
 import { Backend } from '../backend';
 
@@ -10,7 +10,7 @@ describe("The AngularBackend", function () {
     let backend: Backend;
     let abstractSyntaxTree: AbstractSyntaxGraph;
     let data: DataNode;
-    let virtualFileSystem: VirtualFileSystem;
+    let root: Root;
     let folder: Directory;
 
     const NAME = "Shipping Information";
@@ -28,13 +28,13 @@ describe("The AngularBackend", function () {
         data.appendChildNode(new PropertyNode("City", PropertyNode.TYPE_TEXT));
         data.appendChildNode(new PropertyNode("Postal Code", PropertyNode.TYPE_NUMBER));
         abstractSyntaxTree.appendChildNode(data);
-        virtualFileSystem = backend.generate(abstractSyntaxTree);
-        folder = virtualFileSystem.getChildNode("src").getChildNode("app").getChildNode(KEBAB);
+        root = backend.generate(abstractSyntaxTree);
+        folder = root.getChildNode("src").getChildNode("app").getChildNode(KEBAB);
     });
 
 
     it("generates a readme markup file", function () {
-        const file = virtualFileSystem.getChildNode('readme.md') as File;
+        const file = root.getChildNode('readme.md') as File;
         expect(file).toBeDefined();
         expect(file.getValue()).toContain(`$ ng generate component ${PASCAL}`);
         expect(file.getValue()).toContain(`$ cd ./src/app/${KEBAB}`);
@@ -45,7 +45,7 @@ describe("The AngularBackend", function () {
     });
 
     it("generates a src and app directory", function () {
-        expect(folder.getType()).toBe(VirtualFileSystemEntry.DIRECTORY);
+        expect(folder.getType()).toBe(VirtualFileSystemNode.DIRECTORY);
     });
 
     it("generates a class file", function () {

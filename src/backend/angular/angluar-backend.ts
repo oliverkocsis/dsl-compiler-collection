@@ -1,7 +1,7 @@
 import * as Mustache from 'mustache';
 import { AngularTempate } from "./templates/angular-template";
 import { AbstractSyntaxGraph, PropertyNode } from '../../abstract-syntax-graph/abstract-syntax-graph';
-import { VirtualFileSystem, Directory } from '../../virtual-file-system/virtual-file-system';
+import { Root, Directory } from '../../virtual-file-system/virtual-file-system';
 import { File } from '../../virtual-file-system/virtual-file-system';
 import { Backend } from '../backend';
 import * as _ from 'lodash';
@@ -12,8 +12,8 @@ export class AngularBackend implements Backend {
 
     constructor() { }
 
-    public generate(abstractSyntaxGraph: AbstractSyntaxGraph): VirtualFileSystem {
-        const virtualFileSystem: VirtualFileSystem = new VirtualFileSystem();
+    public generate(abstractSyntaxGraph: AbstractSyntaxGraph): Root {
+        const virtualFileSystem: Root = new Root();
         const src = new Directory('src');
         virtualFileSystem.appendChild(src);
         const app = new Directory('app');
