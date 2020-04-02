@@ -1,5 +1,5 @@
 import * as Mustache from 'mustache';
-import { AngularTempate } from "./templates/angular-template";
+import { AngularTempate } from "./angular-template";
 import { AbstractSyntaxGraph, PropertyNode } from '../../abstract-syntax-graph/abstract-syntax-graph';
 import { Root, Directory } from '../../virtual-file-system/virtual-file-system';
 import { File } from '../../virtual-file-system/virtual-file-system';

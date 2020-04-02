@@ -1,4 +1,4 @@
-export const ANGULAR_TABLE_TS_TEMPLATE = `import { Component, OnInit } from '@angular/core';
+export const DATA_TABLE_TS_TEMPLATE = `import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { {{pascal}} } from '../{{kebab}}';
 import { {{pascal}}Service } from '../{{kebab}}.service';

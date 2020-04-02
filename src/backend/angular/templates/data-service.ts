@@ -1,4 +1,4 @@
-export const ANGULAR_SERVICE_TEMPLATE = `import { Injectable } from '@angular/core';
+export const DATA_SERVICE_TEMPLATE = `import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { {{pascal}} } from './{{kebab}}';
 

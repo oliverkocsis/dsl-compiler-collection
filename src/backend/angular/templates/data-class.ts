@@ -1,4 +1,4 @@
-export const ANGULAR_CLASS_TEMPLATE = `export class {{pascal}} {
+export const DATA_CLASS_TEMPLATE = `export class {{pascal}} {
     {{#properties}}
     public {{camel}}: {{jsType}};
     {{/properties}}
