@@ -1,5 +1,5 @@
 import * as Mustache from 'mustache';
-import { AngularTempate } from "./templates/angular-template";
+import { AngularTempate } from "./angular-template";
 import { AbstractSyntaxGraph, PropertyNode } from '../../abstract-syntax-graph/abstract-syntax-graph';
 import { Root, Directory } from '../../virtual-file-system/virtual-file-system';
 import { File } from '../../virtual-file-system/virtual-file-system';
@@ -46,20 +46,36 @@ export class AngularBackend implements Backend {
             name = `readme.md`;
             data = Mustache.render(AngularTempate.getReadmeTemplate(), view);
             virtualFileSystem.appendChild(new File(name, data));
-            // Driectory
-            const directory = new Directory(kebab);
-            app.appendChild(directory);
+            // Routing
+            name = `app-routing.module.ts`;
+            data = Mustache.render(AngularTempate.getRoutingTemplate(), view);
+            app.appendChild(new File(name, data));
+            // Directory
+            const dir = new Directory(kebab);
+            app.appendChild(dir);
             // Class
             name = `${kebab}.ts`;
             data = Mustache.render(AngularTempate.getClassTemplate(), view);
-            directory.appendChild(new File(name, data));
+            dir.appendChild(new File(name, data));
             // Service
             name = `${kebab}.service.ts`;
             data = Mustache.render(AngularTempate.getServiceTemplate(), view);
-            directory.appendChild(new File(name, data));
+            dir.appendChild(new File(name, data));
+            // Component HTML
+            name = `${kebab}.component.html`;
+            data = Mustache.render(AngularTempate.getComponentHTMLTemplate(), view);
+            dir.appendChild(new File(name, data));
+            // Component scss
+            name = `${kebab}.component.scss`;
+            data = Mustache.render(AngularTempate.getComponentSCSSTemplate(), view);
+            dir.appendChild(new File(name, data));
+            // Component TS
+            name = `${kebab}.component.ts`;
+            data = Mustache.render(AngularTempate.getComponentTSTemplate(), view);
+            dir.appendChild(new File(name, data));
             // Form Directory
             const formDirectory = new Directory(`${kebab}-form`);
-            directory.appendChild(formDirectory);
+            dir.appendChild(formDirectory);
             // Form Component HTML
             name = `${kebab}-form.component.html`;
             data = Mustache.render(AngularTempate.getFormComponentHTMLTemplate(), view);
@@ -74,7 +90,7 @@ export class AngularBackend implements Backend {
             formDirectory.appendChild(new File(name, data));
             // Table Directory
             const tableDirectory = new Directory(`${kebab}-table`);
-            directory.appendChild(tableDirectory);
+            dir.appendChild(tableDirectory);
             // Table Component HTML
             name = `${kebab}-table.component.html`;
             data = Mustache.render(AngularTempate.getTableComponentHTMLTemplate(), view);

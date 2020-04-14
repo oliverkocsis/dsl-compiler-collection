@@ -1,4 +1,4 @@
-export const ANGULAR_README_TEMPLATE = `# Getting Started with DSL Compiler Collection
+export const README_TEMPLATE = `# Getting Started with DSL Compiler Collection
 
 sources:
 - https://angular.io/guide/setup-local
