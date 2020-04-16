@@ -3,4 +3,6 @@ import { VirtualFileSystem } from "../virtual-file-system/virtual-file-system";
 
 export interface Backend {
     generate(abstractSyntaxGraph: AbstractSyntaxGraph): VirtualFileSystem;
-} 
+}
+
+export { AngularBackend } from './angular/angluar-backend';

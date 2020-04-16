@@ -3,4 +3,6 @@ import { VirtualFileSystem } from "../virtual-file-system/virtual-file-system";
 
 export interface Frontend {
     parse(root: VirtualFileSystem): AbstractSyntaxGraph;
-} 
+}
+
+export { JsonSchemaFronted } from './json-schema/json-schema-frontend';
