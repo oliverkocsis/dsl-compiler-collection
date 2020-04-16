@@ -60,7 +60,7 @@ export abstract class VirtualFileSystemNode {
 
 }
 
-export class Root extends VirtualFileSystemNode {
+export class VirtualFileSystem extends VirtualFileSystemNode {
 
     constructor() {
         super('');

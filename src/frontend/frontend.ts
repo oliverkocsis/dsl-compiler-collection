@@ -1,6 +1,6 @@
 import { AbstractSyntaxGraph } from "../abstract-syntax-graph/abstract-syntax-graph";
-import { Root } from "../virtual-file-system/virtual-file-system";
+import { VirtualFileSystem } from "../virtual-file-system/virtual-file-system";
 
 export interface Frontend {
-    parse(root: Root): AbstractSyntaxGraph;
+    parse(root: VirtualFileSystem): AbstractSyntaxGraph;
 } 
