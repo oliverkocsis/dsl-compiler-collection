@@ -1,7 +1,7 @@
 import * as Mustache from 'mustache';
 import { AngularTempate } from "./angular-template";
 import { AbstractSyntaxGraph, PropertyNode } from '../../abstract-syntax-graph/abstract-syntax-graph';
-import { Root, Directory } from '../../virtual-file-system/virtual-file-system';
+import { VirtualFileSystem, Directory } from '../../virtual-file-system/virtual-file-system';
 import { File } from '../../virtual-file-system/virtual-file-system';
 import { Backend } from '../backend';
 import * as _ from 'lodash';
@@ -12,8 +12,8 @@ export class AngularBackend implements Backend {
 
     constructor() { }
 
-    public generate(abstractSyntaxGraph: AbstractSyntaxGraph): Root {
-        const virtualFileSystem: Root = new Root();
+    public generate(abstractSyntaxGraph: AbstractSyntaxGraph): VirtualFileSystem {
+        const virtualFileSystem: VirtualFileSystem = new VirtualFileSystem();
         const src = new Directory('src');
         virtualFileSystem.appendChild(src);
         const app = new Directory('app');
@@ -111,7 +111,7 @@ export class AngularBackend implements Backend {
 function convertDataTypeToHTMLType(type: number): string | undefined {
     let inputType;
     switch (type) {
-        case PropertyNode.TYPE_TEXT:
+        case PropertyNode.TYPE_STRING:
             inputType = "text";
             break;
         case PropertyNode.TYPE_NUMBER:
@@ -126,7 +126,7 @@ function convertDataTypeToHTMLType(type: number): string | undefined {
 function convertDataTypeToJSType(type: number): string | undefined {
     let inputType;
     switch (type) {
-        case PropertyNode.TYPE_TEXT:
+        case PropertyNode.TYPE_STRING:
             inputType = "string";
             break;
         case PropertyNode.TYPE_NUMBER:

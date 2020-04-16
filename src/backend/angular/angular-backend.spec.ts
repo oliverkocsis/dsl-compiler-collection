@@ -1,7 +1,7 @@
 import { AbstractSyntaxGraph, DataNode, PropertyNode } from '../../abstract-syntax-graph/abstract-syntax-graph';
 import { AngularBackend } from './angluar-backend';
 import { readFileSync } from 'fs';
-import { Root, Directory, VirtualFileSystemNode } from '../../virtual-file-system/virtual-file-system';
+import { VirtualFileSystem, Directory, VirtualFileSystemNode } from '../../virtual-file-system/virtual-file-system';
 import { File } from '../../virtual-file-system/virtual-file-system';
 import { Backend } from '../backend';
 
@@ -10,7 +10,7 @@ describe("The AngularBackend", function () {
     let backend: Backend;
     let abstractSyntaxTree: AbstractSyntaxGraph;
     let data: DataNode;
-    let root: Root;
+    let root: VirtualFileSystem;
     let src: Directory;
     let app: Directory;
     let dir: Directory;
@@ -23,11 +23,11 @@ describe("The AngularBackend", function () {
         backend = new AngularBackend();
         abstractSyntaxTree = new AbstractSyntaxGraph();
         data = new DataNode(NAME);
-        data.appendChildNode(new PropertyNode("Company", PropertyNode.TYPE_TEXT));
-        data.appendChildNode(new PropertyNode("First Name", PropertyNode.TYPE_TEXT));
-        data.appendChildNode(new PropertyNode("Last Name", PropertyNode.TYPE_TEXT));
-        data.appendChildNode(new PropertyNode("Address", PropertyNode.TYPE_TEXT));
-        data.appendChildNode(new PropertyNode("City", PropertyNode.TYPE_TEXT));
+        data.appendChildNode(new PropertyNode("Company", PropertyNode.TYPE_STRING));
+        data.appendChildNode(new PropertyNode("First Name", PropertyNode.TYPE_STRING));
+        data.appendChildNode(new PropertyNode("Last Name", PropertyNode.TYPE_STRING));
+        data.appendChildNode(new PropertyNode("Address", PropertyNode.TYPE_STRING));
+        data.appendChildNode(new PropertyNode("City", PropertyNode.TYPE_STRING));
         data.appendChildNode(new PropertyNode("Postal Code", PropertyNode.TYPE_NUMBER));
         abstractSyntaxTree.appendChildNode(data);
         root = backend.generate(abstractSyntaxTree);

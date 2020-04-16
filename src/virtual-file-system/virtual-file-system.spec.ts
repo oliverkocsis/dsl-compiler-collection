@@ -1,8 +1,8 @@
-import { Root, Directory, File, VirtualFileSystemNode } from './virtual-file-system';
+import { VirtualFileSystem, Directory, File, VirtualFileSystemNode } from './virtual-file-system';
 
 describe('A VirtualFileSystemNode', function () {
     it('can visit its nodes', function () {
-        const virtualFileSystem = new Root();
+        const virtualFileSystem = new VirtualFileSystem();
         const directoryA = new Directory('A');
         virtualFileSystem.appendChild(directoryA);
         directoryA.appendChild(new File('X', '1'));
