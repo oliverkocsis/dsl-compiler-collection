@@ -1,0 +1,23 @@
+{
+    "type": "object",
+    "properties": {
+        "Company": {
+            "type": "string"
+        },
+        "First Name": {
+            "type": "string"
+        },
+        "Last Name": {
+            "type": "string"
+        },
+        "Address": {
+            "type": "string"
+        },
+        "City": {
+            "type": "string"
+        },
+        "Postal Code": {
+            "type": "string"
+        }
+    }
+}
