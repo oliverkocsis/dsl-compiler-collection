@@ -23,11 +23,11 @@ describe("The AngularBackend", function () {
         backend = new AngularBackend();
         abstractSyntaxTree = new AbstractSyntaxGraph();
         data = new DataNode(NAME);
-        data.appendChildNode(new PropertyNode("Company", PropertyNode.TYPE_TEXT));
-        data.appendChildNode(new PropertyNode("First Name", PropertyNode.TYPE_TEXT));
-        data.appendChildNode(new PropertyNode("Last Name", PropertyNode.TYPE_TEXT));
-        data.appendChildNode(new PropertyNode("Address", PropertyNode.TYPE_TEXT));
-        data.appendChildNode(new PropertyNode("City", PropertyNode.TYPE_TEXT));
+        data.appendChildNode(new PropertyNode("Company", PropertyNode.TYPE_STRING));
+        data.appendChildNode(new PropertyNode("First Name", PropertyNode.TYPE_STRING));
+        data.appendChildNode(new PropertyNode("Last Name", PropertyNode.TYPE_STRING));
+        data.appendChildNode(new PropertyNode("Address", PropertyNode.TYPE_STRING));
+        data.appendChildNode(new PropertyNode("City", PropertyNode.TYPE_STRING));
         data.appendChildNode(new PropertyNode("Postal Code", PropertyNode.TYPE_NUMBER));
         abstractSyntaxTree.appendChildNode(data);
         root = backend.generate(abstractSyntaxTree);

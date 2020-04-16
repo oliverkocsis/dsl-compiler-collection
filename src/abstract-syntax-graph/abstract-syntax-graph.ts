@@ -66,7 +66,7 @@ export class DataNode extends AbstractSyntaxGraphNode {
 
 export class PropertyNode extends AbstractSyntaxGraphNode {
 
-    public static readonly TYPE_TEXT = 0;
+    public static readonly TYPE_STRING = 0;
     public static readonly TYPE_NUMBER = 1;
 
     private type: number;

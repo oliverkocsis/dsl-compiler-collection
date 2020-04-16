@@ -111,7 +111,7 @@ export class AngularBackend implements Backend {
 function convertDataTypeToHTMLType(type: number): string | undefined {
     let inputType;
     switch (type) {
-        case PropertyNode.TYPE_TEXT:
+        case PropertyNode.TYPE_STRING:
             inputType = "text";
             break;
         case PropertyNode.TYPE_NUMBER:
@@ -126,7 +126,7 @@ function convertDataTypeToHTMLType(type: number): string | undefined {
 function convertDataTypeToJSType(type: number): string | undefined {
     let inputType;
     switch (type) {
-        case PropertyNode.TYPE_TEXT:
+        case PropertyNode.TYPE_STRING:
             inputType = "string";
             break;
         case PropertyNode.TYPE_NUMBER:

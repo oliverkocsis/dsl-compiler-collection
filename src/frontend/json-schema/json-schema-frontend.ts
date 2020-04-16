@@ -32,7 +32,7 @@ export class JsonSchemaFronted implements Frontend {
     private static mapJsonSchemaTypeToDataType(type: string): number {
         switch (type) {
             case (JsonSchemaFronted.TYPE_STRING):
-                return PropertyNode.TYPE_TEXT;
+                return PropertyNode.TYPE_STRING;
             case (JsonSchemaFronted.TYPE_NUMBER):
                 return PropertyNode.TYPE_NUMBER;
             default:
