@@ -17,7 +17,7 @@
             "type": "string"
         },
         "Postal Code": {
-            "type": "string"
+            "type": "number"
         }
     }
 }

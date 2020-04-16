@@ -45,13 +45,13 @@ export abstract class VirtualFileSystemNode {
         return childNodes;
     }
 
-    public visit(visitor: (entry: VirtualFileSystemNode) => void) {
+    public visit(visitor: (node: VirtualFileSystemNode) => void) {
         VirtualFileSystemNode._visit(visitor, this);
     }
 
-    private static _visit(visitor: (entry: VirtualFileSystemNode) => void, node: VirtualFileSystemNode) {
-        visitor(node);
-        for (const n of node.getChildNodes()) {
+    private static _visit(visitor: (node: VirtualFileSystemNode) => void, _this: VirtualFileSystemNode) {
+        visitor(_this);
+        for (const n of _this.getChildNodes()) {
             VirtualFileSystemNode._visit(visitor, n);
         }
     }
