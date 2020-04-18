@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Article } from './article';
 
 @Injectable({
@@ -7,10 +7,13 @@ import { Article } from './article';
 })
 export class ArticleService {
 
-  private subject = new Subject<Article[]>();
-  private store: Article[] = [];
+  private store: Article[];
+  private subject: BehaviorSubject<Article[]>;
 
-  constructor() { }
+  constructor() {
+    this.store = [];
+    this.subject = new BehaviorSubject<Article[]>(this.store);
+  }
 
   public create(data: Article): number {
     const index = this.store.push(data) - 1;
@@ -39,11 +42,8 @@ export class ArticleService {
     this.subject.next(this.store);
   }
 
-  public subscribe(next: (data: Article[]) => void) {
-    this.subject.subscribe(next);
+  public subscribe(next: (data: Article[]) => void): Subscription {
+    return this.subject.subscribe(next);
   }
 
-  public observable(): Observable<Article[]> {
-    return this.subject;
-  }
 }

@@ -1,5 +1,5 @@
 export const DATA_SERVICE_TEMPLATE = `import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { {{pascal}} } from './{{kebab}}';
 
 @Injectable({
@@ -7,10 +7,13 @@ import { {{pascal}} } from './{{kebab}}';
 })
 export class {{pascal}}Service {
 
-  private subject = new Subject<{{pascal}}[]>();
-  private store: {{pascal}}[] = [];
+  private store: {{pascal}}[];
+  private subject: BehaviorSubject<{{pascal}}[]>;
 
-  constructor() { }
+  constructor() {
+    this.store = [];
+    this.subject = new BehaviorSubject<{{pascal}}[]>(this.store);
+  }
 
   public create(data: {{pascal}}): number {
     const index = this.store.push(data) - 1;
@@ -39,13 +42,9 @@ export class {{pascal}}Service {
     this.subject.next(this.store);
   }
 
-  public subscribe(next: (data: {{pascal}}[]) => void) {
-    this.subject.subscribe(next);
+  public subscribe(next: (data: {{pascal}}[]) => void): Subscription {
+    return this.subject.subscribe(next);
   }
 
-  public observable(): Observable<{{pascal}}[]> {
-    return this.subject;
-  }
 }
-
 `
