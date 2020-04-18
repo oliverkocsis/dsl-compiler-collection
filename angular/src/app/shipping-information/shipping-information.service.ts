@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { ShippingInformation } from './shipping-information';
 
 @Injectable({
@@ -7,10 +7,13 @@ import { ShippingInformation } from './shipping-information';
 })
 export class ShippingInformationService {
 
-  private subject = new Subject<ShippingInformation[]>();
-  private store: ShippingInformation[] = [];
+  private store: ShippingInformation[];
+  private subject: BehaviorSubject<ShippingInformation[]>;
 
-  constructor() { }
+  constructor() {
+    this.store = [];
+    this.subject = new BehaviorSubject<ShippingInformation[]>(this.store);
+  }
 
   public create(data: ShippingInformation): number {
     const index = this.store.push(data) - 1;
@@ -39,11 +42,7 @@ export class ShippingInformationService {
     this.subject.next(this.store);
   }
 
-  public subscribe(next: (data: ShippingInformation[]) => void) {
-    this.subject.subscribe(next);
-  }
-
-  public observable(): Observable<ShippingInformation[]> {
-    return this.subject;
+  public subscribe(next: (data: ShippingInformation[]) => void): Subscription {
+    return this.subject.subscribe(next);
   }
 }

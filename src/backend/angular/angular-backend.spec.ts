@@ -8,144 +8,186 @@ import { Backend } from '../backend';
 describe("The AngularBackend", function () {
 
     let backend: Backend;
-    let abstractSyntaxTree: AbstractSyntaxGraph;
-    let data: DataNode;
+    let abstractSyntaxGraph: AbstractSyntaxGraph;
     let root: VirtualFileSystem;
     let src: Directory;
     let app: Directory;
-    let dir: Directory;
+    let articleDir: Directory;
+    let shippingInformationDir: Directory;
 
-    const NAME = "Shipping Information";
-    const KEBAB = "shipping-information";
-    const PASCAL = "ShippingInformation";
+    const ARTICLE_NAME = "Article";
+    const ARTICLE_KEBAB = "article";
+    const SHIPPING_INFORMAIION_NAME = "Shipping Information";
+    const SHIPPING_INFORMATION_KEBAB = "shipping-information";
 
     beforeAll(() => {
         backend = new AngularBackend();
-        abstractSyntaxTree = new AbstractSyntaxGraph();
-        data = new DataNode(NAME);
-        data.appendChildNode(new PropertyNode("Company", PropertyNode.TYPE_STRING));
-        data.appendChildNode(new PropertyNode("First Name", PropertyNode.TYPE_STRING));
-        data.appendChildNode(new PropertyNode("Last Name", PropertyNode.TYPE_STRING));
-        data.appendChildNode(new PropertyNode("Address", PropertyNode.TYPE_STRING));
-        data.appendChildNode(new PropertyNode("City", PropertyNode.TYPE_STRING));
-        data.appendChildNode(new PropertyNode("Postal Code", PropertyNode.TYPE_NUMBER));
-        abstractSyntaxTree.appendChildNode(data);
-        root = backend.generate(abstractSyntaxTree);
+        abstractSyntaxGraph = new AbstractSyntaxGraph();
+        const article = new DataNode(ARTICLE_NAME);
+        article.appendChildNode(new PropertyNode("Title", PropertyNode.TYPE_STRING));
+        article.appendChildNode(new PropertyNode("Content", PropertyNode.TYPE_STRING));
+        article.appendChildNode(new PropertyNode("Author", PropertyNode.TYPE_STRING))
+        abstractSyntaxGraph.appendChildNode(article);
+        const shippingInformation = new DataNode(SHIPPING_INFORMAIION_NAME);
+        shippingInformation.appendChildNode(new PropertyNode("Company", PropertyNode.TYPE_STRING));
+        shippingInformation.appendChildNode(new PropertyNode("First Name", PropertyNode.TYPE_STRING));
+        shippingInformation.appendChildNode(new PropertyNode("Last Name", PropertyNode.TYPE_STRING));
+        shippingInformation.appendChildNode(new PropertyNode("Address", PropertyNode.TYPE_STRING));
+        shippingInformation.appendChildNode(new PropertyNode("City", PropertyNode.TYPE_STRING));
+        shippingInformation.appendChildNode(new PropertyNode("Postal Code", PropertyNode.TYPE_NUMBER));
+        abstractSyntaxGraph.appendChildNode(shippingInformation);
+        root = backend.generate(abstractSyntaxGraph);
         src = root.getChildNode("src");
         app = src.getChildNode("app")
-        dir = app.getChildNode(KEBAB);
+        articleDir = app.getChildNode(ARTICLE_KEBAB);
+        shippingInformationDir = app.getChildNode(SHIPPING_INFORMATION_KEBAB);
     });
 
     it("generates a src and app directory", function () {
-        expect(dir.getType()).toBe(VirtualFileSystemNode.DIRECTORY);
-    });
-
-    it("generates a class file", function () {
-        const file = dir.getChildNode(`${KEBAB}.ts`) as File;
-        expect(file).toBeDefined();
-        const expected = readFileSync('angular/src/app/shipping-information/shipping-information.ts');
-        expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
-    });
-
-    it("generates a service file", function () {
-        const file = dir.getChildNode(`${KEBAB}.service.ts`) as File;
-        expect(file).toBeDefined();
-        const expected = readFileSync('angular/src/app/shipping-information/shipping-information.service.ts');
-        expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
-    });
-
-    it("generates a form component HTML file", function () {
-        const file = dir.getChildNode(`${KEBAB}-form`).getChildNode(`${KEBAB}-form.component.html`) as File;
-        expect(file).toBeDefined();
-        const expected = readFileSync('angular/src/app/shipping-information/shipping-information-form/shipping-information-form.component.html');
-        expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
-    });
-
-    it("generates a form component SCSS file", function () {
-        const file = dir.getChildNode(`${KEBAB}-form`).getChildNode(`${KEBAB}-form.component.scss`) as File;
-        expect(file).toBeDefined();
-        const expected = readFileSync('angular/src/app/shipping-information/shipping-information-form/shipping-information-form.component.scss');
-        expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
-    });
-
-    it("generates a form component TS file", function () {
-        const file = dir.getChildNode(`${KEBAB}-form`).getChildNode(`${KEBAB}-form.component.ts`) as File;
-        expect(file).toBeDefined();
-        const expected = readFileSync('angular/src/app/shipping-information/shipping-information-form/shipping-information-form.component.ts');
-        expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
-    });
-
-    it("generates a table component HTML file", function () {
-        const file = dir.getChildNode(`${KEBAB}-table`).getChildNode(`${KEBAB}-table.component.html`) as File;
-        expect(file).toBeDefined();
-        const expected = readFileSync('angular/src/app/shipping-information/shipping-information-table/shipping-information-table.component.html');
-        expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
-    });
-
-    it("generates a table component SCSS file", function () {
-        const file = dir.getChildNode(`${KEBAB}-table`).getChildNode(`${KEBAB}-table.component.scss`) as File;
-        expect(file).toBeDefined();
-        const expected = readFileSync('angular/src/app/shipping-information/shipping-information-table/shipping-information-table.component.scss');
-        expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
-    });
-
-    it("generates a table component TS file", function () {
-        const file = dir.getChildNode(`${KEBAB}-table`).getChildNode(`${KEBAB}-table.component.ts`) as File;
-        expect(file).toBeDefined();
-        const expected = readFileSync('angular/src/app/shipping-information/shipping-information-table/shipping-information-table.component.ts');
-        expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
-    });
-
-    it("generates a component HTML file", function () {
-        const file = dir.getChildNode(`${KEBAB}.component.html`) as File;
-        expect(file).toBeDefined();
-        const expected = readFileSync('angular/src/app/shipping-information/shipping-information.component.html');
-        expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
-    });
-
-    it("generates a component SCSS file", function () {
-        const file = dir.getChildNode(`${KEBAB}.component.scss`) as File;
-        expect(file).toBeDefined();
-        const expected = readFileSync('angular/src/app/shipping-information/shipping-information.component.scss');
-        expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
-    });
-
-    it("generates a component TS file", function () {
-        const file = dir.getChildNode(`${KEBAB}.component.ts`) as File;
-        expect(file).toBeDefined();
-        const expected = readFileSync('angular/src/app/shipping-information/shipping-information.component.ts');
-        expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
+        expect(src.getType()).toBe(VirtualFileSystemNode.DIRECTORY);
+        expect(app.getType()).toBe(VirtualFileSystemNode.DIRECTORY);
+        expect(articleDir.getType()).toBe(VirtualFileSystemNode.DIRECTORY);
+        expect(shippingInformationDir.getType()).toBe(VirtualFileSystemNode.DIRECTORY);
     });
 
     it("generates app-routing.module.ts", function () {
-        const fileName = 'app-routing.module.ts';
-        expectFile(app, fileName).toBe(`angular/src/app/${fileName}`);
+        const path = '/src/app/app-routing.module.ts';
+        expectFile(root, path).toBe(`angular${path}`);
     });
 
     it("generates app.component.html", function () {
-        const fileName = 'app.component.html';
-        expectFile(app, fileName).toBe(`angular/src/app/${fileName}`);
+        const path = '/src/app/app.component.html';
+        expectFile(root, path).toBe(`angular${path}`);
     });
 
     it("generates app.component.scss", function () {
-        const fileName = 'app.component.scss';
-        expectFile(app, fileName).toBe(`angular/src/app/${fileName}`);
+        const path = '/src/app/app.component.scss';
+        expectFile(root, path).toBe(`angular${path}`);
     });
 
     it("generates app.component.ts", function () {
-        const fileName = 'app.component.ts';
-        expectFile(app, fileName).toBe(`angular/src/app/${fileName}`);
+        const path = '/src/app/app.component.ts';
+        expectFile(root, path).toBe(`angular${path}`);
     });
 
     it("generates app.module.ts", function () {
-        const fileName = 'app.module.ts';
-        expectFile(app, fileName).toBe(`angular/src/app/${fileName}`);
+        const path = '/src/app/app.module.ts';
+        expectFile(root, path).toBe(`angular${path}`);
     });
 
+    it("generates article.ts", function () {
+        const path = `${articleDir.getPathName()}/${ARTICLE_KEBAB}.ts`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates article.service.ts", function () {
+        const path = `${articleDir.getPathName()}/${ARTICLE_KEBAB}.service.ts`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates article.component.html", function () {
+        const path = `${articleDir.getPathName()}/${ARTICLE_KEBAB}.component.html`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates article.component.scss", function () {
+        const path = `${articleDir.getPathName()}/${ARTICLE_KEBAB}.component.scss`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates article.component.ts", function () {
+        const path = `${articleDir.getPathName()}/${ARTICLE_KEBAB}.component.ts`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates article-form.component.html", function () {
+        const path = `${articleDir.getPathName()}/${ARTICLE_KEBAB}-form/${ARTICLE_KEBAB}-form.component.html`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates article-form.component.scss", function () {
+        const path = `${articleDir.getPathName()}/${ARTICLE_KEBAB}-form/${ARTICLE_KEBAB}-form.component.scss`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates article-form.component.ts", function () {
+        const path = `${articleDir.getPathName()}/${ARTICLE_KEBAB}-form/${ARTICLE_KEBAB}-form.component.ts`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates article-table.component.html", function () {
+        const path = `${articleDir.getPathName()}/${ARTICLE_KEBAB}-table/${ARTICLE_KEBAB}-table.component.html`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates article-table.component.scss", function () {
+        const path = `${articleDir.getPathName()}/${ARTICLE_KEBAB}-table/${ARTICLE_KEBAB}-table.component.scss`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates article-table.component.ts", function () {
+        const path = `${articleDir.getPathName()}/${ARTICLE_KEBAB}-table/${ARTICLE_KEBAB}-table.component.ts`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates shipping-information.ts", function () {
+        const path = `${shippingInformationDir.getPathName()}/${SHIPPING_INFORMATION_KEBAB}.ts`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates shipping-information.service.html", function () {
+        const path = `${shippingInformationDir.getPathName()}/${SHIPPING_INFORMATION_KEBAB}.service.ts`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates shipping-information.component.html", function () {
+        const path = `${shippingInformationDir.getPathName()}/${SHIPPING_INFORMATION_KEBAB}.component.html`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates shipping-information.component.scss", function () {
+        const path = `${shippingInformationDir.getPathName()}/${SHIPPING_INFORMATION_KEBAB}.component.scss`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates shipping-information.component.ts", function () {
+        const path = `${shippingInformationDir.getPathName()}/${SHIPPING_INFORMATION_KEBAB}.component.ts`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates shipping-information-form.component.html", function () {
+        const path = `${shippingInformationDir.getPathName()}/${SHIPPING_INFORMATION_KEBAB}-form/${SHIPPING_INFORMATION_KEBAB}-form.component.html`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates shipping-information-form.component.scss", function () {
+        const path = `${shippingInformationDir.getPathName()}/${SHIPPING_INFORMATION_KEBAB}-form/${SHIPPING_INFORMATION_KEBAB}-form.component.scss`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates shipping-information-form.component.ts", function () {
+        const path = `${shippingInformationDir.getPathName()}/${SHIPPING_INFORMATION_KEBAB}-form/${SHIPPING_INFORMATION_KEBAB}-form.component.ts`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates shipping-information-table.component.html", function () {
+        const path = `${shippingInformationDir.getPathName()}/${SHIPPING_INFORMATION_KEBAB}-table/${SHIPPING_INFORMATION_KEBAB}-table.component.html`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates shipping-information-table.component.scss", function () {
+        const path = `${shippingInformationDir.getPathName()}/${SHIPPING_INFORMATION_KEBAB}-table/${SHIPPING_INFORMATION_KEBAB}-table.component.scss`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
+
+    it("generates shipping-information-table.component.ts", function () {
+        const path = `${shippingInformationDir.getPathName()}/${SHIPPING_INFORMATION_KEBAB}-table/${SHIPPING_INFORMATION_KEBAB}-table.component.ts`;
+        expectFile(root, path).toBe(`angular${path}`);
+    });
 });
 
-function expectFile(dir: Directory, fileName: string) {
-    const file = dir.getChildNode(fileName) as File;
+function expectFile(root: VirtualFileSystem, path: string) {
+    const file = root.getNode(path) as File;
     expect(file).toBeDefined();
     return {
         toBe: function (path: string) {

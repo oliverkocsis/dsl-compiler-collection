@@ -5,7 +5,7 @@ export const DATA_CLASS_TEMPLATE = `export class {{pascal}} {
 
     constructor() { }
 
-    from(data: ShippingInformation) {
+    from(data: {{pascal}}) {
         {{#properties}}
         this.{{camel}} = data.{{camel}};
         {{/properties}}
