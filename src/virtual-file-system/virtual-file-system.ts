@@ -19,7 +19,7 @@ export abstract class VirtualFileSystemNode {
     }
 
     public getPath(): string {
-        return this.name;
+        return this.path;
     }
 
     public getPathName(): string {
@@ -43,6 +43,20 @@ export abstract class VirtualFileSystemNode {
             }
         }
         return childNodes;
+    }
+
+    getNode(path: string): VirtualFileSystemNode {
+        const index = path.indexOf('/');
+        switch (index) {
+            case -1:
+                return this.getChildNode(path);
+            case 0:
+                return this.getNode(path.substring(1));
+            default:
+                const curr = path.substring(0, index);
+                const next = path.substring(index + 1);
+                return this.getChildNode(curr).getNode(next);
+        }
     }
 
     public visit(visitor: (node: VirtualFileSystemNode) => void) {

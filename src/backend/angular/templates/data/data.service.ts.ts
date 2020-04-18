@@ -7,7 +7,7 @@ import { {{pascal}} } from './{{kebab}}';
 })
 export class {{pascal}}Service {
 
-  private subject = new Subject<ShippingInformation[]>();
+  private subject = new Subject<{{pascal}}[]>();
   private store: {{pascal}}[] = [];
 
   constructor() { }
