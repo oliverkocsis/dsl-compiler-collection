@@ -8,7 +8,7 @@ export const APP_COMPONENT_HTML_TEMPLATE = `<mat-sidenav-container>
     {{ /dataNodes }}
   </mat-nav-list>
 </mat-sidenav>
-<mat-sidenav-content>&nbsp;
+<mat-sidenav-content>
   <router-outlet></router-outlet>
 </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,5 +1,5 @@
 export const DATA_FORM_HTML_TEMPLATE = `<form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
-<mat-card class="shipping-card">
+<mat-card>
   <mat-card-header>
     <mat-card-title>{{name}}</mat-card-title>
   </mat-card-header>
@@ -18,4 +18,5 @@ export const DATA_FORM_HTML_TEMPLATE = `<form [formGroup]="formGroup" novalidate
     <button mat-flat-button color="primary" type="submit">Submit</button>
   </mat-card-actions>
 </mat-card>
-</form>`
+</form>
+`

@@ -1,4 +1,5 @@
-  <table mat-table [dataSource]="dataSource" class="full-width-table">
+<mat-card>
+  <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="company">
       <th mat-header-cell *matHeaderCellDef>Company</th>
       <td mat-cell *matCellDef="let row">{{row.company}}</td>
@@ -26,3 +27,4 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+</mat-card>
