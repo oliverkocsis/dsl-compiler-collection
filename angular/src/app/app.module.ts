@@ -15,6 +15,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { ArticleComponent } from './article/article.component';
+import { ArticleFormComponent } from './article/article-form/article-form.component';
+import { ArticleTableComponent } from './article/article-table/article-table.component';
 import { ShippingInformationComponent } from './shipping-information/shipping-information.component';
 import { ShippingInformationFormComponent } from './shipping-information/shipping-information-form/shipping-information-form.component';
 import { ShippingInformationTableComponent } from './shipping-information/shipping-information-table/shipping-information-table.component';
@@ -22,6 +25,9 @@ import { ShippingInformationTableComponent } from './shipping-information/shippi
 @NgModule({
   declarations: [
     AppComponent,
+    ArticleComponent,
+    ArticleFormComponent,
+    ArticleTableComponent,
     ShippingInformationComponent,
     ShippingInformationFormComponent,
     ShippingInformationTableComponent,
