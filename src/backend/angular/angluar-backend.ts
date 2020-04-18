@@ -132,11 +132,29 @@ export class AngularBackend implements Backend {
         let name;
         let data;
 
-        let view = dataNodes.map((value: DataNode) => this.generateDataView(value));
+        let view = {
+            dataNodes: dataNodes.map((value: DataNode) => this.generateDataView(value))
+        }
 
         // Routing
         name = `app-routing.module.ts`;
-        data = Mustache.render(AngularTempate.getRoutingTemplate(), view);
+        data = Mustache.render(AngularTempate.getAppRoutingTemplate(), view);
+        dir.appendChild(new File(name, data));
+        // HTML
+        name = `app.component.html`;
+        data = Mustache.render(AngularTempate.getAppHTMLTemplate(), view);
+        dir.appendChild(new File(name, data));
+        // SCSS
+        name = `app.component.scss`;
+        data = Mustache.render(AngularTempate.getAppSCSSTemplate(), view);
+        dir.appendChild(new File(name, data));
+        // TS
+        name = `app.component.ts`;
+        data = Mustache.render(AngularTempate.getAppTSTemplate(), view);
+        dir.appendChild(new File(name, data));
+        // Module
+        name = `app.module.ts`;
+        data = Mustache.render(AngularTempate.getAppModuleTemplate(), view);
         dir.appendChild(new File(name, data));
     }
 

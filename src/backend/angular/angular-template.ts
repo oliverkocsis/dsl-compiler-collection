@@ -1,4 +1,3 @@
-import { README_TEMPLATE } from './templates/readme';
 import { DATA_CLASS_TEMPLATE } from './templates/data-class';
 import { DATA_SERVICE_TEMPLATE } from './templates/data-service';
 import { DATA_FORM_HTML_TEMPLATE } from './templates/data-form/data-form.html';
@@ -10,13 +9,13 @@ import { DATA_TABLE_TS_TEMPLATE } from './templates/data-table/data-table.ts';
 import { DATA_COMPONENT_HTML_TEMPLATE } from './templates/data-component.html';
 import { DATA_COMPONENT_SCSS_TEMPLATE } from './templates/data-component.scss';
 import { DATA_COMPONENT_TS_TEMPLATE } from './templates/data-component.ts';
-import { ROUTING_TEMPLATE } from './templates/app-routing.module.ts';
+import { APP_COMPONENT_HTML_TEMPLATE } from './templates/app.component.html';
+import { APP_COMPONENT_SCSS_TEMPLATE } from './templates/app.component.scss';
+import { APP_COMPONENT_TS_TEMPLATE } from './templates/app.component.ts';
+import { APP_ROUTING_TEMPLATE } from './templates/app-routing.module.ts';
+import { APP_MODULE_TEMPLATE } from './templates/app.module.ts';
 
 export class AngularTempate {
-
-  public static getReadmeTemplate(): string {
-    return README_TEMPLATE;
-  }
 
   static getClassTemplate(): string {
     return DATA_CLASS_TEMPLATE;
@@ -62,8 +61,24 @@ export class AngularTempate {
     return DATA_COMPONENT_TS_TEMPLATE;
   }
 
-  public static getRoutingTemplate(): string {
-    return ROUTING_TEMPLATE;
+  public static getAppRoutingTemplate(): string {
+    return APP_ROUTING_TEMPLATE;
+  }
+
+  public static getAppHTMLTemplate(): string {
+    return APP_COMPONENT_HTML_TEMPLATE;
+  }
+
+  public static getAppSCSSTemplate(): string {
+    return APP_COMPONENT_SCSS_TEMPLATE;
+  }
+
+  public static getAppTSTemplate(): string {
+    return APP_COMPONENT_TS_TEMPLATE;
+  }
+
+  public static getAppModuleTemplate(): string {
+    return APP_MODULE_TEMPLATE;
   }
 
 }
