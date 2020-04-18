@@ -36,18 +36,6 @@ describe("The AngularBackend", function () {
         dir = app.getChildNode(KEBAB);
     });
 
-
-    it("generates a readme markup file", function () {
-        const file = root.getChildNode('readme.md') as File;
-        expect(file).toBeDefined();
-        expect(file.getValue()).toContain(`$ ng generate component ${PASCAL}`);
-        expect(file.getValue()).toContain(`$ cd ./src/app/${KEBAB}`);
-        expect(file.getValue()).toContain(`$ ng generate class ${PASCAL}`);
-        expect(file.getValue()).toContain(`$ ng generate service ${PASCAL}`);
-        expect(file.getValue()).toContain(`$ ng generate @angular/material:address-form ${PASCAL}Form`);
-        expect(file.getValue()).toContain(`$ ng generate @angular/material:table ${PASCAL}Table`);
-    });
-
     it("generates a src and app directory", function () {
         expect(dir.getType()).toBe(VirtualFileSystemNode.DIRECTORY);
     });
@@ -129,12 +117,40 @@ describe("The AngularBackend", function () {
         expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
     });
 
+    it("generates app-routing.module.ts", function () {
+        const fileName = 'app-routing.module.ts';
+        expectFile(app, fileName).toBe(`angular/src/app/${fileName}`);
+    });
 
-    it("generates a routing file", function () {
-        const file = app.getChildNode(`app-routing.module.ts`) as File;
-        expect(file).toBeDefined();
-        const expected = readFileSync('angular/src/app/app-routing.module.ts');
-        expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
+    it("generates app.component.html", function () {
+        const fileName = 'app.component.html';
+        expectFile(app, fileName).toBe(`angular/src/app/${fileName}`);
+    });
+
+    it("generates app.component.scss", function () {
+        const fileName = 'app.component.scss';
+        expectFile(app, fileName).toBe(`angular/src/app/${fileName}`);
+    });
+
+    it("generates app.component.ts", function () {
+        const fileName = 'app.component.ts';
+        expectFile(app, fileName).toBe(`angular/src/app/${fileName}`);
+    });
+
+    it("generates app.module.ts", function () {
+        const fileName = 'app.module.ts';
+        expectFile(app, fileName).toBe(`angular/src/app/${fileName}`);
     });
 
 });
+
+function expectFile(dir: Directory, fileName: string) {
+    const file = dir.getChildNode(fileName) as File;
+    expect(file).toBeDefined();
+    return {
+        toBe: function (path: string) {
+            const expected = readFileSync(path);
+            expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
+        }
+    }
+}

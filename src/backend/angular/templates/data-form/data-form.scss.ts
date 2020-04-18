@@ -2,9 +2,8 @@ export const DATA_FORM_SCSS_TEMPLATE = `.full-width {
   width: 100%;
 }
 
-.shipping-card {
-  min-width: 120px;
-  margin: 20px auto;
+mat-card {
+  margin: 1rem;
 }
 
 .mat-radio-button {

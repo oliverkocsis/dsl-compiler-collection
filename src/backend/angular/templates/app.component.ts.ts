@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+export const APP_COMPONENT_TS_TEMPLATE = `import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,3 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent { }
+`
