@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -28,6 +30,8 @@ import { ShippingInformationTableComponent } from './shipping-information/shippi
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatSidenavModule,
+    MatListModule,
     MatInputModule,
     MatButtonModule,
     MatSelectModule,

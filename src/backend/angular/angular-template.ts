@@ -10,7 +10,7 @@ import { DATA_TABLE_TS_TEMPLATE } from './templates/data-table/data-table.ts';
 import { DATA_COMPONENT_HTML_TEMPLATE } from './templates/data-component.html';
 import { DATA_COMPONENT_SCSS_TEMPLATE } from './templates/data-component.scss';
 import { DATA_COMPONENT_TS_TEMPLATE } from './templates/data-component.ts';
-import { ROUTING_TEMPLATE } from './templates/routing';
+import { ROUTING_TEMPLATE } from './templates/app-routing.module.ts';
 
 export class AngularTempate {
 
