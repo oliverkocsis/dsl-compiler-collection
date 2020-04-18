@@ -41,6 +41,17 @@ export abstract class AbstractSyntaxGraphNode {
         return childNodes;
     }
 
+    public visit(visitor: (node: AbstractSyntaxGraphNode) => void) {
+        AbstractSyntaxGraphNode._visit(visitor, this);
+    }
+
+    private static _visit(visitor: (node: AbstractSyntaxGraphNode) => void, _this: AbstractSyntaxGraphNode) {
+        visitor(_this);
+        for (const n of _this.getChildNodes()) {
+            AbstractSyntaxGraphNode._visit(visitor, n);
+        }
+    }
+
     public abstract getNodeType(): number;
 
 }
