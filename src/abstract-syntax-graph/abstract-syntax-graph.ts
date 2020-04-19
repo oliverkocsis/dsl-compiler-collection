@@ -79,6 +79,7 @@ export class PropertyNode extends AbstractSyntaxGraphNode {
 
     public static readonly TYPE_STRING = 0;
     public static readonly TYPE_NUMBER = 1;
+    public static readonly TYPE_REFERENCE = 99;
 
     private type: number;
 

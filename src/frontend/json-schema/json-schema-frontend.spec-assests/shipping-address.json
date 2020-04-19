@@ -1,22 +1,22 @@
 {
     "type": "object",
     "properties": {
-        "Company": {
+        "company": {
             "type": "string"
         },
-        "First Name": {
+        "firstName": {
             "type": "string"
         },
-        "Last Name": {
+        "lastName": {
             "type": "string"
         },
-        "Address": {
+        "address": {
             "type": "string"
         },
-        "City": {
+        "city": {
             "type": "string"
         },
-        "Postal Code": {
+        "postalCode": {
             "type": "number"
         }
     }
