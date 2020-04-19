@@ -6,6 +6,8 @@ import { readFileSync } from 'fs'
 
 describe("The JsonSchemaFronted", function () {
 
+  const ASSETS_FOLDER = 'src/frontend/json-schema/json-schema-frontend.spec-assests'
+
   let frontend: Frontend;
 
   beforeAll(() => {
@@ -13,9 +15,10 @@ describe("The JsonSchemaFronted", function () {
   });
 
   it("can parse a JSON schema file into an Abstract Syntax Graph", function () {
-    const schema = readFileSync(`src/frontend/json-schema/spec-assets/shipping-address.json`);
     const virtualFileSystem = new VirtualFileSystem();
-    virtualFileSystem.appendChild(new File('shipping-address.json', schema.toString()));
+    const shippingAddressFile = 'shipping-address.schema.json'
+    const shippingAddressSchema = readFileSync(`${ASSETS_FOLDER}/${shippingAddressFile}`);
+    virtualFileSystem.appendChild(new File(shippingAddressFile, shippingAddressSchema.toString()));
     const abstractSyntaxGraph = frontend.parse(virtualFileSystem);
     const shippingAddress = abstractSyntaxGraph.getChildNode('Shipping Address');
     expect((shippingAddress.getChildNode("Company") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);
@@ -27,11 +30,13 @@ describe("The JsonSchemaFronted", function () {
   });
 
   it("can parse multiple JSON schema files with hierarchy into an Abstract Syntax Graph", function () {
-    const productSchema = readFileSync(`src/frontend/json-schema/spec-assets/product.json`);
-    const productGroupSchema = readFileSync(`src/frontend/json-schema/spec-assets/product-group.json`);
     const virtualFileSystem = new VirtualFileSystem();
-    virtualFileSystem.appendChild(new File('product.json', productSchema.toString()));
-    virtualFileSystem.appendChild(new File('/product-group.json', productGroupSchema.toString()));
+    const productFile = 'product.schema.json';
+    const productSchema = readFileSync(`${ASSETS_FOLDER}/${productFile}`);
+    virtualFileSystem.appendChild(new File(productFile, productSchema.toString()));
+    const productGroupFile = 'product-group.schema.json'
+    const productGroupSchema = readFileSync(`${ASSETS_FOLDER}/${productGroupFile}`);
+    virtualFileSystem.appendChild(new File(productGroupFile, productGroupSchema.toString()));
     const abstractSyntaxGraph = frontend.parse(virtualFileSystem);
     const product = abstractSyntaxGraph.getChildNode('Product');
     expect((product.getChildNode("Name") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);
