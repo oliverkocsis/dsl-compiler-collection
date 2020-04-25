@@ -1,19 +1,19 @@
 <form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Product Backlog</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="row">
-      <div class="col">
-        <mat-form-field class="full-width">
-          <input matInput placeholder="Name" type="text" formControlName="name">
-        </mat-form-field>
+  <mat-toolbar>
+    <button mat-button type="submit">Save & Close</button>
+  </mat-toolbar>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Product Backlog</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Name" type="text" formControlName="name">
+          </mat-form-field>
+        </div>
       </div>
-    </div>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-flat-button color="primary" type="submit">Submit</button>
-  </mat-card-actions>
-</mat-card>
+    </mat-card-content>
+  </mat-card>
 </form>
