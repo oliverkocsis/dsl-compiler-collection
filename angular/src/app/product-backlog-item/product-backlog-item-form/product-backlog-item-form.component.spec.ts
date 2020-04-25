@@ -7,16 +7,18 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 
-import { ShippingInformationFormComponent } from './shipping-information-form.component';
+import { AppRoutingModule } from './../../app-routing.module';
+import { ProductBacklogItemFormComponent } from './product-backlog-item-form.component';
 
-describe('ShippingInformationFormComponent', () => {
-  let component: ShippingInformationFormComponent;
-  let fixture: ComponentFixture<ShippingInformationFormComponent>;
+describe('ProductBacklogItemFormComponent', () => {
+  let component: ProductBacklogItemFormComponent;
+  let fixture: ComponentFixture<ProductBacklogItemFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShippingInformationFormComponent ],
+      declarations: [ProductBacklogItemFormComponent],
       imports: [
+        AppRoutingModule,
         NoopAnimationsModule,
         ReactiveFormsModule,
         MatButtonModule,
@@ -29,7 +31,7 @@ describe('ShippingInformationFormComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShippingInformationFormComponent);
+    fixture = TestBed.createComponent(ProductBacklogItemFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
