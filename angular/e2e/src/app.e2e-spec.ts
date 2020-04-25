@@ -1,16 +1,17 @@
 import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
 
-describe('workspace-project App', () => {
+describe('Angular App', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display a sidenav with two navigation item', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('angular app is running!');
+    expect(page.getProductBacklogNavigationItem().getText()).toEqual('Product Backlog');
+    expect(page.getProductBacklogItemNavigationItem().getText()).toEqual('Product Backlog Item');
   });
 
   afterEach(async () => {
