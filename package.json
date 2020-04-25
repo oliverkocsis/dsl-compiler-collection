@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "test": "ts-node node_modules/jasmine/bin/jasmine --config=jasmine.json"
+    "test": "ts-node node_modules/jasmine/bin/jasmine --config=jasmine.json",
+    "angular-update": "cd angular && ng update --all=true --allowDirty=true"
   },
   "repository": {
     "type": "git",

@@ -15,9 +15,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { ArticleComponent } from './article/article.component';
-import { ArticleFormComponent } from './article/article-form/article-form.component';
-import { ArticleTableComponent } from './article/article-table/article-table.component';
+import { ProductBacklogItemComponent } from './product-backlog-item/product-backlog-item.component';
+import { ProductBacklogItemFormComponent } from './product-backlog-item/product-backlog-item-form/product-backlog-item-form.component';
+import { ProductBacklogItemTableComponent } from './product-backlog-item/product-backlog-item-table/product-backlog-item-table.component';
+import { ProductBacklogComponent } from './product-backlog/product-backlog.component';
+import { ProductBacklogFormComponent } from './product-backlog/product-backlog-form/product-backlog-form.component';
+import { ProductBacklogTableComponent } from './product-backlog/product-backlog-table/product-backlog-table.component';
 import { ShippingInformationComponent } from './shipping-information/shipping-information.component';
 import { ShippingInformationFormComponent } from './shipping-information/shipping-information-form/shipping-information-form.component';
 import { ShippingInformationTableComponent } from './shipping-information/shipping-information-table/shipping-information-table.component';
@@ -25,9 +28,12 @@ import { ShippingInformationTableComponent } from './shipping-information/shippi
 @NgModule({
   declarations: [
     AppComponent,
-    ArticleComponent,
-    ArticleFormComponent,
-    ArticleTableComponent,
+    ProductBacklogItemComponent,
+    ProductBacklogItemFormComponent,
+    ProductBacklogItemTableComponent,
+    ProductBacklogComponent,
+    ProductBacklogFormComponent,
+    ProductBacklogTableComponent,
     ShippingInformationComponent,
     ShippingInformationFormComponent,
     ShippingInformationTableComponent,

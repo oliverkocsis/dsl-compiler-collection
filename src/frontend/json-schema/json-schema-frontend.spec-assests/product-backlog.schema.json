@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "productBacklogItems": {
+      "type": "array",
+      "items": {
+        "$ref": "product-backlog-item"
+      }
+    }
+  }
+}

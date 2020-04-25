@@ -45,4 +45,5 @@ export class ShippingInformationService {
   public subscribe(next: (data: ShippingInformation[]) => void): Subscription {
     return this.subject.subscribe(next);
   }
+
 }

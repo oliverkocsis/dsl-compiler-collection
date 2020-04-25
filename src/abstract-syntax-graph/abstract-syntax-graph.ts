@@ -77,9 +77,9 @@ export class DataNode extends AbstractSyntaxGraphNode {
 
 export class PropertyNode extends AbstractSyntaxGraphNode {
 
-    public static readonly TYPE_STRING = 0;
-    public static readonly TYPE_NUMBER = 1;
-    public static readonly TYPE_REFERENCE = 99;
+    public static readonly TYPE_OBJECT = 0;
+    public static readonly TYPE_STRING = 1;
+    public static readonly TYPE_NUMBER = 2;
 
     private type: number;
 
@@ -94,5 +94,13 @@ export class PropertyNode extends AbstractSyntaxGraphNode {
 
     getType(): number {
         return this.type;
+    }
+
+    isList(): any {
+        throw new Error("Method not implemented.");
+    }
+
+    getChildNode(): AbstractSyntaxGraphNode {
+        throw new Error("Method not implemented.");
     }
 }

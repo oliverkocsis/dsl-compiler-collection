@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ArticleComponent } from './article/article.component';
+import { ProductBacklogItemComponent } from './product-backlog-item/product-backlog-item.component';
+import { ProductBacklogComponent } from './product-backlog/product-backlog.component';
 import { ShippingInformationComponent } from './shipping-information/shipping-information.component';
 
 
 const routes: Routes = [
-  { path: 'article', component: ArticleComponent },
+  { path: 'product-backlog-item', component: ProductBacklogItemComponent },
+  { path: 'product-backlog', component: ProductBacklogComponent },
   { path: 'shipping-information', component: ShippingInformationComponent },
 ];
 

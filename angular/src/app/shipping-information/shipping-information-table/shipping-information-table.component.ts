@@ -11,12 +11,12 @@ import { ShippingInformationService } from '../shipping-information.service';
 })
 export class ShippingInformationTableComponent implements OnInit, OnDestroy {
   displayedColumns = [
-    'company',
-    'firstName',
-    'lastName',
-    'address',
-    'city',
-    'postalCode',
+    'company', 
+    'firstName', 
+    'lastName', 
+    'address', 
+    'city', 
+    'postalCode', 
   ];
   dataSource: MatTableDataSource<ShippingInformation>;
   subscription: Subscription;

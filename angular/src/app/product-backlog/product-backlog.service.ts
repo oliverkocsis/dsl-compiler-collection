@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { Article } from './article';
+import { ProductBacklog } from './product-backlog';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ArticleService {
+export class ProductBacklogService {
 
-  private store: Article[];
-  private subject: BehaviorSubject<Article[]>;
+  private store: ProductBacklog[];
+  private subject: BehaviorSubject<ProductBacklog[]>;
 
   constructor() {
     this.store = [];
-    this.subject = new BehaviorSubject<Article[]>(this.store);
+    this.subject = new BehaviorSubject<ProductBacklog[]>(this.store);
   }
 
-  public create(data: Article): number {
+  public create(data: ProductBacklog): number {
     const index = this.store.push(data) - 1;
-    console.log('Article created: ' + index);
+    console.log('Product Backlog created: ' + index);
     this.subject.next(this.store);
     return index;
   }
@@ -30,19 +30,19 @@ export class ArticleService {
     return this.store;
   }
 
-  public update(index: number, data: Article) {
+  public update(index: number, data: ProductBacklog) {
     this.store[index] = data;
-    console.log('Article updated: ' + index);
+    console.log('Product Backlog updated: ' + index);
     this.subject.next(this.store);
   }
 
   public delete(index: number) {
     this.store.splice(index, 1);
-    console.log('Article deleted: ' + index);
+    console.log('Product Backlog deleted: ' + index);
     this.subject.next(this.store);
   }
 
-  public subscribe(next: (data: Article[]) => void): Subscription {
+  public subscribe(next: (data: ProductBacklog[]) => void): Subscription {
     return this.subject.subscribe(next);
   }
 

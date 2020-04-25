@@ -1,15 +1,18 @@
 <mat-sidenav-container>
-  <mat-sidenav mode="side" opened>
-    <mat-nav-list>
-      <mat-list-item>
-        <a matLine [routerLink]="['/article']">Article</a>
-      </mat-list-item>
-      <mat-list-item>
-        <a matLine [routerLink]="['/shipping-information']">Shipping Information</a>
-      </mat-list-item>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
+<mat-sidenav mode="side" opened>
+  <mat-nav-list>
+    <mat-list-item>
+      <a matLine [routerLink]="['/product-backlog-item']">Product Backlog Item</a>
+    </mat-list-item>
+    <mat-list-item>
+      <a matLine [routerLink]="['/product-backlog']">Product Backlog</a>
+    </mat-list-item>
+    <mat-list-item>
+      <a matLine [routerLink]="['/shipping-information']">Shipping Information</a>
+    </mat-list-item>
+  </mat-nav-list>
+</mat-sidenav>
+<mat-sidenav-content>
+  <router-outlet></router-outlet>
+</mat-sidenav-content>
 </mat-sidenav-container>
