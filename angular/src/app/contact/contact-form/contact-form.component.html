@@ -30,8 +30,13 @@
           <div class="row">
             <div class="col">
               <mat-form-field class="full-width">
-                <input matInput placeholder="Account" type="text" formControlName="account">
+                <input matInput placeholder="Account" type="text" formControlName="account" [matAutocomplete]="account">
               </mat-form-field>
+              <mat-autocomplete #account="matAutocomplete">
+                <mat-option *ngFor="let option of accountOptions" [value]="option.name">
+                  {{ option.name }}
+                </mat-option>
+              </mat-autocomplete>
             </div>
           </div>
           <div class="row">

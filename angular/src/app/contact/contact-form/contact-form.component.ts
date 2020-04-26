@@ -3,6 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ContactService } from '../contact.service';
 import { Contact } from '../contact';
+import { AccountService } from 'src/app/account/account.service';
+import { Account } from 'src/app/account/account';
 
 @Component({
   selector: 'app-contact-form',
@@ -20,13 +22,16 @@ export class ContactFormComponent implements OnInit {
     email: null,
   });
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private service: ContactService) { }
+  public accountOptions: Account[];
+
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private service: ContactService, private accountService: AccountService) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       const id = params['id'];
       console.log(id);
     });
+    this.accountService.subscribe((data: Account[]) => this.accountOptions = data);
   }
 
   onSubmit() {
