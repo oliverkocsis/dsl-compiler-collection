@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
@@ -56,6 +57,7 @@ import { AddressFormComponent } from './account/account-form/address-form/addres
     MatCardModule,
     MatInputModule,
     MatListModule,
+    MatMenuModule,
     MatPaginatorModule,
     MatRadioModule,
     MatSelectModule,

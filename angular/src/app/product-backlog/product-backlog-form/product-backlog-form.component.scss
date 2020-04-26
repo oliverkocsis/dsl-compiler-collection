@@ -25,7 +25,15 @@ mat-toolbar {
   border-bottom: solid 1px rgba(0, 0, 0, .12);
 
   button {
-    margin: 1em;
+    margin: 0em 1em;
+  }
+
+  button:first-child {
+    margin-left: 0em;
+  }
+
+  button:last-child {
+    margin-right: 0em;
   }
 }
 

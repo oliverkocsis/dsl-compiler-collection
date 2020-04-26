@@ -11,3 +11,20 @@ mat-sidenav-container {
     }
 
 }
+
+mat-toolbar {
+    background-color: #fff;
+    border-bottom: solid 1px rgba(0, 0, 0, .12);
+
+    span {
+        margin: 0em 1em;
+    }
+
+    span:first-child {
+        margin-left: 0em;
+    }
+
+    span:last-child {
+        margin-right: 0em;
+    }
+}

@@ -1,3 +1,20 @@
+<mat-toolbar>
+  <span>
+    <button mat-button [matMenuTriggerFor]="menu1">Accounts</button>
+    <mat-menu #menu1="matMenu">
+      <button mat-menu-item>Contacts</button>
+      <button mat-menu-item>Product Backlogs</button>
+    </mat-menu>
+  </span>
+  |
+  <span>
+    <button mat-button [matMenuTriggerFor]="menu2">Dealogic</button>
+    <mat-menu #menu2="matMenu">
+      <button mat-menu-item>JP Morgan</button>
+      <button mat-menu-item>Ford</button>
+    </mat-menu>
+  </span>
+</mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav mode="side" opened>
     <mat-nav-list>
