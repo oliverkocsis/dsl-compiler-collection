@@ -1,1 +1,29 @@
-<p>account-table works!</p>
+<mat-toolbar>
+  <a mat-button routerLink="/account-form">New</a>
+</mat-toolbar>
+<mat-card>
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let row">{{row.name}}</td>
+    </ng-container>
+    <ng-container matColumnDef="parent">
+      <th mat-header-cell *matHeaderCellDef>Parent</th>
+      <td mat-cell *matCellDef="let row">{{row.parent}}</td>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let row">{{row.type}}</td>
+    </ng-container>
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef>Phone</th>
+      <td mat-cell *matCellDef="let row">{{row.phone}}</td>
+    </ng-container>
+    <ng-container matColumnDef="website">
+      <th mat-header-cell *matHeaderCellDef>Website</th>
+      <td mat-cell *matCellDef="let row">{{row.website}}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</mat-card>

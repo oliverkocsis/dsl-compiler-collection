@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { Subscription } from 'rxjs';
+import { Account } from '../account';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'app-account-table',
@@ -7,9 +11,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountTableComponent implements OnInit {
 
-  constructor() { }
+  displayedColumns = [
+    'name',
+    'parent',
+    'type',
+    'phone',
+    'website',
+  ];
+  dataSource: MatTableDataSource<Account>;
+  subscription: Subscription;
 
-  ngOnInit(): void {
+  constructor(private service: AccountService) { }
+
+  ngOnInit() {
+    this.dataSource = new MatTableDataSource<Account>();
+    this.subscription = this.service.subscribe((data: Account[]) => {
+      this.dataSource.data = data;
+    });
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }
