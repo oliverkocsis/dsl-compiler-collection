@@ -1,12 +1,19 @@
 <mat-toolbar>
   <span>
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </span>
+  <span>
     <button mat-button [matMenuTriggerFor]="menu1">Accounts</button>
     <mat-menu #menu1="matMenu">
       <button mat-menu-item>Contacts</button>
       <button mat-menu-item>Product Backlogs</button>
     </mat-menu>
   </span>
-  |
+  <span>
+    <mat-icon aria-hidden="false">chevron_right</mat-icon>
+  </span>
   <span>
     <button mat-button [matMenuTriggerFor]="menu2">Dealogic</button>
     <mat-menu #menu2="matMenu">
@@ -16,7 +23,7 @@
   </span>
 </mat-toolbar>
 <mat-sidenav-container>
-  <mat-sidenav mode="side" opened>
+  <mat-sidenav #sidenav mode="side" opened>
     <mat-nav-list>
       <mat-list-item>
         <a routerLink="/account-table">Accounts</a>
