@@ -17,6 +17,13 @@ export class AccountFormComponent implements OnInit {
     type: null,
     phone: null,
     website: null,
+    address: this.fb.group({
+      street: null,
+      city: null,
+      state: null,
+      country: null,
+      postalCode: null,
+    }),
   });
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private service: AccountService) { }
