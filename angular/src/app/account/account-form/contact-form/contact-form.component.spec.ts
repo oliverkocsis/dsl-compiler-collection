@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 
-import { AppRoutingModule } from './../../app-routing.module';
+import { AppRoutingModule } from './../../../app-routing.module';
 import { ContactFormComponent } from './contact-form.component';
 
 describe('ContactFormComponent', () => {

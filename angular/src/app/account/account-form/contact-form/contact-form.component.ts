@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ContactService } from '../contact.service';
-import { Contact } from '../contact';
+import { ContactService } from 'src/app/contact/contact.service';
+import { Contact } from 'src/app/contact/contact';
+
 
 @Component({
-  selector: 'app-contact-form',
+  selector: 'app-account-form-contact-form',
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss']
 })
@@ -34,7 +35,7 @@ export class ContactFormComponent implements OnInit {
     const data = Contact.from(this.formGroup.value);
     this.service.create(data);
     this.formGroup.reset();
-    this.router.navigate(['/contact-table'])
+    this.router.navigate(['/account-form'])
   }
 
 }

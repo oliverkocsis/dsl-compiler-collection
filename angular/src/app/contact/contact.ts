@@ -12,6 +12,7 @@ export class Contact {
     this.firstName = data.firstName;
     this.lastName = data.lastName;
     this.jobTitle = data.jobTitle;
+    this.account = data.account
     this.phone = data.phone;
     this.email = data.email;
     return this;

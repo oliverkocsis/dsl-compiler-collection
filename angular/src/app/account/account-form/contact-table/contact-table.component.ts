@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { ContactService } from '../contact.service';
-import { Contact } from '../contact';
+import { ContactService } from 'src/app/contact/contact.service';
+import { Contact } from 'src/app/contact/contact';
 
 @Component({
-  selector: 'app-contact-table',
+  selector: 'app-account-form-contact-table',
   templateUrl: './contact-table.component.html',
   styleUrls: ['./contact-table.component.scss']
 })
@@ -15,7 +15,6 @@ export class ContactTableComponent implements OnInit, OnDestroy {
     'firstName',
     'lastName',
     'jobTitle',
-    'account',
     'phone',
     'email',
   ];

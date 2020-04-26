@@ -1,1 +1,55 @@
-<p>contact-form works!</p>
+<form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
+  <mat-toolbar>
+    <button mat-button type="submit">Save & Close</button>
+  </mat-toolbar>
+  <mat-card>
+    <mat-card-content>
+      <mat-tab-group>
+        <mat-tab label="Account">
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="First Name" type="text" formControlName="firstName">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Last Name" type="text" formControlName="lastName">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Job Title" type="text" formControlName="jobTitle">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Account" type="text" formControlName="account">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Phone" type="tel" formControlName="phone">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput placeholder="Email" type="email" formControlName="email">
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</form>

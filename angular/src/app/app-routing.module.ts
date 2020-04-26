@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AccountTableComponent } from './account/account-table/account-table.component';
 import { AccountFormComponent } from './account/account-form/account-form.component';
+import { ContactFormComponent as AccountFormContactFormComponent } from './account/account-form/contact-form/contact-form.component';
 import { ContactTableComponent } from './contact/contact-table/contact-table.component';
 import { ContactFormComponent } from './contact/contact-form/contact-form.component';
 import { ProductBacklogTableComponent } from './product-backlog/product-backlog-table/product-backlog-table.component';
@@ -11,6 +12,8 @@ import { ProductBacklogItemFormComponent } from './product-backlog-item/product-
 
 const routes: Routes = [
   { path: 'account-table', component: AccountTableComponent },
+  { path: 'account-form/contact-form', component: AccountFormContactFormComponent },
+  { path: 'account-form/contact-form/:id', component: AccountFormContactFormComponent },
   { path: 'account-form', component: AccountFormComponent },
   { path: 'account-form/:id', component: AccountFormComponent },
   { path: 'contact-table', component: ContactTableComponent },
