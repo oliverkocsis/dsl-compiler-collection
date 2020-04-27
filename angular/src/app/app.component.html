@@ -5,20 +5,22 @@
     </button>
   </span>
   <span>
-    <button mat-button [matMenuTriggerFor]="menu1">Accounts</button>
+    <button mat-button>Accounts</button>
+    <button mat-icon-button [matMenuTriggerFor]="menu1"><mat-icon >expand_more</mat-icon></button>
     <mat-menu #menu1="matMenu">
       <button mat-menu-item>Contacts</button>
       <button mat-menu-item>Product Backlogs</button>
     </mat-menu>
   </span>
   <span>
-    <mat-icon aria-hidden="false">chevron_right</mat-icon>
+    <button mat-button disabled>/</button>
   </span>
   <span>
-    <button mat-button [matMenuTriggerFor]="menu2">Dealogic</button>
+    <button mat-button [matMenuTriggerFor]="menu2">Blue Yonder Airlines</button>
+    <button mat-icon-button [matMenuTriggerFor]="menu2"><mat-icon >expand_more</mat-icon></button>
     <mat-menu #menu2="matMenu">
-      <button mat-menu-item>JP Morgan</button>
-      <button mat-menu-item>Ford</button>
+      <button mat-menu-item>Adventure Works</button>
+      <button mat-menu-item>Coho Winery</button>
     </mat-menu>
   </span>
 </mat-toolbar>
