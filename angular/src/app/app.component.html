@@ -24,17 +24,17 @@
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="side" opened>
-    <mat-nav-list>
+    <mat-list>
       <mat-list-item>
-        <a routerLink="/account-table">Accounts</a>
+        <a mat-button routerLink="/account-table">Accounts</a>
       </mat-list-item>
       <mat-list-item>
-        <a routerLink="/contact-table">Contacts</a>
+        <a mat-button routerLink="/contact-table">Contacts</a>
       </mat-list-item>
       <mat-list-item>
-        <a routerLink="/product-backlog-table">Product Backlogs</a>
+        <a mat-button routerLink="/product-backlog-table">Product Backlogs</a>
       </mat-list-item>
-    </mat-nav-list>
+    </mat-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>

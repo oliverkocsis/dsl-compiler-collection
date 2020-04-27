@@ -4,13 +4,10 @@ mat-sidenav-container {
 
     mat-sidenav {
         min-width: 15em;
-
-        mat-list-item {
-            a {
-                padding-right: 2em;
-                font-size: 14px;
-                font-weight: 500;
-            }
+        
+        a {
+            width: 100%;
+            text-align: left;
         }
     }
 }
