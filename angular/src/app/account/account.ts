@@ -1,25 +1,24 @@
+import { Data } from 'src/_dslcc/data';
 import { Address } from '../address/address';
-import { Contact } from '../contact/contact';
 
-export class Account {
+export class Account extends Data {
   public name: string;
   public parent: string;
   public type: string;
   public phone: string;
   public website: string;
-  public address: Address
-  public contacts: Contact[];
+  public address: string;
 
-  constructor() { }
+  constructor() { super() }
 
   from(data: Account) {
+    this._id = data._id;
     this.name = data.name;
     this.parent = data.parent;
     this.type = data.type;
     this.phone = data.phone;
     this.website = data.website;
-    this.address = data.address ? Address.from(data.address) : null;
-    this.contacts = this.contacts ? this.contacts.map((contact: Contact) => Contact.from(contact)) : null;
+    this.address = data.address;
     return this;
   }
 

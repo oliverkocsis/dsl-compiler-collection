@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
 import { AccountService } from '../account.service';
 import { Account } from '../account';
 
@@ -11,37 +10,35 @@ import { Account } from '../account';
 })
 export class AccountFormComponent implements OnInit {
 
+  @Input() id: string;
+  @Output() data = new EventEmitter<Account>()
+
   formGroup = this.fb.group({
+    _id: null,
     name: null,
     parent: null,
     type: null,
     phone: null,
     website: null,
-    address: this.fb.group({
-      street: null,
-      city: null,
-      state: null,
-      country: null,
-      postalCode: null,
-    }),
+    address: null,
   });
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private service: AccountService) { }
+  constructor(private fb: FormBuilder, private service: AccountService) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      const id = params['id'];
-      console.log(id);
-    });
+    if (this.id) {
+      const data = this.service.read(this.id);
+      this.data.emit(data);
+      this.formGroup.patchValue(data);
+    }
   }
 
-  onSubmit() {
+  submit(): Account {
     console.log(this.formGroup.value);
-    const data = Account.from(this.formGroup.value);
-    this.service.create(data);
+    let data = Account.from(this.formGroup.value);
+    data = data._id ? this.service.update(data) : this.service.create(data);
     this.formGroup.reset();
-    this.router.navigate(['/account-table'])
+    return data;
   }
 
 }
-

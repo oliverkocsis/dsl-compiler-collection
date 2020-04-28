@@ -23,30 +23,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AccountTableComponent } from './account/account-table/account-table.component';
 import { AccountFormComponent } from './account/account-form/account-form.component';
-import { ContactTableComponent as AccountFormContactTableComponent } from './account/account-form/contact-table/contact-table.component';
-import { ContactFormComponent as AccountFormContactFormComponent } from './account/account-form/contact-form/contact-form.component';
-import { ContactTableComponent } from './contact/contact-table/contact-table.component';
-import { ContactFormComponent } from './contact/contact-form/contact-form.component';
-import { ProductBacklogTableComponent } from './product-backlog/product-backlog-table/product-backlog-table.component';
-import { ProductBacklogFormComponent } from './product-backlog/product-backlog-form/product-backlog-form.component';
-import { ProductBacklogItemTableComponent } from './product-backlog-item/product-backlog-item-table/product-backlog-item-table.component';
-import { ProductBacklogItemFormComponent } from './product-backlog-item/product-backlog-item-form/product-backlog-item-form.component';
-import { AddressFormComponent } from './account/account-form/address-form/address-form.component';
+import { AddressFormComponent } from './address/address-form/address-form.component';
+import { AccountComponent } from './account/account/account.component';
+import { AccountListComponent } from './account/account-list/account-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AccountTableComponent,
     AccountFormComponent,
-    AccountFormContactTableComponent,
-    AccountFormContactFormComponent,
-    ContactTableComponent,
-    ContactFormComponent,
-    ProductBacklogTableComponent,
-    ProductBacklogFormComponent,
-    ProductBacklogItemTableComponent,
-    ProductBacklogItemFormComponent,
     AddressFormComponent,
+    AccountComponent,
+    AccountListComponent,
   ],
   imports: [
     BrowserModule,
