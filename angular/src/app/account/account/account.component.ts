@@ -33,6 +33,6 @@ export class AccountComponent implements OnInit {
     const addressId = this.address.submit()._id;
     this._this.formGroup.patchValue({ address: addressId });
     this._this.submit();
-    this.router.navigate(['/account-list'])
+    this.router.navigate(['/account-list']);
   }
 }

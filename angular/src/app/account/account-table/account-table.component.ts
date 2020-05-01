@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { Account } from '../account';
 import { AccountService } from '../account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-table',
@@ -21,7 +22,7 @@ export class AccountTableComponent implements OnInit {
   dataSource: MatTableDataSource<Account>;
   subscription: Subscription;
 
-  constructor(private service: AccountService) { }
+  constructor(public router: Router, private service: AccountService) { }
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<Account>();
