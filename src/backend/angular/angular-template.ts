@@ -1,84 +1,114 @@
-import { DATA_CLASS_TEMPLATE } from './templates/data/data.ts';
-import { DATA_SERVICE_TEMPLATE } from './templates/data/data.service.ts';
-import { DATA_FORM_HTML_TEMPLATE } from './templates/data/data-form/data-form.component.html';
-import { DATA_FORM_SCSS_TEMPLATE } from './templates/data/data-form/data-form.component.scss';
-import { DATA_FORM_TS_TEMPLATE } from './templates/data/data-form/data-form.component.ts';
-import { DATA_TABLE_HTML_TEMPLATE } from './templates/data/data-table/data-table.component.html';
-import { DATA_TABLE_SCSS_TEMPLATE } from './templates/data/data-table/data-table.component.scss';
-import { DATA_TABLE_TS_TEMPLATE } from './templates/data/data-table/data-table.component.ts';
-import { DATA_COMPONENT_HTML_TEMPLATE } from './templates/data/data.component.html';
-import { DATA_COMPONENT_SCSS_TEMPLATE } from './templates/data/data.component.scss';
-import { DATA_COMPONENT_TS_TEMPLATE } from './templates/data/data.component.ts';
-import { APP_COMPONENT_HTML_TEMPLATE } from './templates/app.component.html';
-import { APP_COMPONENT_SCSS_TEMPLATE } from './templates/app.component.scss';
-import { APP_COMPONENT_TS_TEMPLATE } from './templates/app.component.ts';
-import { APP_ROUTING_TEMPLATE } from './templates/app-routing.module.ts';
-import { APP_MODULE_TEMPLATE } from './templates/app.module.ts';
+import { readFileSync } from 'fs';
 
 export class AngularTempate {
 
-  static getClassTemplate(): string {
-    return DATA_CLASS_TEMPLATE;
+  private static cache = new Map<string, string>();
+
+  public static data_component_html(): string {
+    const path = 'src/backend/angular/templates/data/data/data.component.html.mustache';
+    return AngularTempate.cacheReadFileSync(path);
   }
 
-  static getServiceTemplate(): string {
-    return DATA_SERVICE_TEMPLATE;
+  public static data_component_scss(): string {
+    const path = 'src/backend/angular/templates/data/data/data.component.scss.mustache';
+    return AngularTempate.cacheReadFileSync(path);
   }
 
-  public static getFormComponentHTMLTemplate(): string {
-    return DATA_FORM_HTML_TEMPLATE;
+  public static data_component_ts(): string {
+    const path = 'src/backend/angular/templates/data/data/data.component.ts.mustache';
+    return AngularTempate.cacheReadFileSync(path);
   }
 
-  public static getFormComponentSCSSTemplate(): string {
-    return DATA_FORM_SCSS_TEMPLATE;
+  public static data_form_component_html(): string {
+    const path = 'src/backend/angular/templates/data/data-form/data-form.component.html.mustache';
+    return AngularTempate.cacheReadFileSync(path);
   }
 
-  public static getFormComponentTSTemplate(): string {
-    return DATA_FORM_TS_TEMPLATE;
+  public static data_form_component_scss(): string {
+    const path = 'src/backend/angular/templates/data/data-form/data-form.component.scss.mustache';
+    return AngularTempate.cacheReadFileSync(path);
   }
 
-  public static getTableComponentHTMLTemplate(): string {
-    return DATA_TABLE_HTML_TEMPLATE;
+  public static data_form_component_ts(): string {
+    const path = 'src/backend/angular/templates/data/data-form/data-form.component.ts.mustache';
+    return AngularTempate.cacheReadFileSync(path);
   }
 
-  public static getTableComponentSCSSTemplate(): string {
-    return DATA_TABLE_SCSS_TEMPLATE;
+  public static data_list_component_html(): string {
+    const path = 'src/backend/angular/templates/data/data-list/data-list.component.html.mustache';
+    return AngularTempate.cacheReadFileSync(path);
   }
 
-  public static getTableComponentTSTemplate(): string {
-    return DATA_TABLE_TS_TEMPLATE;
+  public static data_list_component_scss(): string {
+    const path = 'src/backend/angular/templates/data/data-list/data-list.component.scss.mustache';
+    return AngularTempate.cacheReadFileSync(path);
   }
 
-  public static getComponentHTMLTemplate(): string {
-    return DATA_COMPONENT_HTML_TEMPLATE;
+  public static data_list_component_ts(): string {
+    const path = 'src/backend/angular/templates/data/data-list/data-list.component.ts.mustache';
+    return AngularTempate.cacheReadFileSync(path);
   }
 
-  public static getComponentSCSSTemplate(): string {
-    return DATA_COMPONENT_SCSS_TEMPLATE;
+  public static data_table_component_html(): string {
+    const path = 'src/backend/angular/templates/data/data-table/data-table.component.html.mustache';
+    return AngularTempate.cacheReadFileSync(path);
   }
 
-  public static getComponentTSTemplate(): string {
-    return DATA_COMPONENT_TS_TEMPLATE;
+  public static data_table_component_scss(): string {
+    const path = 'src/backend/angular/templates/data/data-table/data-table.component.scss.mustache';
+    return AngularTempate.cacheReadFileSync(path);
   }
 
-  public static getAppRoutingTemplate(): string {
-    return APP_ROUTING_TEMPLATE;
+  public static data_table_component_ts(): string {
+    const path = 'src/backend/angular/templates/data/data-table/data-table.component.ts.mustache';
+    return AngularTempate.cacheReadFileSync(path);
   }
 
-  public static getAppHTMLTemplate(): string {
-    return APP_COMPONENT_HTML_TEMPLATE;
+  static data_ts(): string {
+    const path = 'src/backend/angular/templates/data/data.ts.mustache';
+    return AngularTempate.cacheReadFileSync(path);
   }
 
-  public static getAppSCSSTemplate(): string {
-    return APP_COMPONENT_SCSS_TEMPLATE;
+  static data_service_ts(): string {
+    const path = 'src/backend/angular/templates/data/data.service.ts.mustache';
+    return AngularTempate.cacheReadFileSync(path);
   }
 
-  public static getAppTSTemplate(): string {
-    return APP_COMPONENT_TS_TEMPLATE;
+  public static app_routing_module_ts(): string {
+    const path = 'src/backend/angular/templates/app-routing.module.ts.mustache';
+    return AngularTempate.cacheReadFileSync(path);
   }
 
-  public static getAppModuleTemplate(): string {
-    return APP_MODULE_TEMPLATE;
+  public static app_component_html(): string {
+    const path = 'src/backend/angular/templates/app.component.html.mustache';
+    return AngularTempate.cacheReadFileSync(path);
+  }
+
+  public static app_component_scss(): string {
+    const path = 'src/backend/angular/templates/app.component.scss.mustache';
+    return AngularTempate.cacheReadFileSync(path);
+  }
+
+  public static app_component_ts(): string {
+    const path = 'src/backend/angular/templates/app.component.ts.mustache';
+    return AngularTempate.cacheReadFileSync(path);
+  }
+
+  public static app_module_ts(): string {
+    const path = 'src/backend/angular/templates/app.module.ts.mustache';
+    return AngularTempate.cacheReadFileSync(path);
+  }
+
+  private static cacheReadFileSync(path: string): string {
+    if (!this.cache.has(path)) {
+      const file = readFileSync(path).toString();
+      this.cache.set(path, file);
+    }
+    const file = this.cache.get(path);
+    if (!file) {
+      throw new Error(`File can not be found: ${path}`);
+    }
+    return file;
   }
 
 }

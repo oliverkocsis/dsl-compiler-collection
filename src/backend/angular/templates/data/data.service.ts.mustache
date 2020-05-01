@@ -1,4 +1,4 @@
-export const DATA_SERVICE_TEMPLATE = `import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { {{pascal}} } from './{{kebab}}';
 
@@ -47,4 +47,3 @@ export class {{pascal}}Service {
   }
 
 }
-`

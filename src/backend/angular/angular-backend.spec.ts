@@ -40,7 +40,7 @@ describe("The AngularBackend", function () {
 
     for (const directory of directories) {
         it(`generates '${directory}' directory`, function () {
-            const dir = root.getChildNode(directory);
+            const dir = root.getNode(directory);
             expect(dir).toBeDefined();
             expect(dir.getType()).toBe(VirtualFileSystemNode.DIRECTORY);
         });
@@ -77,7 +77,7 @@ function expectFile(root: VirtualFileSystem, path: string) {
     return {
         toBe: function (path: string) {
             const expected = readFileSync(path);
-            expect(file.getValue().replace(/\s+/g, ' ')).toBe(expected.toString().replace(/\s+/g, ' '));
+            expect(file.getValue().replace(/\s+/g, ' ').trim()).toBe(expected.toString().replace(/\s+/g, ' ').trim());
         }
     }
 }

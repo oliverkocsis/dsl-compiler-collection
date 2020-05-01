@@ -1,4 +1,5 @@
-export const DATA_FORM_HTML_TEMPLATE = `<form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
+{{=<% %>=}}
+<form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
 <mat-card>
   <mat-card-header>
     <mat-card-title>{{name}}</mat-card-title>
@@ -8,7 +9,7 @@ export const DATA_FORM_HTML_TEMPLATE = `<form [formGroup]="formGroup" novalidate
     <div class="row">
       <div class="col">
         <mat-form-field class="full-width">
-          <input matInput placeholder="{{name}}" type="{{htmlType}}" formControlName="{{camel}}">
+          <input matInput placeholder="<% name %>" type="<% htmlType %>" formControlName="<% camel %>">
         </mat-form-field>
       </div>
     </div>
@@ -19,4 +20,4 @@ export const DATA_FORM_HTML_TEMPLATE = `<form [formGroup]="formGroup" novalidate
   </mat-card-actions>
 </mat-card>
 </form>
-`
+<%={{ }}=%>

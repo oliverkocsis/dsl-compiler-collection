@@ -1,4 +1,4 @@
-export const DATA_TABLE_TS_TEMPLATE = `import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { {{pascal}} } from '../{{kebab}}';
@@ -32,4 +32,3 @@ export class {{pascal}}TableComponent implements OnInit, OnDestroy {
   }
 
 }
-`

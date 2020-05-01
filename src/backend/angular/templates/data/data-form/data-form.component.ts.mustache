@@ -1,4 +1,4 @@
-export const DATA_FORM_TS_TEMPLATE = `import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { {{pascal}}Service } from '../{{kebab}}.service';
 import { {{pascal}} } from '../{{kebab}}';
@@ -24,4 +24,3 @@ export class {{pascal}}FormComponent {
     this.formGroup.reset();
   }
 }
-`
