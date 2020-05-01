@@ -1,21 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { Account } from '../account';
 import { AccountService } from '../account.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-table',
   templateUrl: './account-table.component.html',
   styleUrls: ['./account-table.component.scss']
 })
-export class AccountTableComponent implements OnInit {
+export class AccountTableComponent implements OnInit, OnDestroy {
 
   displayedColumns = [
     'name',
-    'parent',
-    'type',
     'phone',
     'website',
   ];
@@ -34,4 +32,5 @@ export class AccountTableComponent implements OnInit {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+
 }
