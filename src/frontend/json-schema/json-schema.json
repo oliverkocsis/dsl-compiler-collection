@@ -1,36 +1,13 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://dsl-cc.app/example/customer-relationship-management",
   "title": "Customer Relationship Management",
-  "description": "Customer Relationship Management example",
   "type": "object",
   "properties": {
     "account": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/account"
-      }
+      "$ref": "#/definitions/account"
     }
   },
   "definitions": {
-    "account": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "address": {
-          "$ref": "#/definitions/address"
-        },
-        "phone": {
-          "type": "string"
-        },
-        "website": {
-          "type": "string"
-        }
-      }
-    },
-    "address": {
+	"address": {
       "type": "object",
       "properties": {
         "street": {
@@ -46,6 +23,23 @@
           "type": "string"
         },
         "postalCode": {
+          "type": "string"
+        }
+      }
+    },
+    "account": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/address"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "website": {
           "type": "string"
         }
       }

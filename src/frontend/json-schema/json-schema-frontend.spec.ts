@@ -1,4 +1,4 @@
-import { VirtualFileSystem, File } from './../../virtual-file-system/virtual-file-system';
+import { VirtualFileSystem, File, Directory } from './../../virtual-file-system/virtual-file-system';
 import { DataNode, PropertyNode, DomainNode, AbstractSyntaxGraph } from './../../abstract-syntax-graph/abstract-syntax-graph';
 import { JsonSchemaFronted } from './json-schema-frontend'
 import { readFileSync } from 'fs'
@@ -12,8 +12,8 @@ describe("The JsonSchemaFronted", () => {
     const jsonSchemaFileName = "json-schema.json"
     const jsonSchema = readFileSync(`src/frontend/json-schema/${jsonSchemaFileName}`);
     const virtualFileSystem = new VirtualFileSystem();
-    virtualFileSystem.appendChild(new File(jsonSchemaFileName, jsonSchema.toString()));
-    const abstractSyntaxGraph = frontend.parse(virtualFileSystem);
+    virtualFileSystem.appendChild(new Directory("json-schema").appendChild(new File(jsonSchemaFileName, jsonSchema.toString())));
+    abstractSyntaxGraph = frontend.parse(virtualFileSystem);
     expect(abstractSyntaxGraph).toBeDefined();
   });
 
@@ -30,16 +30,12 @@ describe("The JsonSchemaFronted", () => {
 
       let account: DataNode;
 
-      it("contains the Accounts list", () => {
-        const accounts = domain.getChildNode('Accounts') as PropertyNode;
-        expect(accounts).toBeDefined();
-        expect(accounts.getNodeType()).toBe(PropertyNode.TYPE_OBJECT);
-        expect(accounts.isList()).toBe(true);
-        account = accounts.getChildNode() as DataNode;
+      it("contains the Account data", () => {
+        account = domain.getChildNode('Account') as DataNode;
         expect(account).toBeDefined();
       });
 
-      describe("An Account ", () => {
+      describe("The Account data", () => {
 
         let address: DataNode;
 
@@ -53,13 +49,13 @@ describe("The JsonSchemaFronted", () => {
         it("contains the Address object property", () => {
           const addressRef = account.getChildNode("Address") as PropertyNode;
           expect(addressRef).toBeDefined();
-          expect(addressRef.getNodeType()).toBe(PropertyNode.TYPE_OBJECT);
+          expect(addressRef.getType()).toBe(PropertyNode.TYPE_OBJECT);
           expect(addressRef.isList()).toBe(false);
           address = addressRef.getChildNode() as DataNode;
           expect(address).toBeDefined();
         });
 
-        describe("An Address", () => {
+        describe("The Address data", () => {
 
           it("contains the Sreet, the City, the State, the Country and the Postal Code properties", () => {
             expect((address.getChildNode("Street") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);

@@ -26,9 +26,10 @@ export abstract class VirtualFileSystemNode {
         return this.path + this.name;
     }
 
-    public appendChild(node: VirtualFileSystemNode): void {
+    public appendChild(node: VirtualFileSystemNode): VirtualFileSystemNode {
         this.childNodes[node.getName()] = node;
-        node.path = this.path + this.name + '/'
+        node.path = this.path + this.name + '/';
+        return this;
     }
 
     getChildNode(name: string): VirtualFileSystemNode {

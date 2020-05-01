@@ -17,11 +17,12 @@ export abstract class AbstractSyntaxGraphNode {
         return this.name;
     }
 
-    public appendChildNode(node: AbstractSyntaxGraphNode): void {
+    public appendChildNode(node: AbstractSyntaxGraphNode): AbstractSyntaxGraphNode {
         if (this.childNodes[node.getName()] != undefined) {
             throw new Error(`Child node exist: ${node.getName()}`);
         }
         this.childNodes[node.getName()] = node;
+        return this;
     }
 
     public setChildNode(node: AbstractSyntaxGraphNode): void {
@@ -92,12 +93,13 @@ export class PropertyNode extends AbstractSyntaxGraphNode {
 
     private type: number;
     private list: boolean;
-    private child: AbstractSyntaxGraphNode | undefined;
+    private child: string;
 
     constructor(name: string, type: number, list: boolean = false) {
         super(name);
         this.type = type;
         this.list = list;
+        this.child = "";
     }
 
     getNodeType(): number {
@@ -113,15 +115,12 @@ export class PropertyNode extends AbstractSyntaxGraphNode {
     }
 
     public getChildNode(): AbstractSyntaxGraphNode {
-        if (this.child) {
-            return this.child
-        } else {
-            throw new Error("Child is undefined");
-        }
+        return super.getChildNode(this.child);
     }
 
-    public setChildNode(node: AbstractSyntaxGraphNode): void {
-        this.child = node;
+    public appendChildNode(node: AbstractSyntaxGraphNode): AbstractSyntaxGraphNode {
+        this.child = node.getName();
+        return super.appendChildNode(node);
     }
 
 }
