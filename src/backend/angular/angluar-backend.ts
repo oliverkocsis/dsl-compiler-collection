@@ -91,16 +91,16 @@ export class AngularBackend implements Backend {
     public generateDataList(node: DataNode, parent: VirtualFileSystemNode, view: DataView): VirtualFileSystemNode {
         let name;
         let data;
-        const directory = new Directory(`${view.kebab}-table`);
+        const directory = new Directory(`${view.kebab}-list`);
         parent.appendChild(directory);
-        name = `${view.kebab}-table.component.html`;
-        data = Mustache.render(AngularTempate.data_table_component_html(), view);
+        name = `${view.kebab}-list.component.html`;
+        data = Mustache.render(AngularTempate.data_list_component_html(), view);
         directory.appendChild(new File(name, data));
-        name = `${view.kebab}-table.component.scss`;
-        data = Mustache.render(AngularTempate.data_table_component_scss(), view);
+        name = `${view.kebab}-list.component.scss`;
+        data = Mustache.render(AngularTempate.data_list_component_scss(), view);
         directory.appendChild(new File(name, data));
-        name = `${view.kebab}-table.component.ts`;
-        data = Mustache.render(AngularTempate.data_table_component_ts(), view);
+        name = `${view.kebab}-list.component.ts`;
+        data = Mustache.render(AngularTempate.data_list_component_ts(), view);
         directory.appendChild(new File(name, data));
         return directory;
     }
