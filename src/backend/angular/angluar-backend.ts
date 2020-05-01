@@ -167,6 +167,12 @@ export class AngularBackend implements Backend {
                     kebab: _.kebabCase(propertyNode.getChildNode().getName()),
                     camel: _.camelCase(propertyNode.getChildNode().getName()),
                     pascal: _pascalCase(propertyNode.getChildNode().getName()),
+                    property: {
+                        name: propertyNode.getName(),
+                        kebab: _.kebabCase(propertyNode.getName()),
+                        camel: _.camelCase(propertyNode.getName()),
+                        pascal: _pascalCase(propertyNode.getName()),
+                    }
                 };
                 objects.push(object);
             } else {
@@ -243,6 +249,12 @@ interface ObjectView {
     camel: string;
     pascal: string;
     kebab: string;
+    property: {
+        name: string;
+        camel: string;
+        pascal: string;
+        kebab: string;
+    };
 }
 
 interface DataView {

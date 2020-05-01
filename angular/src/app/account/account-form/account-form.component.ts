@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { AccountService } from '../account.service';
 import { Account } from '../account';
@@ -16,8 +16,6 @@ export class AccountFormComponent implements OnInit {
   formGroup = this.fb.group({
     _id: null,
     name: null,
-    parent: null,
-    type: null,
     phone: null,
     website: null,
     address: null,
