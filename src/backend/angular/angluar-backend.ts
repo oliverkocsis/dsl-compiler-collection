@@ -171,7 +171,7 @@ export class AngularBackend implements Backend {
                 objects.push(object);
             } else {
                 const property: PropertyView = {
-                    name: node.getName(),
+                    name: propertyNode.getName(),
                     kebab: _.kebabCase(propertyNode.getName()),
                     camel: _.camelCase(propertyNode.getName()),
                     pascal: _pascalCase(propertyNode.getName()),
