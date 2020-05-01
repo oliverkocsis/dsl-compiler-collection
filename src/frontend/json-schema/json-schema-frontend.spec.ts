@@ -17,7 +17,7 @@ describe("The JsonSchemaFronted", () => {
     expect(abstractSyntaxGraph).toBeDefined();
   });
 
-  describe("The Abstract Syntax Graph ", () => {
+  describe("The Abstract Syntax Graph", () => {
 
     let domain: DomainNode;
 
@@ -30,12 +30,90 @@ describe("The JsonSchemaFronted", () => {
 
       let account: DataNode;
 
-      it("contains the Account data", () => {
-        account = domain.getChildNode('Account') as DataNode;
+      it("contains the Reference data", () => {
+        account = domain.getChildNode('Reference') as DataNode;
         expect(account).toBeDefined();
       });
 
-      describe("The Account data", () => {
+      describe("The Reference data (Account)", () => {
+
+        let address: DataNode;
+
+        it("contains the Name, the Phone and the Website basic properties", () => {
+          expect((account.getChildNode("Name") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);
+          expect((account.getChildNode("Phone") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);
+          expect((account.getChildNode("Website") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);
+        });
+
+
+        it("contains the Address object property", () => {
+          const addressRef = account.getChildNode("Address") as PropertyNode;
+          expect(addressRef).toBeDefined();
+          expect(addressRef.getType()).toBe(PropertyNode.TYPE_OBJECT);
+          expect(addressRef.isList()).toBe(false);
+          address = addressRef.getChildNode() as DataNode;
+          expect(address).toBeDefined();
+        });
+
+        describe("The Address data", () => {
+
+          it("contains the Sreet, the City, the State, the Country and the Postal Code properties", () => {
+            expect((address.getChildNode("Street") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);
+            expect((address.getChildNode("City") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);
+            expect((address.getChildNode("State") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);
+            expect((address.getChildNode("Country") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);
+            expect((address.getChildNode("Postal Code") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);
+          });
+
+        });
+
+      });
+
+      it("contains the Object data", () => {
+        account = domain.getChildNode('Object') as DataNode;
+        expect(account).toBeDefined();
+      });
+
+      describe("The Object data (Account)", () => {
+
+        let address: DataNode;
+
+        it("contains the Name, the Phone and the Website basic properties", () => {
+          expect((account.getChildNode("Name") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);
+          expect((account.getChildNode("Phone") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);
+          expect((account.getChildNode("Website") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);
+        });
+
+
+        it("contains the Address object property", () => {
+          const addressRef = account.getChildNode("Address") as PropertyNode;
+          expect(addressRef).toBeDefined();
+          expect(addressRef.getType()).toBe(PropertyNode.TYPE_OBJECT);
+          expect(addressRef.isList()).toBe(false);
+          address = addressRef.getChildNode() as DataNode;
+          expect(address).toBeDefined();
+        });
+
+        describe("The Address data", () => {
+
+          it("contains the Sreet, the City, the State, the Country and the Postal Code properties", () => {
+            expect((address.getChildNode("Street") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);
+            expect((address.getChildNode("City") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);
+            expect((address.getChildNode("State") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);
+            expect((address.getChildNode("Country") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);
+            expect((address.getChildNode("Postal Code") as PropertyNode).getType()).toBe(PropertyNode.TYPE_STRING);
+          });
+
+        });
+
+      });
+
+      it("contains the Inline data", () => {
+        account = domain.getChildNode('Inline') as DataNode;
+        expect(account).toBeDefined();
+      });
+
+      describe("The Inline data", () => {
 
         let address: DataNode;
 

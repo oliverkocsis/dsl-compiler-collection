@@ -82,9 +82,13 @@ export class JsonSchemaFronted implements Frontend {
     }
 
     private parseReference(name: string, ref: string, repository: Map<string, AbstractSyntaxGraphNode>): DataNode {
-        const data = repository.get(startCase(ref.replace("#/definitions/", "")));
-        if (!data) {
+        const reference = repository.get(startCase(ref.replace("#/definitions/", "")));
+        if (!reference) {
             throw new Error(`Reference does not exist: ${ref} (in ${name})`);
+        }
+        const data = new DataNode(startCase(name));
+        for (const node of reference.getChildNodes()) {
+            data.appendChildNode(node);
         }
         return data;
     }
