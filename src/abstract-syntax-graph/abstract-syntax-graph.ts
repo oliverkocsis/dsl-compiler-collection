@@ -1,8 +1,9 @@
 export abstract class AbstractSyntaxGraphNode {
 
-    public static readonly ABSTRACT_SYNTAX_GRAPH_NODE = 0;
-    public static readonly DATA_NODE = 1;
-    public static readonly PROPERTY_NODE = 2;
+    public static readonly ABSTRACT_SYNTAX_GRAPH = 0;
+    public static readonly DOAMIN_NODE = 1;
+    public static readonly DATA_NODE = 2;
+    public static readonly PROPERTY_NODE = 3;
 
     private name: string;
     private childNodes: any;
@@ -63,8 +64,16 @@ export class AbstractSyntaxGraph extends AbstractSyntaxGraphNode {
     }
 
     getNodeType(): number {
-        return AbstractSyntaxGraphNode.ABSTRACT_SYNTAX_GRAPH_NODE;
+        return AbstractSyntaxGraphNode.ABSTRACT_SYNTAX_GRAPH;
     }
+}
+
+export class DomainNode extends AbstractSyntaxGraphNode {
+
+    getNodeType(): number {
+        return AbstractSyntaxGraphNode.DOAMIN_NODE;
+    }
+
 }
 
 export class DataNode extends AbstractSyntaxGraphNode {
@@ -82,10 +91,13 @@ export class PropertyNode extends AbstractSyntaxGraphNode {
     public static readonly TYPE_NUMBER = 2;
 
     private type: number;
+    private list: boolean;
+    private child: AbstractSyntaxGraphNode | undefined;
 
-    constructor(name: string, type: number) {
+    constructor(name: string, type: number, list: boolean = false) {
         super(name);
         this.type = type;
+        this.list = list;
     }
 
     getNodeType(): number {
@@ -97,10 +109,19 @@ export class PropertyNode extends AbstractSyntaxGraphNode {
     }
 
     isList(): any {
-        throw new Error("Method not implemented.");
+        return this.list;
     }
 
-    getChildNode(): AbstractSyntaxGraphNode {
-        throw new Error("Method not implemented.");
+    public getChildNode(): AbstractSyntaxGraphNode {
+        if (this.child) {
+            return this.child
+        } else {
+            throw new Error("Child is undefined");
+        }
     }
+
+    public setChildNode(node: AbstractSyntaxGraphNode): void {
+        this.child = node;
+    }
+
 }
