@@ -5,14 +5,14 @@
 <mat-card>
   <mat-card-content>
     <mat-tab-group>
-      <mat-tab label="<% name %>">
-        <app-<% kebab %>-form #form [id]="id" (data)="data($event)"></app-<% kebab %>-form>
+      <mat-tab label="<%name%>">
+        <app-<% kebab %>-form #form [id]="id" (data)="data($event)"></app-<%kebab%>-form>
       </mat-tab>
-      <% #objects %>
-      <mat-tab label="<% name %>">
-        <app-<% kebab %>-form #<% camel %> [id]="<% camel %>Id"></app-<% kebab %>-form>
+      <%#objects%>
+      <mat-tab label="<%property.name%>">
+        <app-<%kebab%>-form #<%property.camel%> [id]="<%property.camel%>Id"></app-<%kebab%>-form>
       </mat-tab>
-      <% /objects %>
+      <%/objects%>
     </mat-tab-group>
   </mat-card-content>
 </mat-card>

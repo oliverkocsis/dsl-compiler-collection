@@ -52,10 +52,11 @@ describe("The AngularBackend", function () {
         '/src/app/app.component.scss',
         '/src/app/app.component.ts',
         '/src/app/app.module.ts',
-        '/src/app/address/address/address.component.html'
     ]
 
     for (const data of ['address', 'account']) {
+        files.push(`/src/app/${data}/${data}.ts`);
+        files.push(`/src/app/${data}/${data}.service.ts`);
         for (const directory of ['', '-form', '-list', '-table']) {
             files.push(`/src/app/${data}/${data + directory}/${data + directory}.component.html`);
             files.push(`/src/app/${data}/${data + directory}/${data + directory}.component.scss`);

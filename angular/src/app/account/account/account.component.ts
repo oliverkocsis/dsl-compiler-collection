@@ -1,8 +1,8 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { AccountFormComponent } from '../account-form/account-form.component';
-import { AddressFormComponent } from 'src/app/address/address-form/address-form.component';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AccountFormComponent } from '../account-form/account-form.component';
 import { Account } from '../account';
+import { AddressFormComponent } from '../../address/address-form/address-form.component';
 
 @Component({
   selector: 'app-account',
@@ -34,4 +34,5 @@ export class AccountComponent implements OnInit {
     this.form.submit();
     this.router.navigate(['/account-list']);
   }
+  
 }

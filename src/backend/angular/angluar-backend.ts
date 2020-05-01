@@ -60,14 +60,13 @@ export class AngularBackend implements Backend {
         parent.appendChild(directory);
         name = `${view.kebab}.component.html`;
         data = Mustache.render(AngularTempate.data_component_html(), view);
-        parent.appendChild(new File(name, data));
+        directory.appendChild(new File(name, data));
         name = `${view.kebab}.component.scss`;
         data = Mustache.render(AngularTempate.data_component_scss(), view);
-        parent.appendChild(new File(name, data));
+        directory.appendChild(new File(name, data));
         name = `${view.kebab}.component.ts`;
         data = Mustache.render(AngularTempate.data_component_ts(), view);
-        parent.appendChild(new File(name, data));
-
+        directory.appendChild(new File(name, data));
         return parent;
     }
 
@@ -125,11 +124,9 @@ export class AngularBackend implements Backend {
     public generateApp(dir: Directory, dataNodes: DataNode[]) {
         let name;
         let data;
-
         let view = {
             dataNodes: dataNodes.map((value: DataNode) => this.generateDataView(value))
         }
-
         name = `app-routing.module.ts`;
         data = Mustache.render(AngularTempate.app_routing_module_ts(), view);
         dir.appendChild(new File(name, data));

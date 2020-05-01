@@ -5,7 +5,7 @@
   <mat-card-content>
     <mat-tab-group>
       <mat-tab label="Account">
-        <app-account-form #_this [id]="_id" (data)="data($event)"></app-account-form>
+        <app-account-form #form [id]="id" (data)="data($event)"></app-account-form>
       </mat-tab>
       <mat-tab label="Address">
         <app-address-form #address [id]="addressId"></app-address-form>
