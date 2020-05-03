@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 {{ #dataNodes }}
-import { {{ pascal }}Component } from './{{ kebab }}/{{ kebab }}.component';
+import { {{ pascal }}Component } from './{{ kebab }}/{{ kebab }}/{{ kebab }}.component';
+import { {{ pascal }}ListComponent } from './{{ kebab }}/{{ kebab }}-list/{{ kebab }}-list.component';
 {{ /dataNodes }}
 
 
 const routes: Routes = [
   {{ #dataNodes }}
   { path: '{{ kebab }}', component: {{ pascal }}Component },
+  { path: '{{ kebab }}/:id', component: {{ pascal }}Component },
+  { path: '{{ kebab }}-list', component: {{ pascal }}ListComponent },
   {{ /dataNodes }}
 ];
 

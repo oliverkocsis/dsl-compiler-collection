@@ -17,6 +17,10 @@ export abstract class AbstractSyntaxGraphNode {
         return this.name;
     }
 
+    /**
+     * Adds a node to this node. 
+     * @param node Returns this node to be able to chain the call
+     */
     public appendChildNode(node: AbstractSyntaxGraphNode): AbstractSyntaxGraphNode {
         if (this.childNodes[node.getName()] != undefined) {
             throw new Error(`Child node exist: ${node.getName()}`);
@@ -43,14 +47,24 @@ export abstract class AbstractSyntaxGraphNode {
         return childNodes;
     }
 
-    public visit(visitor: (node: AbstractSyntaxGraphNode) => void) {
-        AbstractSyntaxGraphNode._visit(visitor, this);
-    }
-
-    private static _visit(visitor: (node: AbstractSyntaxGraphNode) => void, _this: AbstractSyntaxGraphNode) {
-        visitor(_this);
-        for (const n of _this.getChildNodes()) {
-            AbstractSyntaxGraphNode._visit(visitor, n);
+    /**
+     * Depth-first search
+     * @param visitor when false then stops the search on that branch
+     * @param top If true then visits the elements from top-to-bottom, otherwise bottom-to-top
+     */
+    public visit(visitor: (node: AbstractSyntaxGraphNode) => boolean, top = true) {
+        if (top) {
+            if (!visitor(this)) {
+                return
+            };
+        }
+        for (const n of this.getChildNodes()) {
+            n.visit(visitor, top);
+        }
+        if (!top) {
+            if (!visitor(this)) {
+                return
+            };
         }
     }
 

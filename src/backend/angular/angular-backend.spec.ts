@@ -32,10 +32,10 @@ describe("The AngularBackend", function () {
         '/src/app/address/address-form',
         '/src/app/address/address-list',
         '/src/app/address/address-table',
-        '/src/app/account/address',
-        '/src/app/account/address-form',
-        '/src/app/account/address-list',
-        '/src/app/account/address-table',
+        '/src/app/account/account',
+        '/src/app/account/account-form',
+        '/src/app/account/account-list',
+        '/src/app/account/account-table',
     ]
 
     for (const directory of directories) {

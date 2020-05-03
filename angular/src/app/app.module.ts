@@ -21,20 +21,26 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AccountTableComponent } from './account/account-table/account-table.component';
-import { AccountFormComponent } from './account/account-form/account-form.component';
-import { AddressFormComponent } from './address/address-form/address-form.component';
 import { AccountComponent } from './account/account/account.component';
+import { AccountFormComponent } from './account/account-form/account-form.component';
 import { AccountListComponent } from './account/account-list/account-list.component';
+import { AccountTableComponent } from './account/account-table/account-table.component';
+import { AddressComponent } from './address/address/address.component';
+import { AddressFormComponent } from './address/address-form/address-form.component';
+import { AddressListComponent } from './address/address-list/address-list.component';
+import { AddressTableComponent } from './address/address-table/address-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AccountTableComponent,
-    AccountFormComponent,
-    AddressFormComponent,
     AccountComponent,
+    AccountFormComponent,
     AccountListComponent,
+    AccountTableComponent,
+    AddressFormComponent,
+    AddressComponent,
+    AddressListComponent,
+    AddressTableComponent,
   ],
   imports: [
     BrowserModule,

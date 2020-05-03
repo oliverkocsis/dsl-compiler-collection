@@ -27,9 +27,22 @@ export class AngularBackend implements Backend {
                     this.generateData(dataNode, app);
                     dataNodes.push(dataNode)
             }
+            return true;
         });
 
-        this.generateApp(app, dataNodes);
+        const topDataNodes: DataNode[] = [];
+        abstractSyntaxGraph.visit((node: AbstractSyntaxGraphNode) => {
+            switch (node.getNodeType()) {
+                case AbstractSyntaxGraphNode.DATA_NODE:
+                    const dataNode = node as DataNode;
+                    this.generateData(dataNode, app);
+                    topDataNodes.push(dataNode)
+                    return false;
+            }
+            return true;
+        });
+
+        this.generateApp(app, dataNodes, topDataNodes);
 
         this.generateUtil(app);
 
@@ -123,17 +136,20 @@ export class AngularBackend implements Backend {
         return directory;
     }
 
-    public generateApp(dir: Directory, dataNodes: DataNode[]) {
+    public generateApp(dir: Directory, dataNodes: DataNode[], topDataNodes: DataNode[]) {
         let name;
         let data;
         let view = {
             dataNodes: dataNodes.map((value: DataNode) => this.generateDataView(value))
         }
+        let topView = {
+            dataNodes: topDataNodes.map((value: DataNode) => this.generateDataView(value))
+        }
         name = `app-routing.module.ts`;
         data = Mustache.render(AngularTempate.app_routing_module_ts(), view);
         dir.appendChild(new File(name, data));
         name = `app.component.html`;
-        data = Mustache.render(AngularTempate.app_component_html(), view);
+        data = Mustache.render(AngularTempate.app_component_html(), topView);
         dir.appendChild(new File(name, data));
         name = `app.component.scss`;
         data = Mustache.render(AngularTempate.app_component_scss(), view);

@@ -1,4 +1,4 @@
-import { AbstractSyntaxGraph, DataNode } from './abstract-syntax-graph';
+import { AbstractSyntaxGraph, DataNode, AbstractSyntaxGraphNode } from './abstract-syntax-graph';
 
 describe("AbstractSyntaxGraph", function () {
 
@@ -32,5 +32,48 @@ describe("AbstractSyntaxGraph", function () {
         abstractSyntaxGraph.appendChildNode(new DataNode(firstData))
         expect(abstractSyntaxGraph.getChildNodes().length).toBe(1);
         expect(() => { abstractSyntaxGraph.appendChildNode(new DataNode(secondData)) }).toThrowError();
+    });
+
+    it("can visit depth-first search from top to bottom", function () {
+        const A = new DataNode("A").appendChildNode(new DataNode("B")).appendChildNode(new DataNode("C"));
+        const D = new DataNode("D").appendChildNode(new DataNode("E")).appendChildNode(new DataNode("F"));
+        abstractSyntaxGraph.appendChildNode(A).appendChildNode(D);
+        let actual = "";
+        abstractSyntaxGraph.visit((node: AbstractSyntaxGraph) => {
+            if (node.getNodeType() != AbstractSyntaxGraphNode.ABSTRACT_SYNTAX_GRAPH) {
+                actual += node.getName();
+            }
+            return true;
+        });
+        expect(actual).toBe("ABCDEF");
+    });
+
+    it("can visit depth-first search from bottom to top", function () {
+        const A = new DataNode("A").appendChildNode(new DataNode("B")).appendChildNode(new DataNode("C"));
+        const D = new DataNode("D").appendChildNode(new DataNode("E")).appendChildNode(new DataNode("F"));
+        abstractSyntaxGraph.appendChildNode(A).appendChildNode(D);
+        let actual = "";
+        abstractSyntaxGraph.visit((node: AbstractSyntaxGraph) => {
+            if (node.getNodeType() != AbstractSyntaxGraphNode.ABSTRACT_SYNTAX_GRAPH) {
+                actual += node.getName();
+            }
+            return true;
+        }, false);
+        expect(actual).toBe("BCAEFD");
+    });
+
+    it("can stop the visit depth-first search from top to bottom", function () {
+        const A = new DataNode("A").appendChildNode(new DataNode("B")).appendChildNode(new DataNode("C"));
+        const D = new DataNode("D").appendChildNode(new DataNode("E")).appendChildNode(new DataNode("F"));
+        abstractSyntaxGraph.appendChildNode(A).appendChildNode(D);
+        let actual = "";
+        abstractSyntaxGraph.visit((node: AbstractSyntaxGraph) => {
+            if (node.getNodeType() != AbstractSyntaxGraphNode.ABSTRACT_SYNTAX_GRAPH) {
+                actual += node.getName();
+                return false;
+            }
+            return true;
+        });
+        expect(actual).toBe("AD");
     });
 });
