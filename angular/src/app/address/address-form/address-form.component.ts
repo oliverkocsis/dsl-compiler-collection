@@ -13,7 +13,7 @@ export class AddressFormComponent implements OnInit {
   @Input() id: string;
   @Output() data = new EventEmitter<Address>()
 
-  public formGroup = this.fb.group({
+  formGroup = this.fb.group({
     _id: null,
     street: null,
     city: null,
@@ -32,7 +32,7 @@ export class AddressFormComponent implements OnInit {
     }
   }
 
-  public submit(): Address {
+  submit(): Address {
     console.log(this.formGroup.value);
     let data = Address.from(this.formGroup.value);
     data = data._id ? this.service.update(data) : this.service.create(data);

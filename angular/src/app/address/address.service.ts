@@ -5,4 +5,4 @@ import { Address } from './address';
 @Injectable({
   providedIn: 'root'
 })
-export class AddressService extends DataService<Address>{ }
+export class AddressService extends DataService<Address> { }

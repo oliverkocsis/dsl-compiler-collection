@@ -4,7 +4,7 @@
   "description": "DSL Compiler Collection (DSL-CC) comprises a number of compilers for different domain model languages",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "rimraf dist && tsc && ncp src/backend/angular/templates dist/backend/angular/templates",
     "test": "ts-node node_modules/jasmine/bin/jasmine --config=jasmine.json",
     "angular-update": "cd angular && ng update --all=true --allowDirty=true"
   },
@@ -32,6 +32,8 @@
     "@types/mustache": "^4.0.1",
     "@types/node": "^13.9.5",
     "jasmine": "^3.5.0",
+    "ncp": "^2.0.0",
+    "rimraf": "^3.0.2",
     "ts-node": "^8.8.1",
     "typescript": "^3.8.3"
   },
