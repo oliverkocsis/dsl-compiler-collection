@@ -1,0 +1,30 @@
+import { Data } from 'src/app/data';
+
+export class {{pascal}} extends Data {
+    {{#properties}}
+    public {{camel}}: {{jsType}};
+    {{/properties}}
+    {{#objects}}
+    public {{camel}}: string;
+    {{/objects}}
+
+  constructor() { super() }
+
+    from(data: {{pascal}}) {
+        this._id = data._id;
+        {{#properties}}
+        this.{{camel}} = data.{{camel}};
+        {{/properties}}
+        {{#objects}}
+        this.{{camel}} = data.{{camel}};
+        {{/objects}}
+        return this;
+    }
+
+    static from(data: {{pascal}}) {
+        const _this = new {{pascal}}();
+        _this.from(data);
+        return _this;
+    }
+
+}

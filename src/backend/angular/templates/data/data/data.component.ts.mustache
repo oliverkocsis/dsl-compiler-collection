@@ -1,0 +1,46 @@
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { {{pascal}}FormComponent } from '../{{kebab}}-form/{{kebab}}-form.component';
+import { {{pascal}} } from '../{{kebab}}';
+{{#objects }}
+import { {{pascal}}FormComponent } from '../../{{kebab}}/{{kebab}}-form/{{kebab}}-form.component';
+{{ /objects }}
+
+@Component({
+  selector: 'app-{{kebab}}',
+  templateUrl: './{{kebab}}.component.html',
+  styleUrls: ['./{{kebab}}.component.scss']
+})
+export class {{pascal}}Component implements OnInit {
+
+  @ViewChild('form') form: {{pascal}}FormComponent;
+  id: string;
+  {{#objects}}
+  @ViewChild('{{property.camel}}') {{property.camel}}Form: {{pascal}}FormComponent;
+  {{property.camel}}Id: string;
+  {{/objects}}
+
+  constructor(private router: Router, private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+  }
+
+  data(data: {{pascal}}) {
+    {{#objects}}
+    this.{{property.camel}}Id = data.{{property.camel}};
+    {{ /objects }}
+  }
+
+  submit() {
+    {{#objects}}
+    const {{property.camel}}Id = this.{{property.camel}}Form.submit()._id;
+    this.form.formGroup.patchValue({ {{property.camel}}: {{property.camel}}Id });
+    {{ /objects }}
+    this.form.submit();
+    this.router.navigate(['/{{kebab}}-list']);
+  }
+  
+}

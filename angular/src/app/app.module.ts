@@ -1,52 +1,67 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatCardModule } from '@angular/material/card';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { ArticleComponent } from './article/article.component';
-import { ArticleFormComponent } from './article/article-form/article-form.component';
-import { ArticleTableComponent } from './article/article-table/article-table.component';
-import { ShippingInformationComponent } from './shipping-information/shipping-information.component';
-import { ShippingInformationFormComponent } from './shipping-information/shipping-information-form/shipping-information-form.component';
-import { ShippingInformationTableComponent } from './shipping-information/shipping-information-table/shipping-information-table.component';
+import { AccountComponent } from './account/account/account.component';
+import { AccountFormComponent } from './account/account-form/account-form.component';
+import { AccountListComponent } from './account/account-list/account-list.component';
+import { AccountTableComponent } from './account/account-table/account-table.component';
+import { AddressComponent } from './address/address/address.component';
+import { AddressFormComponent } from './address/address-form/address-form.component';
+import { AddressListComponent } from './address/address-list/address-list.component';
+import { AddressTableComponent } from './address/address-table/address-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ArticleComponent,
-    ArticleFormComponent,
-    ArticleTableComponent,
-    ShippingInformationComponent,
-    ShippingInformationFormComponent,
-    ShippingInformationTableComponent,
+    AccountComponent,
+    AccountFormComponent,
+    AccountListComponent,
+    AccountTableComponent,
+    AddressComponent,
+    AddressFormComponent,
+    AddressListComponent,
+    AddressTableComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    MatSidenavModule,
-    MatListModule,
-    MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatRadioModule,
-    MatCardModule,
     ReactiveFormsModule,
-    MatTableModule,
+    BrowserAnimationsModule,
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
     MatPaginatorModule,
-    MatSortModule
+    MatRadioModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

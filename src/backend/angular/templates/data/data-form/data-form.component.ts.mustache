@@ -1,0 +1,44 @@
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { {{pascal}}Service } from '../{{kebab}}.service';
+import { {{pascal}} } from '../{{kebab}}';
+
+@Component({
+  selector: 'app-{{kebab}}-form',
+  templateUrl: './{{kebab}}-form.component.html',
+  styleUrls: ['./{{kebab}}-form.component.scss']
+})
+export class {{pascal}}FormComponent implements OnInit {
+
+  @Input() id: string;
+  @Output() data = new EventEmitter<{{pascal}}>()
+
+  formGroup = this.fb.group({
+    _id: null, 
+    {{#properties}}
+    {{camel}}: null,
+    {{/properties}}
+    {{#objects}}
+    {{property.camel}}: null,
+    {{/objects}}
+  });
+
+  constructor(private fb: FormBuilder, private service: {{pascal}}Service) { }
+
+  ngOnInit() {
+    if (this.id) {
+      const data = this.service.read(this.id);
+      this.data.emit(data);
+      this.formGroup.patchValue(data);
+    }
+  }
+
+  submit(): {{pascal}} {
+    console.log(this.formGroup.value);
+    let data = {{pascal}}.from(this.formGroup.value);
+    data = data._id ? this.service.update(data) : this.service.create(data);
+    this.formGroup.reset();
+    return data;
+  }
+
+}

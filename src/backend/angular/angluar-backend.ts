@@ -13,7 +13,7 @@ export class AngularBackend implements Backend {
     constructor() { }
 
     public generate(abstractSyntaxGraph: AbstractSyntaxGraph): VirtualFileSystem {
-        const virtualFileSystem: VirtualFileSystem = new VirtualFileSystem();
+        const virtualFileSystem = new VirtualFileSystem();
         const src = new Directory('src');
         virtualFileSystem.appendChild(src);
         const app = new Directory('app');
@@ -27,9 +27,24 @@ export class AngularBackend implements Backend {
                     this.generateData(dataNode, app);
                     dataNodes.push(dataNode)
             }
+            return true;
         });
 
-        this.generateApp(app, dataNodes);
+        const topDataNodes: DataNode[] = [];
+        abstractSyntaxGraph.visit((node: AbstractSyntaxGraphNode) => {
+            switch (node.getNodeType()) {
+                case AbstractSyntaxGraphNode.DATA_NODE:
+                    const dataNode = node as DataNode;
+                    this.generateData(dataNode, app);
+                    topDataNodes.push(dataNode)
+                    return false;
+            }
+            return true;
+        });
+
+        this.generateApp(app, dataNodes, topDataNodes);
+
+        this.generateUtil(app);
 
         return virtualFileSystem;
     }
@@ -38,153 +53,176 @@ export class AngularBackend implements Backend {
         let name;
         let data;
         const view = this.generateDataView(node);
-
-        // Directory
         const directory = new Directory(view.kebab);
         parent.appendChild(directory);
-        // Data Component
-        this.generateDataComponent(node, directory);
-        // Data Form
-        this.generateDataForm(node, directory);
-        // Data Table
-        this.generateDataTable(node, directory);
-
+        name = `${view.kebab}.ts`;
+        data = Mustache.render(AngularTempate.data_ts(), view);
+        directory.appendChild(new File(name, data));
+        name = `${view.kebab}.service.ts`;
+        data = Mustache.render(AngularTempate.data_service_ts(), view);
+        directory.appendChild(new File(name, data));
+        this.generateDataComponent(node, directory, view);
+        this.generateDataForm(node, directory, view);
+        this.generateDataList(node, directory, view);
+        this.generateDataTable(node, directory, view);
         return directory;
     }
 
-    public generateDataComponent(node: DataNode, parent: VirtualFileSystemNode): VirtualFileSystemNode {
+    public generateDataComponent(node: DataNode, parent: VirtualFileSystemNode, view: DataView): VirtualFileSystemNode {
         let name;
         let data;
-        const view = this.generateDataView(node);
-        // Class
-        name = `${view.kebab}.ts`;
-        data = Mustache.render(AngularTempate.getClassTemplate(), view);
-        parent.appendChild(new File(name, data));
-        // Service
-        name = `${view.kebab}.service.ts`;
-        data = Mustache.render(AngularTempate.getServiceTemplate(), view);
-        parent.appendChild(new File(name, data));
-        // Component HTML
+        const directory = new Directory(`${view.kebab}`);
+        parent.appendChild(directory);
         name = `${view.kebab}.component.html`;
-        data = Mustache.render(AngularTempate.getComponentHTMLTemplate(), view);
-        parent.appendChild(new File(name, data));
-        // Component scss
+        data = Mustache.render(AngularTempate.data_component_html(), view);
+        directory.appendChild(new File(name, data));
         name = `${view.kebab}.component.scss`;
-        data = Mustache.render(AngularTempate.getComponentSCSSTemplate(), view);
-        parent.appendChild(new File(name, data));
-        // Component TS
+        data = Mustache.render(AngularTempate.data_component_scss(), view);
+        directory.appendChild(new File(name, data));
         name = `${view.kebab}.component.ts`;
-        data = Mustache.render(AngularTempate.getComponentTSTemplate(), view);
-        parent.appendChild(new File(name, data));
-
+        data = Mustache.render(AngularTempate.data_component_ts(), view);
+        directory.appendChild(new File(name, data));
         return parent;
     }
 
-    public generateDataForm(node: DataNode, parent: VirtualFileSystemNode): VirtualFileSystemNode {
+    public generateDataForm(node: DataNode, parent: VirtualFileSystemNode, view: DataView): VirtualFileSystemNode {
         let name;
         let data;
-        const view = this.generateDataView(node);
-
-        // Form Directory
         const directory = new Directory(`${view.kebab}-form`);
         parent.appendChild(directory);
-        // Form Component HTML
         name = `${view.kebab}-form.component.html`;
-        data = Mustache.render(AngularTempate.getFormComponentHTMLTemplate(), view);
+        data = Mustache.render(AngularTempate.data_form_component_html(), view);
         directory.appendChild(new File(name, data));
-        // Form Component scss
         name = `${view.kebab}-form.component.scss`;
-        data = Mustache.render(AngularTempate.getFormComponentSCSSTemplate(), view);
+        data = Mustache.render(AngularTempate.data_form_component_scss(), view);
         directory.appendChild(new File(name, data));
-        // Form Component TS
         name = `${view.kebab}-form.component.ts`;
-        data = Mustache.render(AngularTempate.getFormComponentTSTemplate(), view);
+        data = Mustache.render(AngularTempate.data_form_component_ts(), view);
         directory.appendChild(new File(name, data));
-
         return directory;
     }
 
-    public generateDataTable(node: DataNode, parent: VirtualFileSystemNode): VirtualFileSystemNode {
+    public generateDataList(node: DataNode, parent: VirtualFileSystemNode, view: DataView): VirtualFileSystemNode {
         let name;
         let data;
-        const view = this.generateDataView(node);
+        const directory = new Directory(`${view.kebab}-list`);
+        parent.appendChild(directory);
+        name = `${view.kebab}-list.component.html`;
+        data = Mustache.render(AngularTempate.data_list_component_html(), view);
+        directory.appendChild(new File(name, data));
+        name = `${view.kebab}-list.component.scss`;
+        data = Mustache.render(AngularTempate.data_list_component_scss(), view);
+        directory.appendChild(new File(name, data));
+        name = `${view.kebab}-list.component.ts`;
+        data = Mustache.render(AngularTempate.data_list_component_ts(), view);
+        directory.appendChild(new File(name, data));
+        return directory;
+    }
 
-        // Table Directory
+    public generateDataTable(node: DataNode, parent: VirtualFileSystemNode, view: DataView): VirtualFileSystemNode {
+        let name;
+        let data;
         const directory = new Directory(`${view.kebab}-table`);
         parent.appendChild(directory);
-        // Table Component HTML
         name = `${view.kebab}-table.component.html`;
-        data = Mustache.render(AngularTempate.getTableComponentHTMLTemplate(), view);
+        data = Mustache.render(AngularTempate.data_table_component_html(), view);
         directory.appendChild(new File(name, data));
-        // Table Component scss
         name = `${view.kebab}-table.component.scss`;
-        data = Mustache.render(AngularTempate.getTableComponentSCSSTemplate(), view);
+        data = Mustache.render(AngularTempate.data_table_component_scss(), view);
         directory.appendChild(new File(name, data));
-        // Table Component TS
         name = `${view.kebab}-table.component.ts`;
-        data = Mustache.render(AngularTempate.getTableComponentTSTemplate(), view);
+        data = Mustache.render(AngularTempate.data_table_component_ts(), view);
         directory.appendChild(new File(name, data));
-
         return directory;
     }
 
-    public generateApp(dir: Directory, dataNodes: DataNode[]) {
+    public generateApp(dir: Directory, dataNodes: DataNode[], topDataNodes: DataNode[]) {
         let name;
         let data;
-
         let view = {
             dataNodes: dataNodes.map((value: DataNode) => this.generateDataView(value))
         }
-
-        // Routing
+        let topView = {
+            dataNodes: topDataNodes.map((value: DataNode) => this.generateDataView(value))
+        }
         name = `app-routing.module.ts`;
-        data = Mustache.render(AngularTempate.getAppRoutingTemplate(), view);
+        data = Mustache.render(AngularTempate.app_routing_module_ts(), view);
         dir.appendChild(new File(name, data));
-        // HTML
         name = `app.component.html`;
-        data = Mustache.render(AngularTempate.getAppHTMLTemplate(), view);
+        data = Mustache.render(AngularTempate.app_component_html(), topView);
         dir.appendChild(new File(name, data));
-        // SCSS
         name = `app.component.scss`;
-        data = Mustache.render(AngularTempate.getAppSCSSTemplate(), view);
+        data = Mustache.render(AngularTempate.app_component_scss(), view);
         dir.appendChild(new File(name, data));
-        // TS
         name = `app.component.ts`;
-        data = Mustache.render(AngularTempate.getAppTSTemplate(), view);
+        data = Mustache.render(AngularTempate.app_component_ts(), view);
         dir.appendChild(new File(name, data));
-        // Module
         name = `app.module.ts`;
-        data = Mustache.render(AngularTempate.getAppModuleTemplate(), view);
+        data = Mustache.render(AngularTempate.app_module_ts(), view);
         dir.appendChild(new File(name, data));
     }
 
-    public generateDataView(node: DataNode) {
+    generateUtil(dir: Directory) {
+        let name;
+        name = `data.service.ts`;
+        dir.appendChild(new File(name, AngularTempate.abstract_data_service_ts()));
+        name = `data.ts`;
+        dir.appendChild(new File(name, AngularTempate.abstract_data_ts()));
+    }
+
+    public generateDataView(node: DataNode): DataView {
         const kebab = _.kebabCase(node.getName());
         const camel = _.camelCase(node.getName());
         const pascal = _pascalCase(node.getName());
 
-        const properties = node.getChildNodes().map((node) => {
-            return {
-                name: node.getName(),
-                kebab: _.kebabCase(node.getName()),
-                camel: _.camelCase(node.getName()),
-                pascal: _pascalCase(node.getName()),
-                htmlType: convertDataTypeToHTMLType((node as PropertyNode).getType()),
-                jsType: convertDataTypeToJSType((node as PropertyNode).getType()),
+        const properties: PropertyView[] = [];
+        const objects: ObjectView[] = [];
+
+        for (const childNode of node.getChildNodes()) {
+            if (childNode.getNodeType() != AbstractSyntaxGraphNode.PROPERTY_NODE) {
+                throw new Error(`DataNode should have only PropertyNode child nodes: ${node.getName()}`);
             }
-        });
+            const propertyNode = childNode as PropertyNode;
+
+            if (propertyNode.getType() == PropertyNode.TYPE_OBJECT) {
+                const object: ObjectView = {
+                    name: node.getName(),
+                    kebab: _.kebabCase(propertyNode.getChildNode().getName()),
+                    camel: _.camelCase(propertyNode.getChildNode().getName()),
+                    pascal: _pascalCase(propertyNode.getChildNode().getName()),
+                    property: {
+                        name: propertyNode.getName(),
+                        kebab: _.kebabCase(propertyNode.getName()),
+                        camel: _.camelCase(propertyNode.getName()),
+                        pascal: _pascalCase(propertyNode.getName()),
+                    }
+                };
+                objects.push(object);
+            } else {
+                const property: PropertyView = {
+                    name: propertyNode.getName(),
+                    kebab: _.kebabCase(propertyNode.getName()),
+                    camel: _.camelCase(propertyNode.getName()),
+                    pascal: _pascalCase(propertyNode.getName()),
+                    htmlType: convertDataTypeToHTMLType(propertyNode.getType()),
+                    jsType: convertDataTypeToJSType(propertyNode.getType()),
+                }
+                properties.push(property);
+            }
+        }
 
         return {
             name: node.getName(),
             kebab: kebab,
             camel: camel,
             pascal: pascal,
-            properties: properties
+            properties: properties,
+            objects: objects,
         };
     }
 }
 
-function convertDataTypeToHTMLType(type: number): string | undefined {
+function convertDataTypeToHTMLType(type: number): string {
     let inputType;
     switch (type) {
         case PropertyNode.TYPE_STRING:
@@ -193,13 +231,16 @@ function convertDataTypeToHTMLType(type: number): string | undefined {
         case PropertyNode.TYPE_NUMBER:
             inputType = "number";
             break;
-        default:
+        case PropertyNode.TYPE_OBJECT:
+            inputType = "object";
             break;
+        default:
+            throw new Error(`Unkown data type: ${type}`);
     }
     return inputType;
 }
 
-function convertDataTypeToJSType(type: number): string | undefined {
+function convertDataTypeToJSType(type: number): string {
     let inputType;
     switch (type) {
         case PropertyNode.TYPE_STRING:
@@ -208,9 +249,43 @@ function convertDataTypeToJSType(type: number): string | undefined {
         case PropertyNode.TYPE_NUMBER:
             inputType = "number";
             break;
-        default:
+        case PropertyNode.TYPE_OBJECT:
+            inputType = "Object";
             break;
+        default:
+            throw new Error(`Unkown data type: ${type}`);
     }
     return inputType;
+}
+
+interface PropertyView {
+    name: string;
+    camel: string;
+    pascal: string;
+    kebab: string;
+    htmlType: string;
+    jsType: string;
+}
+
+interface ObjectView {
+    name: string;
+    camel: string;
+    pascal: string;
+    kebab: string;
+    property: {
+        name: string;
+        camel: string;
+        pascal: string;
+        kebab: string;
+    };
+}
+
+interface DataView {
+    name: string;
+    camel: string;
+    pascal: string;
+    kebab: string;
+    properties: PropertyView[];
+    objects: ObjectView[];
 }
 

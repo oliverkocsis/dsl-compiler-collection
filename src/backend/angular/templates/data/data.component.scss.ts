@@ -1,2 +1,0 @@
-export const DATA_COMPONENT_SCSS_TEMPLATE = `
-`

@@ -1,13 +1,10 @@
 <mat-sidenav-container>
-  <mat-sidenav mode="side" opened>
-    <mat-nav-list>
+  <mat-sidenav #sidenav mode="side" opened>
+    <mat-list>
       <mat-list-item>
-        <a matLine [routerLink]="['/article']">Article</a>
+        <a mat-button routerLink="/account-list">Account</a>
       </mat-list-item>
-      <mat-list-item>
-        <a matLine [routerLink]="['/shipping-information']">Shipping Information</a>
-      </mat-list-item>
-    </mat-nav-list>
+    </mat-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet>

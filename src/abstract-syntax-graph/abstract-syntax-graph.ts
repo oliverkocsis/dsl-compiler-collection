@@ -1,8 +1,9 @@
 export abstract class AbstractSyntaxGraphNode {
 
-    public static readonly ABSTRACT_SYNTAX_GRAPH_NODE = 0;
-    public static readonly DATA_NODE = 1;
-    public static readonly PROPERTY_NODE = 2;
+    public static readonly ABSTRACT_SYNTAX_GRAPH = 0;
+    public static readonly DOAMIN_NODE = 1;
+    public static readonly DATA_NODE = 2;
+    public static readonly PROPERTY_NODE = 3;
 
     private name: string;
     private childNodes: any;
@@ -16,11 +17,16 @@ export abstract class AbstractSyntaxGraphNode {
         return this.name;
     }
 
-    public appendChildNode(node: AbstractSyntaxGraphNode): void {
+    /**
+     * Adds a node to this node. 
+     * @param node Returns this node to be able to chain the call
+     */
+    public appendChildNode(node: AbstractSyntaxGraphNode): AbstractSyntaxGraphNode {
         if (this.childNodes[node.getName()] != undefined) {
             throw new Error(`Child node exist: ${node.getName()}`);
         }
         this.childNodes[node.getName()] = node;
+        return this;
     }
 
     public setChildNode(node: AbstractSyntaxGraphNode): void {
@@ -41,14 +47,24 @@ export abstract class AbstractSyntaxGraphNode {
         return childNodes;
     }
 
-    public visit(visitor: (node: AbstractSyntaxGraphNode) => void) {
-        AbstractSyntaxGraphNode._visit(visitor, this);
-    }
-
-    private static _visit(visitor: (node: AbstractSyntaxGraphNode) => void, _this: AbstractSyntaxGraphNode) {
-        visitor(_this);
-        for (const n of _this.getChildNodes()) {
-            AbstractSyntaxGraphNode._visit(visitor, n);
+    /**
+     * Depth-first search
+     * @param visitor when false then stops the search on that branch
+     * @param top If true then visits the elements from top-to-bottom, otherwise bottom-to-top
+     */
+    public visit(visitor: (node: AbstractSyntaxGraphNode) => boolean, top = true) {
+        if (top) {
+            if (!visitor(this)) {
+                return
+            };
+        }
+        for (const n of this.getChildNodes()) {
+            n.visit(visitor, top);
+        }
+        if (!top) {
+            if (!visitor(this)) {
+                return
+            };
         }
     }
 
@@ -63,8 +79,16 @@ export class AbstractSyntaxGraph extends AbstractSyntaxGraphNode {
     }
 
     getNodeType(): number {
-        return AbstractSyntaxGraphNode.ABSTRACT_SYNTAX_GRAPH_NODE;
+        return AbstractSyntaxGraphNode.ABSTRACT_SYNTAX_GRAPH;
     }
+}
+
+export class DomainNode extends AbstractSyntaxGraphNode {
+
+    getNodeType(): number {
+        return AbstractSyntaxGraphNode.DOAMIN_NODE;
+    }
+
 }
 
 export class DataNode extends AbstractSyntaxGraphNode {
@@ -77,14 +101,19 @@ export class DataNode extends AbstractSyntaxGraphNode {
 
 export class PropertyNode extends AbstractSyntaxGraphNode {
 
-    public static readonly TYPE_STRING = 0;
-    public static readonly TYPE_NUMBER = 1;
+    public static readonly TYPE_OBJECT = 0;
+    public static readonly TYPE_STRING = 1;
+    public static readonly TYPE_NUMBER = 2;
 
     private type: number;
+    private list: boolean;
+    private child: string;
 
-    constructor(name: string, type: number) {
+    constructor(name: string, type: number, list: boolean = false) {
         super(name);
         this.type = type;
+        this.list = list;
+        this.child = "";
     }
 
     getNodeType(): number {
@@ -94,4 +123,18 @@ export class PropertyNode extends AbstractSyntaxGraphNode {
     getType(): number {
         return this.type;
     }
+
+    isList(): any {
+        return this.list;
+    }
+
+    public getChildNode(): AbstractSyntaxGraphNode {
+        return super.getChildNode(this.child);
+    }
+
+    public appendChildNode(node: AbstractSyntaxGraphNode): AbstractSyntaxGraphNode {
+        this.child = node.getName();
+        return super.appendChildNode(node);
+    }
+
 }
