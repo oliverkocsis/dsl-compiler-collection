@@ -1,4 +1,4 @@
-import { Data } from 'src/_dslcc/data';
+import { Data } from 'src/app/data';
 
 export class Address extends Data {
   public street: string;

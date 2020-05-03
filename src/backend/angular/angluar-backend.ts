@@ -31,6 +31,8 @@ export class AngularBackend implements Backend {
 
         this.generateApp(app, dataNodes);
 
+        this.generateUtil(app);
+
         return virtualFileSystem;
     }
 
@@ -142,6 +144,14 @@ export class AngularBackend implements Backend {
         name = `app.module.ts`;
         data = Mustache.render(AngularTempate.app_module_ts(), view);
         dir.appendChild(new File(name, data));
+    }
+
+    generateUtil(dir: Directory) {
+        let name;
+        name = `data.service.ts`;
+        dir.appendChild(new File(name, AngularTempate.abstract_data_service_ts()));
+        name = `data.ts`;
+        dir.appendChild(new File(name, AngularTempate.abstract_data_ts()));
     }
 
     public generateDataView(node: DataNode): DataView {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DataService } from 'src/_dslcc/data-service';
+import { DataService } from 'src/app/data.service';
 import { Address } from './address';
 
 @Injectable({

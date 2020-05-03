@@ -111,4 +111,13 @@ export class AngularTempate {
     return file;
   }
 
+  static abstract_data_ts(): string {
+    const path = 'src/backend/angular/templates/data.ts.mustache';
+    return AngularTempate.cacheReadFileSync(path);
+  }
+
+  static abstract_data_service_ts(): string {
+    const path = 'src/backend/angular/templates/data.service.ts.mustache';
+    return AngularTempate.cacheReadFileSync(path);
+  }
 }
