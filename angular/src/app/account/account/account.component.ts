@@ -20,7 +20,7 @@ export class AccountComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.id = params['id'];
+      this.id = params.id;
     });
   }
 
@@ -28,11 +28,14 @@ export class AccountComponent implements OnInit {
     this.addressId = data.address;
   }
 
-  submit() {
+  save() {
     const addressId = this.addressForm.submit()._id;
     this.form.formGroup.patchValue({ address: addressId });
     this.form.submit();
+  }
+
+  saveClose() {
+    this.save();
     this.router.navigate(['/account-list']);
   }
-  
 }

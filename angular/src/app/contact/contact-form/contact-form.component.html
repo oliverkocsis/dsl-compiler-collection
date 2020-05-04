@@ -1,0 +1,37 @@
+<form [formGroup]="formGroup" novalidate (ngSubmit)="submit()">
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="First Name" type="text" formControlName="firstName">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Last Name" type="text" formControlName="lastName">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Job Title" type="text" formControlName="jobTitle">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Phone" type="text" formControlName="phone">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Email" type="text" formControlName="email">
+      </mat-form-field>
+    </div>
+  </div>
+</form>

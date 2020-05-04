@@ -29,6 +29,10 @@ import { AddressComponent } from './address/address/address.component';
 import { AddressFormComponent } from './address/address-form/address-form.component';
 import { AddressListComponent } from './address/address-list/address-list.component';
 import { AddressTableComponent } from './address/address-table/address-table.component';
+import { ContactComponent } from './contact/contact/contact.component';
+import { ContactFormComponent } from './contact/contact-form/contact-form.component';
+import { ContactListComponent } from './contact/contact-list/contact-list.component';
+import { ContactTableComponent } from './contact/contact-table/contact-table.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,10 @@ import { AddressTableComponent } from './address/address-table/address-table.com
     AddressFormComponent,
     AddressListComponent,
     AddressTableComponent,
+    ContactComponent,
+    ContactFormComponent,
+    ContactListComponent,
+    ContactTableComponent,
   ],
   imports: [
     BrowserModule,
