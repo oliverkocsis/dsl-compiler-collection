@@ -22,6 +22,7 @@ export class AccountFormComponent extends DataFormComponent<Account, AccountServ
       phone: null,
       website: null,
       address: null,
+      contacts: [],
     });
   }
 }

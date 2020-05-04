@@ -5,4 +5,5 @@ export class Account extends Data {
   public phone: string;
   public website: string;
   public address: string;
+  public contacts: string[];
 }
