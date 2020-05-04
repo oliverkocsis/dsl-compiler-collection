@@ -9,15 +9,15 @@ import { ContactListComponent } from './contact/contact-list/contact-list.compon
 
 
 const routes: Routes = [
-  { path: 'account', component: AccountComponent },
-  { path: 'account/:id', component: AccountComponent },
-  { path: 'account-list', component: AccountListComponent },
-  { path: 'address', component: AddressComponent },
-  { path: 'address/:id', component: AddressComponent },
-  { path: 'address-list', component: AddressListComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'contact/:id', component: ContactComponent },
-  { path: 'contact-list', component: ContactListComponent },
+  { path: 'account/list', component: AccountListComponent },
+  { path: 'account/edit', component: AccountComponent },
+  { path: 'account/edit/:id', component: AccountComponent },
+  { path: 'address/list', component: AddressListComponent },
+  { path: 'address/edit', component: AddressComponent },
+  { path: 'address/edit/:id', component: AddressComponent },
+  { path: 'contact/list', component: ContactListComponent },
+  { path: 'contact/edit', component: ContactComponent },
+  { path: 'contact/edit/:id', component: ContactComponent },
 ];
 
 @NgModule({

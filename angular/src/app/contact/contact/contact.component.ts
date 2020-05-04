@@ -1,33 +1,20 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { ContactFormComponent } from '../contact-form/contact-form.component';
+import { DataComponent } from 'src/app/data.component';
 import { Contact } from '../contact';
+import { ContactFormComponent } from '../contact-form/contact-form.component';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent extends DataComponent<Contact, ContactFormComponent> {
 
-  @ViewChild('form') form: ContactFormComponent;
-  id: string;
-
-  constructor(private location: Location, private route: ActivatedRoute) { }
-
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.id = params.id;
-    });
+  constructor(router: Router, route: ActivatedRoute, location: Location) {
+    super(router, route, location);
   }
 
-  data(data: Contact) {
-  }
-
-  submit() {
-    this.form.submit();
-    this.location.back();
-  }
-
+  getRouterLink(): string { return '/contact' }
 }

@@ -1,23 +1,25 @@
 <mat-toolbar>
   <a mat-button (click)="save()">Save</a>
   <a mat-button (click)="saveClose()">Save & Close</a>
-  <a mat-button routerLink="/contact" [disabled]="id === undefined">New Contact</a>
+  <a mat-button routerLink="/contact/edit" [disabled]="id === undefined">New Contact</a>
 </mat-toolbar>
 <mat-card>
   <mat-card-content>
     <mat-tab-group>
       <mat-tab label="Account">
         <div class="margin-top">
-          <app-account-form #form [id]="id" (data)="data($event)" class="margin-top"></app-account-form>
+          <app-account-form #formComponent [id]="id"></app-account-form>
         </div>
       </mat-tab>
       <mat-tab label="Address">
         <div class="margin-top">
-          <app-address-form #address [id]="addressId" class="margin-top"></app-address-form>
+          <app-address-form #addressFormComponent [id]="formComponent.formGroup.value.address"></app-address-form>
         </div>
       </mat-tab>
       <mat-tab label="Contacts">
-        <app-contact-table></app-contact-table>
+        <div class="margin-top">
+          <app-contact-table></app-contact-table>
+        </div>
       </mat-tab>
     </mat-tab-group>
   </mat-card-content>

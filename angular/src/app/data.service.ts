@@ -13,7 +13,7 @@ export abstract class DataService<T extends Data> {
   public create(data: T): T {
     data._id = Date.now().toString();
     this.store.set(data._id, data);
-    console.log(`${typeof data} created: ${data._id}`);
+    console.log(`Data created: ${JSON.stringify(data)}`);
     this.subject.next(Array.from(this.store.values()));
     return data;
   }
@@ -28,7 +28,7 @@ export abstract class DataService<T extends Data> {
 
   public update(data: T): T {
     this.store.set(data._id, data);
-    console.log(`${typeof data} updated: ${data._id}`);
+    console.log(`Data updated: ${JSON.stringify(data)}`);
     this.subject.next(Array.from(this.store.values()));
     return data;
   }
@@ -36,7 +36,7 @@ export abstract class DataService<T extends Data> {
   public delete(id: string) {
     const data = this.store.get(id);
     this.store.delete(id);
-    console.log(`${typeof data} deleted: ${data._id}`);
+    console.log(`Data deleted: ${data._id}`);
     this.subject.next(Array.from(this.store.values()));
   }
 

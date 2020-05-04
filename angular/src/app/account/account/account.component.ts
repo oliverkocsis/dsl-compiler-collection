@@ -1,7 +1,9 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AccountFormComponent } from '../account-form/account-form.component';
+import { Location } from '@angular/common';
+import { DataComponent } from 'src/app/data.component';
 import { Account } from '../account';
+import { AccountFormComponent } from '../account-form/account-form.component';
 import { AddressFormComponent } from '../../address/address-form/address-form.component';
 
 @Component({
@@ -9,33 +11,17 @@ import { AddressFormComponent } from '../../address/address-form/address-form.co
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss']
 })
-export class AccountComponent implements OnInit {
+export class AccountComponent extends DataComponent<Account, AccountFormComponent> {
 
-  @ViewChild('form') form: AccountFormComponent;
-  id: string;
-  @ViewChild('address') addressForm: AddressFormComponent;
-  addressId: string;
+  @ViewChild('addressFormComponent') addressFormComponent: AddressFormComponent;
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
-
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.id = params.id;
-    });
+  constructor(router: Router, route: ActivatedRoute, location: Location) {
+    super(router, route, location);
   }
 
-  data(data: Account) {
-    this.addressId = data.address;
-  }
+  getRouterLink(): string { return '/account' }
 
-  save() {
-    const addressId = this.addressForm.submit()._id;
-    this.form.formGroup.patchValue({ address: addressId });
-    this.form.submit();
-  }
-
-  saveClose() {
-    this.save();
-    this.router.navigate(['/account-list']);
+  saveNestedForms() {
+    this.formComponent.formGroup.patchValue({ address: this.addressFormComponent.submit()._id });
   }
 }

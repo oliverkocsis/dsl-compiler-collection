@@ -52,6 +52,8 @@ describe("The AngularBackend", function () {
         '/src/app/app.component.scss',
         '/src/app/app.component.ts',
         '/src/app/app.module.ts',
+        '/src/app/data-form.component.ts',
+        '/src/app/data.component.ts',
         '/src/app/data.service.ts',
         '/src/app/data.ts',
     ]
