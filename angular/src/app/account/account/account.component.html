@@ -1,7 +1,7 @@
 <mat-toolbar>
   <a mat-button (click)="save()">Save</a>
   <a mat-button (click)="saveClose()">Save & Close</a>
-  <a mat-button routerLink="/contact/edit" [disabled]="id === undefined">New Contact</a>
+  <a mat-button [routerLink]="['/contact/edit', { redirect: current }]" [disabled]="id === undefined">New Contact</a>
 </mat-toolbar>
 <mat-card>
   <mat-card-content>
