@@ -20,10 +20,14 @@ export class ContactTableComponent implements OnInit {
   ];
   dataSource: Contact[];
 
-  constructor(public router: Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.dataSource = this.form.value as Contact[];
+  }
+
+  edit(id: string) {
+    this.router.navigate(['contact/edit', id])
   }
 
 }

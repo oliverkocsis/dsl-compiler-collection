@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Account } from './account';
 import { Subscription, BehaviorSubject } from 'rxjs';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { Contact } from '../contact/contact';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,15 @@ export class AccountService {
       const entity = this.read(id)
       if (entity) {
         this.form.patchValue(entity);
+        this.form.setControl('contacts',
+          this.formBuilder.array(
+            entity.contacts.map((object: Contact) => this.formBuilder.group({
+              firstName: object.firstName,
+              lastName: object.lastName,
+              jobTitle: object.jobTitle,
+              phone: object.phone,
+              email: object.email,
+            }))));
       }
       else {
         const msg = `entity does not exist: ${id}`;
@@ -104,14 +114,14 @@ const SAMPLE: Account = {
       lastName: 'Smith',
       jobTitle: 'CEO',
       email: 'john.smith@mohio.app',
-      phone: '"36 (70) 123-3456',
+      phone: '+36 (70) 123-3456',
     },
     {
       firstName: 'Jane',
       lastName: 'Doe',
       jobTitle: 'CFO',
       email: 'jane.doe@mohio.app',
-      phone: '"36 (30) 987-6543',
+      phone: '+36 (30) 987-6543',
     }
   ]
 }
