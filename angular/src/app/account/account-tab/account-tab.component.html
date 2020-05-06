@@ -1,0 +1,17 @@
+<mat-tab-group>
+  <mat-tab label="Account">
+    <div class="margin-top">
+      <app-account-form [form]="form"></app-account-form>
+    </div>
+  </mat-tab>
+  <mat-tab label="Address">
+    <div class="margin-top">
+      <app-address-form [form]="form.get('address')"></app-address-form>
+    </div>
+  </mat-tab>
+  <mat-tab label="Contacts">
+    <div class="margin-top">
+      <app-contact-table [form]="form.get('contacts')"></app-contact-table>
+    </div>
+  </mat-tab>
+</mat-tab-group>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataFormComponent } from 'src/app/data-form.component';
 import { AccountService } from '../account.service';
@@ -9,20 +9,10 @@ import { Account } from '../account';
   templateUrl: './account-form.component.html',
   styleUrls: ['./account-form.component.scss']
 })
-export class AccountFormComponent extends DataFormComponent<Account, AccountService> {
+export class AccountFormComponent {
 
-  constructor(formBuilder: FormBuilder, service: AccountService) {
-    super(formBuilder, service);
-  }
+  @Input() form: FormGroup;
 
-  buildForm(): FormGroup {
-    return this.formBuilder.group({
-      _id: null,
-      name: null,
-      phone: null,
-      website: null,
-      address: null,
-      contacts: [],
-    });
-  }
+  constructor() { }
+
 }

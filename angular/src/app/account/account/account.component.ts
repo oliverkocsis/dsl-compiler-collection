@@ -1,27 +1,28 @@
-import { Component, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { DataComponent } from 'src/app/data.component';
-import { Account } from '../account';
-import { AccountFormComponent } from '../account-form/account-form.component';
-import { AddressFormComponent } from '../../address/address-form/address-form.component';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss']
 })
-export class AccountComponent extends DataComponent<Account, AccountFormComponent> {
+export class AccountComponent implements OnInit {
 
-  @ViewChild('addressFormComponent') addressFormComponent: AddressFormComponent;
+  constructor(private route: ActivatedRoute, private location: Location, private service: AccountService) { }
 
-  constructor(router: Router, route: ActivatedRoute, location: Location) {
-    super(router, route, location);
+  ngOnInit() {
+
   }
 
-  getRouterLink(): string { return '/account' }
-
-  saveNestedForms() {
-    this.formComponent.formGroup.patchValue({ address: this.addressFormComponent.submit()._id });
+  save() {
+    this.service.save();
   }
+
+  saveClose() {
+    this.service.save();
+    this.location.back();
+  }
+
 }
