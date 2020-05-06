@@ -15,7 +15,7 @@ export class AccountService {
     this.store = new Map<string, Account>();
     this.subject = new BehaviorSubject<Account[]>(Array.from(this.store.values()));
     this.form = this.formBuilder.group({
-      _id: null,
+      $$id: null,
       name: null,
       phone: null,
       website: null,
@@ -28,6 +28,7 @@ export class AccountService {
       }),
       contacts: this.formBuilder.array([]),
     });
+    this.create(SAMPLE);
   }
 
   public edit(id: string): FormGroup {
@@ -49,12 +50,12 @@ export class AccountService {
 
   public save(): Account {
     const entity = this.form.value as Account;
-    return entity._id ? this.update(entity) : this.create(entity);
+    return entity.$$id ? this.update(entity) : this.create(entity);
   }
 
   public create(entity: Account): Account {
-    entity._id = Date.now().toString();
-    this.store.set(entity._id, entity);
+    entity.$$id = Date.now().toString();
+    this.store.set(entity.$$id, entity);
     console.log(`entity created: ${JSON.stringify(entity)}`);
     this.subject.next(Array.from(this.store.values()));
     return entity;
@@ -69,7 +70,7 @@ export class AccountService {
   }
 
   public update(entity: Account): Account {
-    this.store.set(entity._id, entity);
+    this.store.set(entity.$$id, entity);
     console.log(`entity updated: ${JSON.stringify(entity)}`);
     this.subject.next(Array.from(this.store.values()));
     return entity;
@@ -78,11 +79,39 @@ export class AccountService {
   public delete(id: string) {
     const entity = this.store.get(id);
     this.store.delete(id);
-    console.log(`entity deleted: ${entity._id}`);
+    console.log(`entity deleted: ${entity.$$id}`);
     this.subject.next(Array.from(this.store.values()));
   }
 
   public subscribe(next: (entity: Account[]) => void): Subscription {
     return this.subject.subscribe(next);
   }
+}
+
+const SAMPLE: Account = {
+  name: 'Mohio',
+  phone: '+36 (1) 234-5678',
+  website: 'mohio.app',
+  address: {
+    street: 'Váci utca 1',
+    city: 'Budapest',
+    country: 'Hungary',
+    postalCode: '1051'
+  },
+  contacts: [
+    {
+      firstName: 'John',
+      lastName: 'Smith',
+      jobTitle: 'CEO',
+      email: 'john.smith@mohio.app',
+      phone: '"36 (70) 123-3456',
+    },
+    {
+      firstName: 'Jane',
+      lastName: 'Doe',
+      jobTitle: 'CFO',
+      email: 'jane.doe@mohio.app',
+      phone: '"36 (30) 987-6543',
+    }
+  ]
 }

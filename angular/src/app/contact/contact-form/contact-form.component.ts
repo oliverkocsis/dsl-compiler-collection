@@ -1,28 +1,16 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { DataFormComponent } from 'src/app/data-form.component';
-import { ContactService } from '../contact.service';
-import { Contact } from '../contact';
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'app-contact-form',
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss']
 })
-export class ContactFormComponent extends DataFormComponent<Contact, ContactService> {
+export class ContactFormComponent {
 
-  constructor(formBuilder: FormBuilder, service: ContactService) {
-    super(formBuilder, service);
-  }
+  @Input() form: FormGroup;
 
-  buildForm(): FormGroup {
-    return this.formBuilder.group({
-      _id: null,
-      firstName: null,
-      lastName: null,
-      jobTitle: null,
-      phone: null,
-      email: null,
-    });
-  }
+  constructor() { }
+
 }

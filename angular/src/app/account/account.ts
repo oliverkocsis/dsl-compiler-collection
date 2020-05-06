@@ -1,9 +1,11 @@
-import { Data } from 'src/app/data';
+import { Address } from '../address/address';
+import { Contact } from '../contact/contact';
 
-export class Account extends Data {
-  public name: string;
-  public phone: string;
-  public website: string;
-  public address: string;
-  public contacts: string[];
+export class Account {
+  public $$id?: string;
+  public name?: string;
+  public phone?: string;
+  public website?: string;
+  public address?: Address;
+  public contacts?: Contact[];
 }

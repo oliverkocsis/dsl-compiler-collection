@@ -26,9 +26,7 @@ import { AccountFormComponent } from './account/account-form/account-form.compon
 import { AccountTabComponent } from './account/account-tab/account-tab.component';
 import { AccountTableComponent } from './account/account-table/account-table.component';
 import { AddressFormComponent } from './address/address-form/address-form.component';
-import { ContactComponent } from './contact/contact/contact.component';
 import { ContactFormComponent } from './contact/contact-form/contact-form.component';
-import { ContactListComponent } from './contact/contact-list/contact-list.component';
 import { ContactTableComponent } from './contact/contact-table/contact-table.component';
 
 @NgModule({
@@ -39,9 +37,7 @@ import { ContactTableComponent } from './contact/contact-table/contact-table.com
     AccountTabComponent,
     AccountTableComponent,
     AddressFormComponent,
-    ContactComponent,
     ContactFormComponent,
-    ContactListComponent,
     ContactTableComponent,
   ],
   imports: [

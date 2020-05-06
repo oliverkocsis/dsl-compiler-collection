@@ -20,7 +20,7 @@ export class ContactTableComponent implements OnInit {
   ];
   dataSource: Contact[];
 
-  constructor(private router: Router) { }
+  constructor(public router: Router) { }
 
   ngOnInit() {
     this.dataSource = this.form.value as Contact[];
