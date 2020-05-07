@@ -8,20 +8,8 @@ import { AccountService } from '../account.service';
   templateUrl: './account-tab.component.html',
   styleUrls: ['./account-tab.component.scss']
 })
-export class AccountTabComponent implements OnInit {
+export class AccountTabComponent {
 
-
-  form: FormGroup;
-
-  constructor(private route: ActivatedRoute, private service: AccountService) { }
-
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      console.log(`router.params: ${JSON.stringify(params)}`);
-      const id = params.id;
-      this.form = this.service.edit(id);
-    });
-
-  }
+  constructor() { }
 
 }

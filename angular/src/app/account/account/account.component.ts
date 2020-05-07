@@ -17,11 +17,11 @@ export class AccountComponent implements OnInit {
   }
 
   save() {
-    this.service.save();
+    this.service.onSave();
   }
 
   saveClose() {
-    this.service.save();
+    this.service.onSave();
     this.location.back();
   }
 

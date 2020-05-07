@@ -23,8 +23,9 @@ export class AccountTableComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private service: AccountService) { }
 
   ngOnInit() {
+    this.service.onList();
     this.dataSource = new MatTableDataSource<Account>();
-    this.subscription = this.service.subscribe((data: Account[]) => {
+    this.subscription = this.service.subscribeStore((data: Account[]) => {
       this.dataSource.data = data;
     });
   }
@@ -34,6 +35,7 @@ export class AccountTableComponent implements OnInit, OnDestroy {
   }
 
   edit(id: string) {
+    this.service.onEdit(id);
     this.router.navigate(['/account/edit', id])
   }
 

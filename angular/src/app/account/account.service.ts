@@ -9,13 +9,19 @@ import { Contact } from '../contact/contact';
 })
 export class AccountService {
   private store: Map<string, Account>;
-  private subject: BehaviorSubject<Account[]>;
+  private storeSubject: BehaviorSubject<Account[]>;
   private form: FormGroup;
+  private formSubject: BehaviorSubject<FormGroup>;
 
   constructor(private formBuilder: FormBuilder) {
     this.store = new Map<string, Account>();
-    this.subject = new BehaviorSubject<Account[]>(Array.from(this.store.values()));
-    this.form = this.formBuilder.group({
+    this.storeSubject = new BehaviorSubject<Account[]>(Array.from(this.store.values()));
+    this.form = this.emptyForm();
+    this.formSubject = new BehaviorSubject<FormGroup>(this.form);
+  }
+
+  private emptyForm(): FormGroup {
+    return this.formBuilder.group({
       $$id: null,
       name: null,
       phone: null,
@@ -29,76 +35,112 @@ export class AccountService {
       }),
       contacts: this.formBuilder.array([]),
     });
-    this.create(SAMPLE);
   }
 
-  public edit(id: string): FormGroup {
+  public onList() {
+    if (this.store.size === 0) {
+      for (const sample of SAMPLES) {
+        this.create(sample);
+      }
+    }
+  }
+
+  public onEdit(id: string) {
+    this.form = this.emptyForm();
+    this.formSubject.next(this.form);
     if (id) {
-      const entity = this.read(id)
-      if (entity) {
-        this.form.patchValue(entity);
-        this.form.setControl('contacts',
-          this.formBuilder.array(
-            entity.contacts.map((object: Contact) => this.formBuilder.group({
+      this.read(id).then((entity: Account) => {
+        if (entity) {
+          this.form.patchValue(entity);
+          const array = this.form.get('contacts') as FormArray;
+          for (const object of entity.contacts) {
+            array.push(this.formBuilder.group({
               firstName: object.firstName,
               lastName: object.lastName,
               jobTitle: object.jobTitle,
               phone: object.phone,
               email: object.email,
-            }))));
-      }
-      else {
-        const msg = `entity does not exist: ${id}`;
-        console.warn(msg);
-        throw new Error(msg);
-      }
-    } else {
-      this.form.reset();
+            }))
+          }
+          this.formSubject.next(this.form);
+          return this.formSubject;
+        } else {
+          const msg = `entity does not exist: ${id}`;
+          console.warn(msg);
+          this.formSubject.error(msg);
+          throw new Error(msg);
+        }
+      });
     }
-    return this.form;
   }
 
-  public save(): Account {
+  public onSave() {
     const entity = this.form.value as Account;
-    return entity.$$id ? this.update(entity) : this.create(entity);
+    entity.$$id ? this.update(entity) : this.create(entity)
   }
 
-  public create(entity: Account): Account {
-    entity.$$id = Date.now().toString();
-    this.store.set(entity.$$id, entity);
-    console.log(`entity created: ${JSON.stringify(entity)}`);
-    this.subject.next(Array.from(this.store.values()));
-    return entity;
+  public subscribeStore(next: (entity: Account[]) => void): Subscription {
+    return this.storeSubject.subscribe(next);
   }
 
-  public read(id: string): Account {
-    return this.store.get(id);
+  public subscribeForm(next: (form: FormGroup) => void): Subscription {
+    return this.formSubject.subscribe(next);
   }
 
-  public list(): Account[] {
-    return Array.from(this.store.values());
+
+  public create(entity: Account): Promise<Account> {
+    return new Promise<Account>((resolve, reject) => {
+      setTimeout(() => {
+        entity.$$id = Date.now().toString();
+        this.store.set(entity.$$id, entity);
+        console.log(`entity created: ${JSON.stringify(entity)}`);
+        this.storeSubject.next(Array.from(this.store.values()));
+        resolve(entity);
+      }, 1000);
+    });
   }
 
-  public update(entity: Account): Account {
-    this.store.set(entity.$$id, entity);
-    console.log(`entity updated: ${JSON.stringify(entity)}`);
-    this.subject.next(Array.from(this.store.values()));
-    return entity;
+  public read(id: string): Promise<Account> {
+    return new Promise<Account>((resolve, reject) => {
+      setTimeout(() => {
+        resolve(this.store.get(id));
+      }, 1000);
+    });
   }
 
-  public delete(id: string) {
-    const entity = this.store.get(id);
-    this.store.delete(id);
-    console.log(`entity deleted: ${entity.$$id}`);
-    this.subject.next(Array.from(this.store.values()));
+  public list(): Promise<Account[]> {
+    return new Promise<Account[]>((resolve, reject) => {
+      setTimeout(() => {
+        resolve(Array.from(this.store.values()));
+      }, 1000);
+    });
   }
 
-  public subscribe(next: (entity: Account[]) => void): Subscription {
-    return this.subject.subscribe(next);
+  public update(entity: Account): Promise<Account> {
+    return new Promise<Account>((resolve, reject) => {
+      setTimeout(() => {
+        this.store.set(entity.$$id, entity);
+        console.log(`entity updated: ${JSON.stringify(entity)}`);
+        this.storeSubject.next(Array.from(this.store.values()));
+        resolve(entity);
+      }, 1000);
+    });
+  }
+
+  public delete(id: string): Promise<Account> {
+    return new Promise<Account>((resolve, reject) => {
+      setTimeout(() => {
+        const entity = this.store.get(id);
+        this.store.delete(id);
+        console.log(`entity deleted: ${entity.$$id}`);
+        this.storeSubject.next(Array.from(this.store.values()));
+        resolve(entity);
+      }, 1000);
+    });
   }
 }
 
-const SAMPLE: Account = {
+const SAMPLES: Account[] = [{
   name: 'Mohio',
   phone: '+36 (1) 234-5678',
   website: 'mohio.app',
@@ -124,4 +166,30 @@ const SAMPLE: Account = {
       phone: '+36 (30) 987-6543',
     }
   ]
-}
+}, {
+  name: 'DSL-CC',
+  phone: '+36 (1) 234-5678',
+  website: 'dsl-cc.app',
+  address: {
+    street: 'Bécsi út 1',
+    city: 'Budapest',
+    country: 'Hungary',
+    postalCode: '1021'
+  },
+  contacts: [
+    {
+      firstName: 'James',
+      lastName: 'Bond',
+      jobTitle: 'CEO',
+      email: 'john.smith@mohio.app',
+      phone: '+36 (70) 123-3456',
+    },
+    {
+      firstName: 'Super',
+      lastName: 'Girl',
+      jobTitle: 'CFO',
+      email: 'jane.doe@mohio.app',
+      phone: '+36 (30) 987-6543',
+    }
+  ]
+}]
