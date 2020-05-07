@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Contact } from '../contact';
 import { FormArray } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-contact-table',
@@ -20,14 +20,14 @@ export class ContactTableComponent implements OnInit {
   ];
   dataSource: Contact[];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.dataSource = this.form.value as Contact[];
   }
 
   edit(id: string) {
-    this.router.navigate(['contact/edit', id])
+    this.router.navigate(['contact/edit', id], { relativeTo: this.route })
   }
 
 }
