@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Account } from './account';
 import { Subscription, BehaviorSubject, Observable } from 'rxjs';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Contact } from '../contact/contact';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class AccountService {
   private emptyForm(): FormGroup {
     return this.formBuilder.group({
       $$id: null,
-      name: null,
+      name: [null, Validators.required],
       phone: null,
       website: null,
       address: this.formBuilder.group({

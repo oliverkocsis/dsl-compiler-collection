@@ -1,7 +1,7 @@
 <mat-toolbar>
   <a mat-button routerLink="/account/edit">New</a>
-  <a mat-button (click)="save()">Save</a>
-  <a mat-button (click)="saveClose()">Save & Close</a>
+  <a mat-button (click)="save()" [disabled]="!form.valid">Save</a>
+  <a mat-button (click)="saveClose()" [disabled]="!form.valid">Save & Close</a>
   <a mat-button routerLink="contact/edit">New Contact</a>
 </mat-toolbar>
 <mat-card>
