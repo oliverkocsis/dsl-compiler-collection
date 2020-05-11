@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataFormComponent } from 'src/app/data-form.component';
 import { AccountService } from '../account.service';
 import { Account } from '../account';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, Params, ActivatedRouteSnapshot } from '@angular/router';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-account-form',
@@ -14,18 +14,24 @@ import { Subscription } from 'rxjs';
 export class AccountFormComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
-  subscription: Subscription;
+  subscription: Subscription
 
-  constructor(private service: AccountService) { }
+  constructor(private route: ActivatedRoute, private service: AccountService) { }
 
   ngOnInit() {
-    this.subscription = this.service.subscribeForm((form: FormGroup) => {
-      this.form = form;
+    this.route.params.subscribe((params: Params) => {
+      const id = params.id;
+      this.subscription = this.service.onEdit(id).subscribe((form: FormGroup) => {
+        this.form = form;
+      }, (error: any) => {
+        console.error(error);
+      });
     });
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+
 
 }

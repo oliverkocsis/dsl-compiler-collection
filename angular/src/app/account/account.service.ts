@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Account } from './account';
-import { Subscription, BehaviorSubject } from 'rxjs';
+import { Subscription, BehaviorSubject, Observable } from 'rxjs';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Contact } from '../contact/contact';
 
@@ -45,7 +45,7 @@ export class AccountService {
     }
   }
 
-  public onEdit(id: string) {
+  public onEdit(id: string): Observable<FormGroup> {
     this.form = this.emptyForm();
     this.formSubject.next(this.form);
     if (id) {
@@ -62,16 +62,16 @@ export class AccountService {
               email: object.email,
             }))
           }
+          console.log(this.form.value);
           this.formSubject.next(this.form);
-          return this.formSubject;
         } else {
           const msg = `entity does not exist: ${id}`;
           console.warn(msg);
-          this.formSubject.error(msg);
           throw new Error(msg);
         }
       });
     }
+    return this.formSubject;
   }
 
   public onSave() {

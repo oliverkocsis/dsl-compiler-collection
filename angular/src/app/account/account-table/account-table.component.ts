@@ -35,7 +35,6 @@ export class AccountTableComponent implements OnInit, OnDestroy {
   }
 
   edit(id: string) {
-    this.service.onEdit(id);
     this.router.navigate(['/account/edit', id])
   }
 
