@@ -1,5 +1,5 @@
 # DSL Compiler Collection
-DSL Compiler Collection (DCC) is a collection of compilers for domain specific languages
+DSL Compiler Collection (DCC) is a collection of compilers for domain specific languages. 
 
 # Getting Started
 
@@ -7,54 +7,264 @@ Install `@dsl-cc/dsl-compiler-collection`
 
     npm install --save @dsl-cc/dsl-compiler-collection
 
-Create a data node, add properties, then compile. 
+Within your application
+1. create an entity node, 
+1. add attributes to the entity, 
+1. create an abstract syntax graph, 
+1. add the entity to the abstract syntax graph,
+1. select a compiler backend, 
+1. then compile. 
 
-    import { AngularBackend, AbstractSyntaxGraph, DataNode, PropertyNode, Directory, File, VirtualFileSystem } from '@dsl-cc/dsl-compiler-collection';
+    import { Enity, AbstractSyntaxGraph, AngularBackend } from '@dsl-cc/dsl-compiler-collection';
 
+    const entity = new Entity("Shipping Information");
+    entity.addAttribute("First Name");
+    entity.addAttribute("Last Name");
+    entity.addAttribute("Address");
+    entity.addAttribute("City");
+    entity.addAttribute("State");
+    entity.addAttribute("Postal Code");
+
+    const abstractSyntaxGraph = new AbstractSyntaxGraph();
+    abstractSyntaxGraph.appendNode(entity);
+    
     const backend = new AngularBackend();
-    const abstractSyntaxTree = new AbstractSyntaxGraph();
-    const data = new DataNode("Shipping Information");
-    data.appendChildNode(new PropertyNode("Company", PropertyNode.TYPE_TEXT));
-    data.appendChildNode(new PropertyNode("First Name", PropertyNode.TYPE_TEXT));
-    data.appendChildNode(new PropertyNode("Last Name", PropertyNode.TYPE_TEXT));
-    data.appendChildNode(new PropertyNode("Address", PropertyNode.TYPE_TEXT));
-    data.appendChildNode(new PropertyNode("City", PropertyNode.TYPE_TEXT));
-    data.appendChildNode(new PropertyNode("Postal Code", PropertyNode.TYPE_NUMBER));
-    abstractSyntaxTree.appendChildNode(data);
     const virtualFileSystem = backend.generate(abstractSyntaxTree); 
 
 # Domain
 
-## Domain
-A sphere of knowledge (ontology), influence, or activity. The subject area to which the user applies a program is the domain of the software;
+Domain is a sphere of knowledge. The subject area to which one developes a software. 
 
-## Bounded context
-Multiple models are in play on any large project. Yet when code based on distinct models is combined, software becomes buggy, unreliable, and difficult to understand. Communication among team members becomes confusing. It is often unclear in what context a model should not be applied.
+The ubiquitous language is a language structured around the domain, used unanimously by every participant to connect all the entities and activities of the domain unambiguously. 
 
-## Ubiquitous Language
-A language structured around the domain model and used by all team members to connect all the activities of the team with the software.
-
-## Reference
-[Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design)
-
-# Business Process Model and Notation (BPMN)
-A standard [Business Process Model and Notation (BPMN)](http://www.bpmn.org/) will provide businesses with the capability of understanding their internal business procedures in a graphical notation and will give organizations the ability to communicate these procedures in a standard manner. Furthermore, the graphical notation will facilitate the understanding of the performance collaborations and business transactions between the organizations. This will ensure that businesses will understand themselves and participants in their business and will enable organizations to adjust to new internal and B2B business circumstances quickly.
-
-## Data 
-Data provide information about what Activities require to be performed and/or what they produce, Data can represent a singular object or a collection of objects.
+## Entity
+An entity has separate and distinct existence and objective or conceptual reality as contrasted with its attributes. An attribute is a quality, character, or characteristic ascribed to the enity. 
 
 ## Activity
-Work that a company or organization performs using business processes. An activity can be atomic or non-atomic (compound). The types of activities that are a part of a Process Model are: Process, Sub-Process, and Task.
+The current version does not support yet activties. 
 
-## Reference
+# Frontend
+The current version supports only [JSON Schema](https://json-schema.org/) to describe a domain with the following restrictions: 
+- The entities shall be described as `properties`. 
+- The identifier of the entity will inherit the name of the property
+- Only types and references can be used, restrictions are not supported yet
+
+## JSON Schema 
+
+```json
+{
+  "title": "Customer Relationship Management",
+  "type": "object",
+  "properties": {
+    "reference": {
+      "$ref": "#/definitions/account"
+    },
+    "object": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/address"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string"
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/contact"
+          }
+        }
+      }
+    },
+    "inline": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "object",
+          "properties": {
+            "street": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "postalCode": {
+              "type": "string"
+            }
+          }
+        },
+        "phone": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string"
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "jobTitle": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "address": {
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "jobTitle": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "account": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/address"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string"
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/contact"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+# Abstract Syntax Graph
+
+## Basic Types
+- Text (default)
+- Number
+
+## Example: Customer Relationship Management
+
+Account and contact records store much of the information that you and your team collect from your customers. You store data about companies you do business with in accounts. You store data about the people you know and work with in contacts.
+
+Usually, an account has more than one contact associated with it, especially when you're working with a larger company with many departments or locations and you deal with several people to manage the account.
+
+```typescript
+import { Enity, Object, AbstractSyntaxGraph, AngularBackend } from '@dsl-cc/dsl-compiler-collection';
+
+const address = new Object("Address");
+address.addAttribute("Street");
+address.addAttribute("City");
+address.addAttribute("State");
+address.addAttribute("Country");
+address.addAttribute("Postal Code");
+
+const account = new Entity("Account");
+account.addAttribute("Name");
+account.addAttribute("Phone");
+account.addAttribute("Web Site");
+account.addAttribute("Address", address);
+
+const contact = new Entity("Contact");
+contact.addAttribute("First Name");
+contact.addAttribute("Last Name");
+contact.addAttribute("Job Title");
+contact.addAttribute("Phone");
+contact.addAttribute("Email");
+
+const contactsAttribute = account.addAttribute("Contacts", contact, list = true);
+const accountAttribute = acontact.addAttribute("Account", account);
+
+const abstractSyntaxGraph = new AbstractSyntaxGraph();
+abstractSyntaxGraph.addNode(account);
+abstractSyntaxGraph.addNode(contact);
+abstractSyntaxGraph.link(contactsAttribute, accountAttribute);
+
+const backend = new AngularBackend();
+const virtualFileSystem = backend.generate(abstractSyntaxTree); 
+```
+
+# Backend
+
+The current version supports only generate [Angular](https://angular.io/) web applications using [Angular Material](https://material.angular.io/) UI component library. 
+
+# References
+[Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design)
+[The Boost Graph Library (BGL)](https://www.boost.org/doc/libs/1_73_0/libs/graph/doc/index.html)
 [Business Process Model and Notation (BPMN)](http://www.bpmn.org/)
-[Business Process Model and Notation (BPMN) Version 2.0](https://www.omg.org/spec/BPMN/2.0/PDF)
-[BPMN Quick Guide](https://www.bpmnquickguide.com/)
+[Basics Guide for Dynamics 365 Customer Engagement](https://docs.microsoft.com/en-us/dynamics365/customerengagement/on-premises/basics/accounts-contacts)
 
-# Coming Soon .. 
-
-- Compliance
-- Firebase
 
 
 

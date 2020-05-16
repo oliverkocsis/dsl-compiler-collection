@@ -19,6 +19,12 @@
         },
         "website": {
           "type": "string"
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/contact"
+          }
         }
       }
     },
@@ -53,6 +59,29 @@
         },
         "website": {
           "type": "string"
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "jobTitle": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              }
+            }
+          }
         }
       }
     }
@@ -78,6 +107,26 @@
         }
       }
     },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "jobTitle": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
     "account": {
       "type": "object",
       "properties": {
@@ -92,6 +141,12 @@
         },
         "website": {
           "type": "string"
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/contact"
+          }
         }
       }
     }
