@@ -15,21 +15,23 @@ Within your application
 1. select a compiler backend, 
 1. then compile. 
 
-    import { Enity, AbstractSyntaxGraph, AngularBackend } from '@dsl-cc/dsl-compiler-collection';
+```typescript
+import { Enity, AbstractSyntaxGraph, AngularBackend } from '@dsl-cc/dsl-compiler-collection';
 
-    const entity = new Entity("Shipping Information");
-    entity.addAttribute("First Name");
-    entity.addAttribute("Last Name");
-    entity.addAttribute("Address");
-    entity.addAttribute("City");
-    entity.addAttribute("State");
-    entity.addAttribute("Postal Code");
+const entity = new Entity("Shipping Information");
+entity.addAttribute("First Name");
+entity.addAttribute("Last Name");
+entity.addAttribute("Address");
+entity.addAttribute("City");
+entity.addAttribute("State");
+entity.addAttribute("Postal Code");
 
-    const abstractSyntaxGraph = new AbstractSyntaxGraph();
-    abstractSyntaxGraph.appendNode(entity);
-    
-    const backend = new AngularBackend();
-    const virtualFileSystem = backend.generate(abstractSyntaxTree); 
+const abstractSyntaxGraph = new AbstractSyntaxGraph();
+abstractSyntaxGraph.appendNode(entity);
+
+const backend = new AngularBackend();
+const virtualFileSystem = backend.generate(abstractSyntaxTree); 
+```
 
 # Domain
 
@@ -51,7 +53,7 @@ The current version supports only [JSON Schema](https://json-schema.org/) to des
 
 ## JSON Schema 
 
-```json
+```javascript
 {
   "title": "Customer Relationship Management",
   "type": "object",
@@ -260,10 +262,10 @@ const virtualFileSystem = backend.generate(abstractSyntaxTree);
 The current version supports only generate [Angular](https://angular.io/) web applications using [Angular Material](https://material.angular.io/) UI component library. 
 
 # References
-[Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design)
-[The Boost Graph Library (BGL)](https://www.boost.org/doc/libs/1_73_0/libs/graph/doc/index.html)
-[Business Process Model and Notation (BPMN)](http://www.bpmn.org/)
-[Basics Guide for Dynamics 365 Customer Engagement](https://docs.microsoft.com/en-us/dynamics365/customerengagement/on-premises/basics/accounts-contacts)
+- [Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design)
+- [The Boost Graph Library (BGL)](https://www.boost.org/doc/libs/1_73_0/libs/graph/doc/index.html)
+- [Business Process Model and Notation (BPMN)](http://www.bpmn.org/)
+- [Basics Guide for Dynamics 365 Customer Engagement](https://docs.microsoft.com/en-us/dynamics365/customerengagement/on-premises/basics/accounts-contacts)
 
 
 
