@@ -1,61 +1,60 @@
+DSL Compiler Collection lets you to focus on the solution instead of the development.
+
 # DSL Compiler Collection
-DSL Compiler Collection (DCC) is a collection of compilers for domain specific languages
+DSL Compiler Collection is a collection of compilers for domain specific languages. A domain specific languages is a language specialized to a particular domain. Domain is a sphere of knowledge; the subject area to which one developes a software. The ubiquitous language is a language structured around the domain, used unanimously by every participant to connect all the entities and activities of the domain unambiguously. 
+
+## Entity
+An entity is the single, definitive source of truth about every nouns of your ubiquitous language. An entity has separate and distinct existence and objective or conceptual reality as contrasted with its attributes. An attribute is a quality, character, or characteristic ascribed to the enity.
+
+## Activity
+An activity is the single, definitive source of truth about every verbs of your ubiquitous language. 
 
 # Getting Started
 
-Install `@dsl-cc/dsl-compiler-collection`
+If you are new to Angular or getting started with a new Angular application, see [Angular's full Getting Started Guide](https://angular.io/start) and [Setting up your environment](https://angular.io/guide/setup-local).
 
-    npm install --save @dsl-cc/dsl-compiler-collection
+For existing applications, follow the steps below to begin using DSL Compiler Collection.
 
-Create a data node, add properties, then compile. 
+Use the Angular CLI's install schematic to set up your DSL Compiler Collection project by running the following command:
 
-    import { AngularBackend, AbstractSyntaxGraph, DataNode, PropertyNode, Directory, File, VirtualFileSystem } from '@dsl-cc/dsl-compiler-collection';
+```
+ng add @dsl-cc/dsl-compiler-collection
+```
 
-    const backend = new AngularBackend();
-    const abstractSyntaxTree = new AbstractSyntaxGraph();
-    const data = new DataNode("Shipping Information");
-    data.appendChildNode(new PropertyNode("Company", PropertyNode.TYPE_TEXT));
-    data.appendChildNode(new PropertyNode("First Name", PropertyNode.TYPE_TEXT));
-    data.appendChildNode(new PropertyNode("Last Name", PropertyNode.TYPE_TEXT));
-    data.appendChildNode(new PropertyNode("Address", PropertyNode.TYPE_TEXT));
-    data.appendChildNode(new PropertyNode("City", PropertyNode.TYPE_TEXT));
-    data.appendChildNode(new PropertyNode("Postal Code", PropertyNode.TYPE_NUMBER));
-    abstractSyntaxTree.appendChildNode(data);
-    const virtualFileSystem = backend.generate(abstractSyntaxTree); 
+The `ng add` command will install
+- Add project dependencies to `package.json`
 
-# Domain
+Describe your entity within the `address.json` file 
 
-## Domain
-A sphere of knowledge (ontology), influence, or activity. The subject area to which the user applies a program is the domain of the software;
+```json
+{
+	"Address" : {
+		"Street": null, 
+		"City": null, 
+		"State": null, 
+		"Country", null, 
+		"Postal Code": null
+	}
+}
+``` 
 
-## Bounded context
-Multiple models are in play on any large project. Yet when code based on distinct models is combined, software becomes buggy, unreliable, and difficult to understand. Communication among team members becomes confusing. It is often unclear in what context a model should not be applied.
+Generate the form
+```
+ng generate @dsl-cc/dsl-compiler-collection:form address.json
+```
 
-## Ubiquitous Language
-A language structured around the domain model and used by all team members to connect all the activities of the team with the software.
+This will generate an angular reactive form within the current folder. 
 
-## Reference
-[Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design)
+# Roadmap
+- Lists
+- Angular Material and Bootstrap themes
+- Relationships (one-to-one, one-to-many)
+- CLI
+- Layouts
+- Activities
+- Python Djanog
 
-# Business Process Model and Notation (BPMN)
-A standard [Business Process Model and Notation (BPMN)](http://www.bpmn.org/) will provide businesses with the capability of understanding their internal business procedures in a graphical notation and will give organizations the ability to communicate these procedures in a standard manner. Furthermore, the graphical notation will facilitate the understanding of the performance collaborations and business transactions between the organizations. This will ensure that businesses will understand themselves and participants in their business and will enable organizations to adjust to new internal and B2B business circumstances quickly.
+# Contributing
+We would love for you to contribute to DSL Compiler Collection and help make it even better than it is today! As a contributor, here are the guidelines we would like you to follow:
 
-## Data 
-Data provide information about what Activities require to be performed and/or what they produce, Data can represent a singular object or a collection of objects.
-
-## Activity
-Work that a company or organization performs using business processes. An activity can be atomic or non-atomic (compound). The types of activities that are a part of a Process Model are: Process, Sub-Process, and Task.
-
-## Reference
-[Business Process Model and Notation (BPMN)](http://www.bpmn.org/)
-[Business Process Model and Notation (BPMN) Version 2.0](https://www.omg.org/spec/BPMN/2.0/PDF)
-[BPMN Quick Guide](https://www.bpmnquickguide.com/)
-
-# Coming Soon .. 
-
-- Compliance
-- Firebase
-
-
-
-
+- Code of Conduct
