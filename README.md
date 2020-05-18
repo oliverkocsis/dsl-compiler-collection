@@ -58,3 +58,4 @@ This will generate an angular reactive form within the current folder.
 We would love for you to contribute to DSL Compiler Collection and help make it even better than it is today! As a contributor, here are the guidelines we would like you to follow:
 
 - Code of Conduct
+- Coding Rules
