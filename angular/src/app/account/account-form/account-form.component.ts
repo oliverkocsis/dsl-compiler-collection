@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { DataFormComponent } from 'src/app/data-form.component';
+import { FormGroup } from '@angular/forms';
 import { AccountService } from '../account.service';
 import { Account } from '../account';
 import { ActivatedRoute, Params, ActivatedRouteSnapshot } from '@angular/router';

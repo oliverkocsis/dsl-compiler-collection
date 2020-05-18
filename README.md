@@ -55,91 +55,10 @@ The current version supports only [JSON Schema](https://json-schema.org/) to des
 
 ```javascript
 {
-  "title": "Customer Relationship Management",
   "type": "object",
   "properties": {
-    "reference": {
+    "account": {
       "$ref": "#/definitions/account"
-    },
-    "object": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "address": {
-          "$ref": "#/definitions/address"
-        },
-        "phone": {
-          "type": "string"
-        },
-        "website": {
-          "type": "string"
-        },
-        "contacts": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/contact"
-          }
-        }
-      }
-    },
-    "inline": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "address": {
-          "type": "object",
-          "properties": {
-            "street": {
-              "type": "string"
-            },
-            "city": {
-              "type": "string"
-            },
-            "state": {
-              "type": "string"
-            },
-            "country": {
-              "type": "string"
-            },
-            "postalCode": {
-              "type": "string"
-            }
-          }
-        },
-        "phone": {
-          "type": "string"
-        },
-        "website": {
-          "type": "string"
-        },
-        "contacts": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "firstName": {
-                "type": "string"
-              },
-              "lastName": {
-                "type": "string"
-              },
-              "jobTitle": {
-                "type": "string"
-              },
-              "phone": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -223,9 +142,9 @@ Account and contact records store much of the information that you and your team
 Usually, an account has more than one contact associated with it, especially when you're working with a larger company with many departments or locations and you deal with several people to manage the account.
 
 ```typescript
-import { Enity, Object, AbstractSyntaxGraph, AngularBackend } from '@dsl-cc/dsl-compiler-collection';
+import { Enity, Value, AbstractSyntaxGraph, AngularBackend } from '@dsl-cc/dsl-compiler-collection';
 
-const address = new Object("Address");
+const address = new Value("Address");
 address.addAttribute("Street");
 address.addAttribute("City");
 address.addAttribute("State");
@@ -249,9 +168,9 @@ const contactsAttribute = account.addAttribute("Contacts", contact, list = true)
 const accountAttribute = acontact.addAttribute("Account", account);
 
 const abstractSyntaxGraph = new AbstractSyntaxGraph();
-abstractSyntaxGraph.addNode(account);
-abstractSyntaxGraph.addNode(contact);
-abstractSyntaxGraph.link(contactsAttribute, accountAttribute);
+abstractSyntaxGraph.addEntity(account);
+abstractSyntaxGraph.addEntity(contact);
+abstractSyntaxGraph.linkEntities(contactsAttribute, accountAttribute);
 
 const backend = new AngularBackend();
 const virtualFileSystem = backend.generate(abstractSyntaxTree); 

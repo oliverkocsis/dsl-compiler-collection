@@ -1,6 +1,6 @@
 import { Frontend } from "../frontend";
 import { VirtualFileSystem, File, VirtualFileSystemNode } from "../../virtual-file-system/virtual-file-system";
-import { AbstractSyntaxGraph, DataNode, PropertyNode, DomainNode, AbstractSyntaxGraphNode } from "../../abstract-syntax-graph/abstract-syntax-graph";
+import { Domain} from "../../domain/domain";
 import { startCase } from 'lodash'
 
 export class JsonSchemaFronted implements Frontend {
@@ -15,23 +15,23 @@ export class JsonSchemaFronted implements Frontend {
         this.directory = directory;
     }
 
-    parse(virtualFileSystem: VirtualFileSystem): AbstractSyntaxGraph {
-        const abstractSyntaxGraph = new AbstractSyntaxGraph();
+    parse(virtualFileSystem: VirtualFileSystem): Domain {
+        const domain = new Domain();
         virtualFileSystem.getChildNode(this.directory).visit((node: VirtualFileSystemNode) => {
             if (node.getType() == VirtualFileSystemNode.FILE) {
-                abstractSyntaxGraph.appendChildNode(this.parseFile(node as File));
+                domain.addNode(this.parseFile(node as File));
             }
         });
-        return abstractSyntaxGraph;
+        return domain;
     }
 
-    private parseFile(file: File): DomainNode {
+    private parseFile(file: File): Domain {
         const schema = JSON.parse(file.getValue()) as JSONSchema;
-        if (!schema.title || !schema.properties) {
-            throw new Error(`The JSON schema shall contain both 'title' and 'properties': ${file.getPathName()}`);
+        if (!schema.properties) {
+            throw new Error(`A schema file must contain at least one entitiy in 'properties': ${file.getPathName()}`);
         }
-        const domain = new DomainNode(schema.title);
-        let repository = new Map<string, AbstractSyntaxGraphNode>();
+        const domain = new Domain();
+        let repository = new Map<string, Node>();
         if (schema.definitions) {
             for (const key in schema.definitions) {
                 if (schema.definitions.hasOwnProperty(key)) {
@@ -44,9 +44,9 @@ export class JsonSchemaFronted implements Frontend {
             if (schema.properties.hasOwnProperty(key)) {
                 const definition = schema.properties[key] as JSONSchemaObject;
                 if (definition.type) {
-                    domain.appendChildNode(this.parseObject(key, definition, repository));
+                    domain.addNode(this.parseObject(key, definition, repository));
                 } else if (definition.$ref) {
-                    domain.appendChildNode(this.parseReference(key, definition.$ref, repository));
+                    domain.addNode(this.parseReference(key, definition.$ref, repository));
                 } else {
                     throw new Error(`Domain property has no 'type' nor '$ref': ${key}`);
                 }
@@ -57,7 +57,7 @@ export class JsonSchemaFronted implements Frontend {
 
 
 
-    private parseObject(name: string, definition: JSONSchemaObject, repository: Map<string, AbstractSyntaxGraphNode>): DataNode {
+    private parseObject(name: string, definition: JSONSchemaObject, repository: Map<string, Node>): DataNode {
         const data = new DataNode(startCase(name));
         if (definition.type != JsonSchemaFronted.TYPE_OBJECT.toString()) {
             throw new Error(`Definition is not an object: ${name} (but ${definition.type})`);
@@ -67,12 +67,12 @@ export class JsonSchemaFronted implements Frontend {
                 const property = definition.properties[key] as JSONSchemaObject;
                 if (property.type) {
                     if (property.type == JsonSchemaFronted.TYPE_OBJECT) {
-                        data.appendChildNode(this.parseObjectProperty(key, property, repository));
+                        data.addNode(this.parseObjectProperty(key, property, repository));
                     } else {
-                        data.appendChildNode(this.parseBasicProperty(key, property.type));
+                        data.addNode(this.parseBasicProperty(key, property.type));
                     }
                 } else if (property.$ref) {
-                    data.appendChildNode(this.parseReferenceProperty(key, property.$ref, repository));
+                    data.addNode(this.parseReferenceProperty(key, property.$ref, repository));
                 } else {
                     throw new Error(`Property has no 'type' nor '$ref': ${key}`);
                 }
@@ -81,50 +81,49 @@ export class JsonSchemaFronted implements Frontend {
         return data;
     }
 
-    private parseReference(name: string, ref: string, repository: Map<string, AbstractSyntaxGraphNode>): DataNode {
+    private parseReference(name: string, ref: string, repository: Map<string, Node>): DataNode {
         const reference = repository.get(startCase(ref.replace("#/definitions/", "")));
         if (!reference) {
             throw new Error(`Reference does not exist: ${ref} (in ${name})`);
         }
         const data = new DataNode(startCase(name));
-        for (const node of reference.getChildNodes()) {
-            data.appendChildNode(node);
+        for (const node of reference.getNodes()) {
+            data.addNode(node);
         }
         return data;
     }
 
-    private parseBasicProperty(name: string, type: string, list: boolean = false): AbstractSyntaxGraphNode {
+    private parseBasicProperty(name: string, type: string, list: boolean = false): Node {
         let dataType: number;
         switch (type) {
             case (JsonSchemaFronted.TYPE_STRING):
-                dataType = PropertyNode.TYPE_STRING;
+                dataType = Attribute.TYPE_STRING;
                 break;
             case (JsonSchemaFronted.TYPE_NUMBER):
-                dataType = PropertyNode.TYPE_NUMBER;
+                dataType = Attribute.TYPE_NUMBER;
                 break;
             default:
                 throw new Error(`Unknown JSON schema type: ${type}`);
         }
-        return new PropertyNode(startCase(name), dataType, list);
+        return new Attribute(startCase(name), dataType, list);
     }
 
-    private parseObjectProperty(name: string, definition: JSONSchemaObject, repository: Map<string, AbstractSyntaxGraphNode>, list: boolean = false): AbstractSyntaxGraphNode {
+    private parseObjectProperty(name: string, definition: JSONSchemaObject, repository: Map<string, Node>, list: boolean = false): Node {
         const data = this.parseObject(name, definition, repository);
-        return new PropertyNode(startCase(name), PropertyNode.TYPE_OBJECT, list).appendChildNode(data);
+        return new Attribute(startCase(name), Attribute.TYPE_OBJECT, list).addNode(data);
     }
 
-    private parseReferenceProperty(name: string, ref: string, repository: Map<string, AbstractSyntaxGraphNode>, list: boolean = false): AbstractSyntaxGraphNode {
+    private parseReferenceProperty(name: string, ref: string, repository: Map<string, Node>, list: boolean = false): Node {
         const data = repository.get(startCase(ref.replace("#/definitions/", "")));
         if (!data) {
             throw new Error(`Reference does not exist: ${ref} (in ${name})`);
         }
-        return new PropertyNode(startCase(name), PropertyNode.TYPE_OBJECT, list).appendChildNode(data);
+        return new Attribute(startCase(name), Attribute.TYPE_OBJECT, list).addNode(data);
     }
 
 }
 
 interface JSONSchema {
-    title?: string;
     type?: string;
     properties?: any;
     definitions?: any;
