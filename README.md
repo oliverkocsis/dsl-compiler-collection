@@ -32,7 +32,7 @@ Describe your entity within the `address.json` file
 		"Street": null, 
 		"City": null, 
 		"State": null, 
-		"Country", null, 
+		"Country": null, 
 		"Postal Code": null
 	}
 }
