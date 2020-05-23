@@ -1,7 +1,7 @@
 {
-  "name": "@dsl-cc/dsl-compiler-collection",
-  "version": "0.1.0",
-  "description": "DSL Compiler Collection (DSL-CC) comprises a number of compilers for different domain model languages",
+  "name": "@dsl-cc/core",
+  "version": "0.0.1",
+  "description": "DSL Compiler Collection is a collection of compilers for domain specific languages",
   "main": "dist/index.js",
   "scripts": {
     "build": "rimraf dist && tsc && ncp src/backend/angular/templates dist/backend/angular/templates",
