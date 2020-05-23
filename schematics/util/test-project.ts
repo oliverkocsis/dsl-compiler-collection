@@ -19,6 +19,5 @@ export async function createTestProject(
     newProjectRoot: 'projects',
   }, tree).toPromise();
 
-  return runner.runExternalSchematicAsync('@schematics/angular', projectType,
-    { name: 'material', ...appOptions }, workspaceTree).toPromise();
+  return runner.runExternalSchematicAsync('@schematics/angular', projectType, appOptions, workspaceTree).toPromise();
 }
