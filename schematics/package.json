@@ -1,0 +1,27 @@
+{
+  "name": "@dsl-cc/schematics",
+  "version": "0.0.1",
+  "description": "Angular schematics for DSL Compiler Collection",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && jasmine src/**/*_spec.js --random=false"
+  },
+  "keywords": [
+    "schematics"
+  ],
+  "author": "",
+  "license": "MIT",
+  "schematics": "./src/collection.json",
+  "dependencies": {
+    "@angular-devkit/core": "^9.1.7",
+    "@angular-devkit/schematics": "^9.1.7",
+    "@angular/cdk": "^9.2.4",
+    "@schematics/angular": "^9.1.7",
+    "typescript": "~3.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^12.11.1",
+    "@types/jasmine": "~3.5.0",
+    "jasmine": "^3.5.0"
+  }
+}
