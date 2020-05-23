@@ -8,7 +8,8 @@
     "copy:schemas": "copyfiles ng-generate/**/schema.json dist",
     "copy:files": "copyfiles  ng-generate/**/files/** dist",
     "postbuild": "npm run copy:schemas && npm run copy:files",
-    "test": "npm run build && jasmine dist/**/*_spec.js --random=false"
+    "test": "npm run build && jasmine dist/**/*_spec.js --random=false",
+    "prepack": "rimraf dist/**/*_spec.js && rimraf dist/**/*_spec.js.map && rimraf dist/**/*_spec.d.ts"
   },
   "keywords": [
     "angular",
@@ -20,7 +21,7 @@
   "license": "MIT",
   "schematics": "./collection.json",
   "files": [
-    "dist/**",
+    "dist",
     "collection.json"
   ],
   "dependencies": {

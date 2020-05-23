@@ -6,11 +6,6 @@ ng-generate/
 util/
 tsconfig.json
 
-# test
-dist/**/*_spec.js
-dist/**/*_spec.js.map
-dist/**/*_spec.d.ts
-
 # IDEs
 .idea/
 jsconfig.json
