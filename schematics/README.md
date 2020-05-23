@@ -16,13 +16,15 @@ npm install --save-dev @dsl-cc/schematics
 
 ## Component schematics
 
-Running the `form` schematic generates a new Angular component using a Material Design form group consisting of:
-- Material Design form fields
-- Material Design radio controls
-- Material Design buttons
+Running the `form` schematic generates a new Angular component using a Material Design form group. Define one or more fields using the `--fields` parameter.
 
 ```
-ng generate @dsl-cc/schematics:form <component-name>
+ng generate @dsl-cc/schematics:form <component-name> --fields <field-name> --fields <field-name> ...
+```
+
+Example 
+```
+ng generate @dsl-cc/schematics:form shipping-address --fields street --fields city  --fields postal-code
 ```
 
 # Contributing 

@@ -12,10 +12,12 @@ describe('ng generate @dsl-cc/schematics:form', () => {
   let runner: SchematicTestRunner;
   const schematic = 'form'
   const name = 'address';
+  const fields: string[] = ["street", "city", "postal-code"];
   const project = 'dsl-cc';
 
   const baseOptions: Schema = {
     name: name,
+    fields: fields,
     project: project,
   };
 
@@ -50,9 +52,25 @@ describe('ng generate @dsl-cc/schematics:form', () => {
     expect(moduleContent).toContain('ReactiveFormsModule');
   });
 
+  it('should add fields to the form', async () => {
+    const app = await createTestApp(runner, { name: project });
+    const tree = await runner.runSchematicAsync(schematic, baseOptions, app).toPromise();
+    const content = getFileContent(tree, `/projects/${project}/src/app/${name}/${name}.component.html`);
+
+    expect(content).toMatch(/<input.*matInput.*placeholder.*=.*"Street".*formControlName.*=.*"street".*>/);
+    expect(content).toMatch(/<input.*matInput.*placeholder.*=.*"City".*formControlName.*=.*"city".*>/);
+    expect(content).toMatch(/<input.*matInput.*placeholder.*=.*"PostalCode".*formControlName.*=.*"postalCode".*>/);
+  });
+
+
   it('should throw if no name has been specified', async () => {
     const app = await createTestApp(runner, { name: project });
     await expectAsync(runner.runSchematicAsync(schematic, { project: project }, app).toPromise()).toBeRejectedWithError(/required property 'name'/);
+  });
+
+  it('should throw if no fields has been specified', async () => {
+    const app = await createTestApp(runner, { name: project });
+    await expectAsync(runner.runSchematicAsync(schematic, { project: project, name: name }, app).toPromise()).toBeRejectedWithError(/required property 'fields'/);
   });
 
 
@@ -78,8 +96,7 @@ describe('ng generate @dsl-cc/schematics:form', () => {
       const tree = await runner.runSchematicAsync(schematic, { inlineStyle: true, ...baseOptions }, app).toPromise();
 
       expect(tree.files).not.toContain(`/projects/${project}/src/app/${name}/${name}.component.css`);
-      expect(tree.readContent(`/projects/${project}/src/app/${name}/${name}.component.ts`))
-        .toContain('styles: [`');
+      expect(tree.readContent(`/projects/${project}/src/app/${name}/${name}.component.ts`)).toContain('styles: [`');
     });
 
     it('should fall back to the @schematics/angular:component option value', async () => {
