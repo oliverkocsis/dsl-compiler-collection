@@ -1,21 +1,41 @@
-# Getting Started With Schematics
+Angular Schematics for DSL Compiler Collection
 
-This repository is a basic Schematic implementation that serves as a starting point to create and publish Schematics to NPM.
+# Getting Started
 
-### Testing
+If you are new to Angular or getting started with a new Angular application, see [Angular's full Getting Started Guide](https://angular.io/start) and [Setting up your environment](https://angular.io/guide/setup-local).
 
-To test locally, install `@angular-devkit/schematics-cli` globally and use the `schematics` command line tool. That tool acts the same as the `generate` command of the Angular CLI, but also has a debug mode.
+The generate schematics require Angular Material, see [Getting Started with Angular Material](https://material.angular.io/guide/getting-started).
 
-Check the documentation with
-```bash
-schematics --help
+## Install Schematics
+
+Install Angular Schematics for DSL Compiler Collection
+
+```
+npm install --save-dev @dsl-cc/schematics
 ```
 
-### Unit Testing
+## Component schematics
+
+Running the `form` schematic generates a new Angular component using a Material Design form group consisting of:
+- Material Design form fields
+- Material Design radio controls
+- Material Design buttons
+
+```
+ng generate @dsl-cc/schematics:form <component-name>
+```
+
+# Contributing 
+
+## Product Backlog
+
+Visit our [Product Backlog](https://github.com/oliverkocsis/dsl-compiler-collection/projects/1) and choose an item. 
+
+## Unit Testing
 
 `npm run test` will run the unit tests, using Jasmine as a runner and test framework.
 
-### Publishing
+## Publishing
 
 To publish, simply do:
 
@@ -23,6 +43,3 @@ To publish, simply do:
 npm run build
 npm publish
 ```
-
-That's it!
- 

@@ -1,7 +1,7 @@
 {
   "name": "@dsl-cc/schematics",
   "version": "0.0.1",
-  "description": "DSL Compiler Collection: Angular schematics",
+  "description": "Angular Schematics for DSL Compiler Collection",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc -p tsconfig.json",
@@ -18,9 +18,10 @@
   ],
   "author": "Oliver Kocsis",
   "license": "MIT",
-  "schematics": "collection.json",
+  "schematics": "./collection.json",
   "files": [
-    "dist"
+    "dist/**",
+    "collection.json"
   ],
   "dependencies": {
     "@angular-devkit/core": "^9.1.7",
