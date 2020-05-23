@@ -14,7 +14,8 @@
     "noImplicitThis": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "rootDir": "src/",
+    "rootDir": "./",
+    "outDir": "./dist",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "sourceMap": true,
@@ -26,7 +27,7 @@
     ]
   },
   "include": [
-    "src/**/*"
+    "util/**/*", "ng-generate/**/*"
   ],
   "exclude": [
     "src/*/files/**/*"

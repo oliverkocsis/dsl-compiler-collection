@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "form": {
+      "description": "Generate a form with fields",
+      "factory": "./ng-generate/form/index",
+      "schema": "./ng-generate/form/schema.json",
+      "aliases": [
+        "f"
+      ]
+    }
+  }
+}

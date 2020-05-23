@@ -3,15 +3,20 @@
   "version": "0.0.1",
   "description": "Angular schematics for DSL Compiler Collection",
   "scripts": {
+    "prebuild": "rimraf dist",
     "build": "tsc -p tsconfig.json",
-    "test": "npm run build && jasmine src/**/*_spec.js --random=false"
+    "copy:schemas": "copyfiles ng-generate/**/schema.json dist",
+    "copy:files": "copyfiles  ng-generate/**/files/** dist",
+    "copy:collection": "ncp collection.json dist/collection.json",
+    "postbuild": "npm run copy:schemas && npm run copy:files && npm run copy:collection",
+    "test": "npm run build && jasmine dist/**/*_spec.js --random=false"
   },
   "keywords": [
     "schematics"
   ],
   "author": "",
   "license": "MIT",
-  "schematics": "./src/collection.json",
+  "schematics": "./dist/collection.json",
   "dependencies": {
     "@angular-devkit/core": "^9.1.7",
     "@angular-devkit/schematics": "^9.1.7",
@@ -20,8 +25,10 @@
     "typescript": "~3.8.2"
   },
   "devDependencies": {
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
-    "jasmine": "^3.5.0"
+    "@types/node": "^12.11.1",
+    "copyfiles": "^2.2.0",
+    "jasmine": "^3.5.0",
+    "rimraf": "^3.0.2"
   }
 }
