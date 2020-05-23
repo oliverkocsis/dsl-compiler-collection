@@ -2,10 +2,10 @@ import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import { createTestApp } from '../../util/test-app';
 import { getFileContent } from '../../util/file-content';
 import { Schema } from './schema';
-import * as path from 'path';
+import { join } from 'path';
 
 
-const collectionPath = path.join(__dirname, '../../collection.json');
+const collectionPath = join(process.cwd(), 'collection.json');
 
 
 describe('ng generate @dsl-cc/schematics:form', () => {

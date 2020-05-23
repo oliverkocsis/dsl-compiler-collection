@@ -1,8 +1,11 @@
-# Outputs
-src/**/*.js
-src/**/*.js.map
-src/**/*.d.ts
-dist/
+# src
+ng-generate/
+util/
+tsconfig.json
+
+# test
+dist/**/*_spec.js
+dist/**/*_spec.js.map
 
 # IDEs
 .idea/

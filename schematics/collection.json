@@ -3,8 +3,8 @@
   "schematics": {
     "form": {
       "description": "Generate a form with fields",
-      "factory": "./ng-generate/form/index",
-      "schema": "./ng-generate/form/schema.json",
+      "factory": "./dist/ng-generate/form/index",
+      "schema": "./dist/ng-generate/form/schema.json",
       "aliases": [
         "f"
       ]

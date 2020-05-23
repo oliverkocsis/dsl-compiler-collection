@@ -1,34 +1,36 @@
 {
   "name": "@dsl-cc/schematics",
   "version": "0.0.1",
-  "description": "Angular schematics for DSL Compiler Collection",
+  "description": "DSL Compiler Collection: Angular schematics",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc -p tsconfig.json",
     "copy:schemas": "copyfiles ng-generate/**/schema.json dist",
     "copy:files": "copyfiles  ng-generate/**/files/** dist",
-    "copy:collection": "ncp collection.json dist/collection.json",
-    "postbuild": "npm run copy:schemas && npm run copy:files && npm run copy:collection",
+    "postbuild": "npm run copy:schemas && npm run copy:files",
     "test": "npm run build && jasmine dist/**/*_spec.js --random=false"
   },
   "keywords": [
-    "schematics"
+    "angular",
+    "schematics",
+    "dsl",
+    "compiler"
   ],
-  "author": "",
+  "author": "Oliver Kocsis",
   "license": "MIT",
-  "schematics": "./dist/collection.json",
+  "schematics": "collection.json",
   "files": [
     "dist"
   ],
   "dependencies": {
     "@angular-devkit/core": "^9.1.7",
     "@angular-devkit/schematics": "^9.1.7",
-    "@angular/cdk": "^9.2.4",
+    "@angular/cdk": "^9.1.7",
     "@schematics/angular": "^9.1.7",
     "typescript": "~3.8.2"
   },
   "devDependencies": {
-    "@types/jasmine": "~3.5.0",
+    "@types/jasmine": "^3.5.0",
     "@types/node": "^12.11.1",
     "copyfiles": "^2.2.0",
     "jasmine": "^3.5.0",
