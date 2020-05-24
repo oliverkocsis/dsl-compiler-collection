@@ -1,6 +1,6 @@
 {
   "name": "@dsl-cc/schematics",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Angular Schematics for DSL Compiler Collection",
   "scripts": {
     "prebuild": "rimraf dist",
