@@ -6,24 +6,26 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {chain, noop, Rule, Tree} from '@angular-devkit/schematics';
+import { chain, noop, Rule, Tree } from '@angular-devkit/schematics';
 import {
   addModuleImportToModule,
   buildComponent,
   findModuleFromOptions,
 } from '@angular/cdk/schematics';
-import {Schema} from './schema';
+import { Schema } from './schema';
+import { startCase } from 'lodash';
 
 /**
  * Scaffolds a new form component.
  * Internally it bootstraps the base component schematic
  */
-export default function(options: Schema): Rule {
+export default function (options: Schema): Rule {
+  options.titleize = startCase;
   return chain([
-    buildComponent({...options}, {
+    buildComponent({ ...options }, {
       template: './__path__/__name@dasherize@if-flat__/__name@dasherize__.component.html.template',
       stylesheet:
-          './__path__/__name@dasherize@if-flat__/__name@dasherize__.component.__style__.template',
+        './__path__/__name@dasherize@if-flat__/__name@dasherize__.component.__style__.template',
     }),
     options.skipImport ? noop() : addFormModulesToModule(options)
   ]);

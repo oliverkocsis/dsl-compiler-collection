@@ -9,5 +9,6 @@
 import { Schema as ComponentSchema } from '@schematics/angular/component/schema';
 
 export interface Schema extends ComponentSchema {
-  fields: string[]
+  fields: string[],
+  titleize?: any
 }

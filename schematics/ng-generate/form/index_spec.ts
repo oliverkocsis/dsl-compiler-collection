@@ -11,7 +11,7 @@ const collectionPath = join(process.cwd(), 'collection.json');
 describe('ng generate @dsl-cc/schematics:form', () => {
   let runner: SchematicTestRunner;
   const schematic = 'form'
-  const name = 'address';
+  const name = 'shipping-address';
   const fields: string[] = ["street", "city", "postal-code"];
   const project = 'dsl-cc';
 
@@ -36,8 +36,8 @@ describe('ng generate @dsl-cc/schematics:form', () => {
     expect(files).toContain(`/projects/${project}/src/app/${name}/${name}.component.ts`);
 
     const moduleContent = getFileContent(tree, `/projects/${project}/src/app/app.module.ts`);
-    expect(moduleContent).toMatch(/import.*Address.*from '.\/address\/address.component'/);
-    expect(moduleContent).toMatch(/declarations:\s*\[[^\]]+?,\r?\n\s+AddressComponent\r?\n/m);
+    expect(moduleContent).toMatch(/import.*ShippingAddress.*from '.\/shipping-address\/shipping-address.component'/);
+    expect(moduleContent).toMatch(/declarations:\s*\[[^\]]+?,\r?\n\s+ShippingAddressComponent\r?\n/m);
   });
 
   it('should add form imports to module', async () => {
@@ -56,10 +56,11 @@ describe('ng generate @dsl-cc/schematics:form', () => {
     const app = await createTestApp(runner, { name: project });
     const tree = await runner.runSchematicAsync(schematic, baseOptions, app).toPromise();
     const content = getFileContent(tree, `/projects/${project}/src/app/${name}/${name}.component.html`);
-
+    
+    expect(content).toMatch(/<mat-card-title>.*Shipping Address.*<\/mat-card-title>/);
     expect(content).toMatch(/<input.*matInput.*placeholder.*=.*"Street".*formControlName.*=.*"street".*>/);
     expect(content).toMatch(/<input.*matInput.*placeholder.*=.*"City".*formControlName.*=.*"city".*>/);
-    expect(content).toMatch(/<input.*matInput.*placeholder.*=.*"PostalCode".*formControlName.*=.*"postalCode".*>/);
+    expect(content).toMatch(/<input.*matInput.*placeholder.*=.*"Postal Code".*formControlName.*=.*"postalCode".*>/);
   });
 
   it('should add fields to the component form', async () => {

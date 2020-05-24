@@ -1,14 +1,14 @@
 <form [formGroup]="form" novalidate (ngSubmit)="submit()">
   <mat-card class="shipping-card">
     <mat-card-header>
-      <mat-card-title><%= classify(name) %></mat-card-title>
+      <mat-card-title><%= titleize(name) %></mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <% for (let field of fields ) { %>
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="<%= classify(field) %>" formControlName="<%= camelize(field) %>">
+            <input matInput placeholder="<%= titleize(field) %>" formControlName="<%= camelize(field) %>">
           </mat-form-field>
         </div>
       </div>

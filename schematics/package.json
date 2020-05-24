@@ -29,10 +29,12 @@
     "@angular-devkit/schematics": "^9.1.7",
     "@angular/cdk": "^9.1.7",
     "@schematics/angular": "^9.1.7",
+    "lodash": "^4.17.15",
     "typescript": "~3.8.2"
   },
   "devDependencies": {
     "@types/jasmine": "^3.5.0",
+    "@types/lodash": "^4.14.152",
     "@types/node": "^12.11.1",
     "copyfiles": "^2.2.0",
     "jasmine": "^3.5.0",
