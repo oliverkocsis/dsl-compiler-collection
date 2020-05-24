@@ -1,0 +1,17 @@
+{
+  "name": "@dsl-cc/dsl-cc",
+  "version": "0.0.1",
+  "description": "DSL Compiler Collection is a collection of compilers for domain specific languages",
+  "main": "",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oliverkocsis/domain-compiler-collection.git"
+  },
+  "author": "Oliver Kocsis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oliverkocsis/domain-compiler-collection/issues"
+  },
+  "homepage": "https://github.com/oliverkocsis/domain-compiler-collection#readme"
+}
