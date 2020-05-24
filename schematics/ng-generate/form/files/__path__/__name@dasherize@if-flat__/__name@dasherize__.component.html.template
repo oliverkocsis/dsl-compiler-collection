@@ -1,7 +1,7 @@
-<form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
+<form [formGroup]="form" novalidate (ngSubmit)="submit()">
   <mat-card class="shipping-card">
     <mat-card-header>
-      <mat-card-title>Shipping Information</mat-card-title>
+      <mat-card-title><%= classify(name) %></mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <% for (let field of fields ) { %>

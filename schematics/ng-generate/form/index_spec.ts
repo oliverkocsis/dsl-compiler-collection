@@ -52,7 +52,7 @@ describe('ng generate @dsl-cc/schematics:form', () => {
     expect(moduleContent).toContain('ReactiveFormsModule');
   });
 
-  it('should add fields to the form', async () => {
+  it('should add fields to the template form', async () => {
     const app = await createTestApp(runner, { name: project });
     const tree = await runner.runSchematicAsync(schematic, baseOptions, app).toPromise();
     const content = getFileContent(tree, `/projects/${project}/src/app/${name}/${name}.component.html`);
@@ -60,6 +60,14 @@ describe('ng generate @dsl-cc/schematics:form', () => {
     expect(content).toMatch(/<input.*matInput.*placeholder.*=.*"Street".*formControlName.*=.*"street".*>/);
     expect(content).toMatch(/<input.*matInput.*placeholder.*=.*"City".*formControlName.*=.*"city".*>/);
     expect(content).toMatch(/<input.*matInput.*placeholder.*=.*"PostalCode".*formControlName.*=.*"postalCode".*>/);
+  });
+
+  it('should add fields to the component form', async () => {
+    const app = await createTestApp(runner, { name: project });
+    const tree = await runner.runSchematicAsync(schematic, baseOptions, app).toPromise();
+    const content = getFileContent(tree, `/projects/${project}/src/app/${name}/${name}.component.ts`);
+
+    expect(content).toMatch(/form = this.fb.group\({[\s]*street.*:.*null.*,[\s]*city.*:.*null.*,[\s]*postalCode.*:.*null.*,[\s]*}\);/);
   });
 
 
