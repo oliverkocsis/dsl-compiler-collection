@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Jasmine Individual Test",
+      "cwd": "${workspaceFolder}\\schematics",
+      "program": "${workspaceFolder}\\schematics\\node_modules\\jasmine\\bin\\jasmine.js",
+      "args": [
+        "${workspaceFolder}\\schematics\\dist\\ng-add\\index.spec.js"
+      ],
+      "env": {
+        "NODE_PATH": "."
+      }
+    }
+  ]
+}

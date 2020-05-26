@@ -1,12 +1,17 @@
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
 import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
-import { createTestApp } from '../../util/test-app';
-import { getFileContent } from '../../util/file-content';
+import { createTestApp, getFileContent } from '../../util/test-util';
 import { Schema } from './schema';
 import { join } from 'path';
 
-
 const collectionPath = join(process.cwd(), 'collection.json');
-
 
 describe('ng generate @dsl-cc/schematics:form', () => {
   let runner: SchematicTestRunner;
@@ -56,7 +61,7 @@ describe('ng generate @dsl-cc/schematics:form', () => {
     const app = await createTestApp(runner, { name: project });
     const tree = await runner.runSchematicAsync(schematic, baseOptions, app).toPromise();
     const content = getFileContent(tree, `/projects/${project}/src/app/${name}/${name}.component.html`);
-    
+
     expect(content).toMatch(/<mat-card-title>.*Shipping Address.*<\/mat-card-title>/);
     expect(content).toMatch(/<input.*matInput.*placeholder.*=.*"Street".*formControlName.*=.*"street".*>/);
     expect(content).toMatch(/<input.*matInput.*placeholder.*=.*"City".*formControlName.*=.*"city".*>/);

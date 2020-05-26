@@ -9,6 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "install": "",
+    "demo:schematics:add": "ng add ../schematics",
     "demo:schematics:form": "npm install --save-dev ../schematics && rimraf src/app/shipping-address && ng generate @dsl-cc/schematics:form shipping-address --fields street --fields city  --fields postal-code"
   },
   "private": true,

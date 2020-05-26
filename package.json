@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "DSL Compiler Collection is a collection of compilers for domain specific languages",
   "main": "",
-  "scripts": {},
+  "scripts": {
+    "schematics:test": "cd schematics && npm run test"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oliverkocsis/domain-compiler-collection.git"

@@ -9,6 +9,22 @@
 import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
 
+/** Gets the content of a specified file from a schematic tree. */
+export function getFileContent(tree: Tree, filePath: string): string {
+  const contentBuffer = tree.read(filePath);
+
+  if (!contentBuffer) {
+    throw new Error(`Cannot read "${filePath}" because it does not exist.`);
+  }
+
+  return contentBuffer.toString();
+}
+
+/** Create a base app used for testing. */
+export async function createTestApp(runner: SchematicTestRunner, appOptions = {}, tree?: Tree): Promise<UnitTestTree> {
+  return createTestProject(runner, 'application', appOptions, tree);
+}
+
 /** Create a base project used for testing. */
 export async function createTestProject(runner: SchematicTestRunner, projectType: 'application' | 'library', appOptions = {}, tree?: Tree): Promise<UnitTestTree> {
   const workspaceTree = await runner.runExternalSchematicAsync('@schematics/angular', 'workspace', {

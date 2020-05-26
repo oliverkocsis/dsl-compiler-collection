@@ -5,11 +5,13 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc -p tsconfig.json",
-    "copy:schemas": "copyfiles ng-generate/**/schema.json dist",
-    "copy:files": "copyfiles  ng-generate/**/files/** dist",
+    "copy:schemas": "copyfiles ng-*/**/schema.json dist",
+    "copy:files": "copyfiles  ng-*/**/files/** dist",
     "postbuild": "npm run copy:schemas && npm run copy:files",
-    "test": "npm run build && jasmine dist/**/*_spec.js --random=false",
-    "prepack": "rimraf dist/**/*_spec.js && rimraf dist/**/*_spec.js.map && rimraf dist/**/*_spec.d.ts"
+    "pretest": "npm run build",
+    "test": "jasmine dist/**/*.spec.js --random=false",
+    "test:debug": "node --inspect-brk=9229 jasmine dist/**/*.spec.js --random=false ",
+    "prepack": "rimraf dist/**/*.spec.*"
   },
   "keywords": [
     "angular",

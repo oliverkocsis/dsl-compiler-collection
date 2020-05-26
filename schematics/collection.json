@@ -1,6 +1,14 @@
 {
   "$schema": "./node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
+    "ng-add": {
+      "description": "Adds DSL Compiler Collection to the application without affecting any templates",
+      "factory": "./dist/ng-add/index",
+      "schema": "./dist/ng-add/schema.json",
+      "aliases": [
+        "install"
+      ]
+    },
     "form": {
       "description": "Generate a form with fields",
       "factory": "./dist/ng-generate/form/index",
