@@ -2,6 +2,18 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "schematics:test:debug",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/schematics",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run-script",
+        "test:debug"
+      ],
+      "port": 9229
+    },
+    {
       "type": "node",
       "request": "launch",
       "name": "Jasmine Individual Test",
