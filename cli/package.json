@@ -1,0 +1,45 @@
+{
+  "name": "@dsl-cc/dsl-compiler-collection-cli",
+  "version": "0.1.0",
+  "description": "Command-line interface for DSL Compiler Collection (DCC)",
+  "main": "bin/index.js",
+  "bin": {
+    "cwd": "./bin/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "tsc && node ./bin/index.js",
+    "angular-new": "ng new angular --interactive=false --routing=true --style=scss --skipGit=true --skipTests=true && cd angular && echo y | ng add @angular/material --defaults=true  --interactive=false",
+    "angular-update": "cd angular && ng update --all=true --allowDirty=true",
+    "angular-remove": "DEL /F/Q/S angular > NUL && RMDIR /Q/S angular"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oliverkocsis/dsl-compiler-collection-cli.git"
+  },
+  "keywords": [
+    "angular",
+    "firebase",
+    "dsl",
+    "bpmn",
+    "ddd",
+    "compiler",
+    "cli"
+  ],
+  "author": "Oliver Kocsis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oliverkocsis/dsl-compiler-collection-cli/issues"
+  },
+  "homepage": "https://github.com/oliverkocsis/dsl-compiler-collection-cli#readme",
+  "dependencies": {
+    "@angular/cli": "^9.1.1",
+    "@dsl-cc/dsl-compiler-collection": "file:../dsl-compiler-collection"
+  },
+  "devDependencies": {
+    "@types/node": "^13.9.5",
+    "ts-node": "^8.8.1",
+    "typescript": "^3.8.3"
+  }
+}
